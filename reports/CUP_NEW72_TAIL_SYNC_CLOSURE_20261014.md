@@ -1,0 +1,7 @@
+# 新72张最终尾部证据同步复验
+
+第一次scp目录上传尚未完成时提前启动部署，preflight发现暂存文件列表与manifest不符，拒绝并未更改原数据；接着追加结果说明因文件尚未部署而FileNotFound，未写入该事件内容。失败记录保留。第二次用新incoming报告目录引用旧incoming的manifest，违反导入器同一incoming范围约束，安全检查拒绝；未改变已上传数据或网格。
+
+修正：等待scp进程44523明确退出0，将完整payload及manifest复制到新自包含`cup_new72_final_evidence_20261014_1930_retry2`，保持原两份失败报告不变。复验run `20261014_193523_195049_new72_tail_deploy_selfcontained_retry2_2bde4f6d`退出0，2,376文件哈希验证、变更代码/指南备份、29份Windows结束run_id追加通过；之前静态包51份，合计80份新增该阶段Windows档案。模型/原始数据/Ubuntu总日志没有被覆盖。
+
+最终重建/问题会话追加复验Ubuntu run `20261014_193927_909679_new72_reconstruction_session_append_retry_a057eb77`退出0，本机run为`20261014_193910_828358_new72_ubuntu_final_session_append_retry_7309e7a4`；事件ID `CUP-E-NEW72-UBUNTU-RECON-20261014`，实际输出Session notes archived。同步依赖顺序/暂存范围问题在上述部署和追加复验已解决，重建退出139与精确模型QA仍未解决。

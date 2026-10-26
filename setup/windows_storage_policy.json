@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "effective_date": "2026-10-15",
+  "project_root": "E:\\foundationPos",
+  "compatibility_alias": "C:\\Users\\YOUR_USER\\Desktop\\foundationPos",
+  "data_root": "E:\\foundationPos_data",
+  "environment": {
+    "TEMP": "E:\\foundationPos_data\\temp",
+    "TMP": "E:\\foundationPos_data\\temp",
+    "PIP_CACHE_DIR": "E:\\foundationPos_data\\cache\\pip",
+    "HF_HOME": "E:\\foundationPos_data\\cache\\huggingface",
+    "TORCH_HOME": "E:\\foundationPos_data\\cache\\torch",
+    "XDG_CACHE_HOME": "E:\\foundationPos_data\\cache\\general",
+    "MPLCONFIGDIR": "E:\\foundationPos_data\\cache\\matplotlib",
+    "NUMBA_CACHE_DIR": "E:\\foundationPos_data\\cache\\numba",
+    "CUDA_CACHE_PATH": "E:\\foundationPos_data\\cache\\cuda",
+    "PYTHONPYCACHEPREFIX": "E:\\foundationPos_data\\cache\\pycache"
+  },
+  "note": "User requests all future Windows project files, generated data, archives, reports, logs, temporary files and tool caches on E. Linux paths are unchanged."
+}

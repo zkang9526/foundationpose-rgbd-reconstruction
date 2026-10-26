@@ -1,0 +1,7 @@
+{
+  "cols": 6,
+  "rows": 11,
+  "square_mm": 20.0,
+  "source": "2026-10-17 user explicitly confirms 7 by 12 squares, 6 by 11 inner corners, each square 2 cm; transposed orientation of the previous board specification",
+  "metrology": "2026-10-17 user reports horizontal and vertical spans of 5 consecutive squares both measured as 100 mm, supporting 20 mm per square; ruler uncertainty and board flatness not independently quantified"
+}

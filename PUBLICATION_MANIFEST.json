@@ -1,0 +1,3289 @@
+{
+  "schema": "foundationpos_public_snapshot_v1",
+  "created_utc": "2026-10-26T03:10:34.962040+00:00",
+  "source_commit": "2265979b13b408da7261990d8f0811fa02bc85bf",
+  "source_branch": "fix/reacquisition-sam2-eval",
+  "source_tracked_changes": [],
+  "private_history_included": false,
+  "assets_included": false,
+  "raw_runtime_records_included": false,
+  "transformations": [
+    "UTF-8/LF normalization",
+    "known private SSH host and Windows profile redaction",
+    "missing local evidence links explicitly marked"
+  ],
+  "unpublished_links": [
+    {
+      "document": "CUP_CHECK_20261013.md",
+      "target": "foundationpose_data/windows_captures/cup_check_20261013_152557/"
+    },
+    {
+      "document": "CUP_CHECK_20261013.md",
+      "target": "foundationpose_data/windows_captures/cup_check_20261013_152557/rgb.png"
+    },
+    {
+      "document": "CUP_CHECK_20261013.md",
+      "target": "foundationpose_data/windows_captures/cup_check_20261013_152557/depth_preview_color.png"
+    },
+    {
+      "document": "CUP_CHECK_20261013.md",
+      "target": "reports/cup_snapshot_assessment_corrected_20261013_152557.json"
+    },
+    {
+      "document": "CUP_LIGHT_RECHECK_20261013.md",
+      "target": "foundationpose_data/windows_captures/cup_light_recheck_20261013_01/rgb.png"
+    },
+    {
+      "document": "CUP_LIGHT_RECHECK_20261013.md",
+      "target": "foundationpose_data/windows_captures/cup_light_recheck_20261013_01/depth_preview_color.png"
+    },
+    {
+      "document": "CUP_MANUAL_PHOTOS.md",
+      "target": "foundationpose_data/windows_captures/cup_photos_20261013_163353_632/rgb/000000.png"
+    },
+    {
+      "document": "CUP_NEXT_STEPS_20261013.md",
+      "target": "EXPERIMENT_LOG.md"
+    },
+    {
+      "document": "CUP_NEXT_STEPS_20261013.md",
+      "target": "ISSUES.md"
+    },
+    {
+      "document": "CUP_TRIAL_REVIEW_20261013.md",
+      "target": "foundationpose_data/windows_captures/cup_trial_20261013_160538_278/rgb/000210.png"
+    },
+    {
+      "document": "CUP_TRIAL_REVIEW_20261013.md",
+      "target": "foundationpose_data/windows_captures/cup_trial_20261013_160538_278/rgb/000245.png"
+    },
+    {
+      "document": "camera_calibration/REVIEW_20261015_164319.md",
+      "target": "results/review_windows_20261015_164319_478_v1/review.json"
+    },
+    {
+      "document": "camera_calibration/REVIEW_20261015_164319.md",
+      "target": "results/review_windows_20261015_164319_478_v1/trials.csv"
+    },
+    {
+      "document": "camera_calibration/REVIEW_20261015_164319.md",
+      "target": "results/review_windows_20261015_164319_478_v1/all_trials_contact_sheet.jpg"
+    },
+    {
+      "document": "camera_calibration/REVIEW_20261015_164319.md",
+      "target": "results/review_windows_20261015_164319_478_v1/cross_projection_0015.png"
+    },
+    {
+      "document": "reports/CAMERA_CALIBRATION_REVIEW_SNAPSHOT_20261015.md",
+      "target": "results/review_windows_20261015_164319_478_v1/review.json"
+    },
+    {
+      "document": "reports/CAMERA_CALIBRATION_REVIEW_SNAPSHOT_20261015.md",
+      "target": "results/review_windows_20261015_164319_478_v1/trials.csv"
+    },
+    {
+      "document": "reports/CAMERA_CALIBRATION_REVIEW_SNAPSHOT_20261015.md",
+      "target": "results/review_windows_20261015_164319_478_v1/all_trials_contact_sheet.jpg"
+    },
+    {
+      "document": "reports/CAMERA_CALIBRATION_REVIEW_SNAPSHOT_20261015.md",
+      "target": "results/review_windows_20261015_164319_478_v1/cross_projection_0015.png"
+    },
+    {
+      "document": "reports/FOUNDATIONPOSE_REPRODUCTION_SUMMARY_20261015.md",
+      "target": "AUTO_RECOVERY_FINAL_VERIFICATION_20261015.json"
+    },
+    {
+      "document": "reports/FOUNDATIONPOSE_REPRODUCTION_SUMMARY_20261015.md",
+      "target": "CUP_CAMERA_METADATA_AUDIT_20261014.json"
+    },
+    {
+      "document": "reports/OBJ_DEPTH_DENSITY_DIAGNOSIS_20261014.md",
+      "target": "obj_depth30_review_20261014_154706/depth_crop_00.png"
+    },
+    {
+      "document": "reports/OBJ_DEPTH_DENSITY_DIAGNOSIS_20261014.md",
+      "target": "obj_high_density_raw_preview_20261014_1557/alignment_panel.png"
+    },
+    {
+      "document": "reports/OBJ_DEPTH_DENSITY_DIAGNOSIS_20261014.md",
+      "target": "OBJ_DEPTH30_REGIONS_RESULT_20261014_154706.json"
+    },
+    {
+      "document": "reports/OBJ_DEPTH_DENSITY_DIAGNOSIS_20261014.md",
+      "target": "OBJ_DEPTH30_CURRENT_SETTINGS_20261014_1555.json"
+    },
+    {
+      "document": "reports/OBJ_ENVIRONMENT_SETUP_20261014.md",
+      "target": "open3d_20261014_1333_surface/report.json"
+    },
+    {
+      "document": "reports/RED_CUP72_CAPTURE_REVIEW_20261017.md",
+      "target": "../foundationpose_data/reviews/red_cup72_20261017_v1/patches/report.json"
+    },
+    {
+      "document": "reports/RED_CUP72_CAPTURE_REVIEW_20261017.md",
+      "target": "red_cup72_patch_annotations_20261017.json"
+    },
+    {
+      "document": "reports/RED_CUP_REVIEWED72_MESH_RESULT_20261017.md",
+      "target": "redcup_initial_pose_mesh_summary_20261017.json"
+    },
+    {
+      "document": "reports/RGBD_ALIGNMENT_CHECK_GUIDE_20261014.md",
+      "target": "rgbd_alignment_20261014_134626_307/depth_edges_on_rgb.png"
+    },
+    {
+      "document": "reports/RGBD_ALIGNMENT_CHECK_GUIDE_20261014.md",
+      "target": "rgbd_alignment_20261014_134626_307/overlay.png"
+    },
+    {
+      "document": "reports/WINDOWS_E_DRIVE_CAPTURE_20261014.md",
+      "target": "deleted_capture_evidence_20261014_161409_789/deletion_manifest.json"
+    },
+    {
+      "document": "reports/WINDOWS_E_DRIVE_CAPTURE_20261014.md",
+      "target": "E_DRIVE_RECAPTURE_LAUNCH_20261014_161656_316.json"
+    },
+    {
+      "document": "reports/windows_setup_experiment_notes_20261013.md",
+      "target": "reports/windows_camera_setup_summary_20261013.json"
+    },
+    {
+      "document": "reports/windows_setup_experiment_notes_20261013.md",
+      "target": "reports/windows_portable_capture_validation_20261013.json"
+    },
+    {
+      "document": "reports/windows_setup_experiment_notes_20261013.md",
+      "target": "WINDOWS_CAPTURE_UBUNTU.md"
+    },
+    {
+      "document": "reports/windows_setup_issue_notes_20261013.md",
+      "target": "reports/windows_camera_setup_summary_20261013.json"
+    }
+  ],
+  "files": [
+    {
+      "path": ".gitattributes",
+      "source_sha256": "4890a382034f7d890f45a75e94e1a59d1b5adabb1c7ea5b1f1f1122cc21f3eca",
+      "exported_sha256": "4890a382034f7d890f45a75e94e1a59d1b5adabb1c7ea5b1f1f1122cc21f3eca",
+      "bytes": 166,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "CUP_CHECK_20261013.md",
+      "source_sha256": "c6e1bddeb7f52dc361b5a1dd249cbf5e0d7c8e9bd7827fed547eae871d0b8fa6",
+      "exported_sha256": "a9c2de4168813e01b93e6148f9cba534a8b4f802cd9874c080b8d988a30e0eca",
+      "bytes": 5440,
+      "private_host_or_profile_replacements": 1
+    },
+    {
+      "path": "CUP_LIGHT_RECHECK_20261013.md",
+      "source_sha256": "e6a9dd4a63f9a3703aa1d5bfc539240651c7bdd9d6730ed1b5a379571bc3ee17",
+      "exported_sha256": "c0d2dcd48c6cba0ad531cf55ec161c7f5edcb30a9b2370f50290281834ad8cfc",
+      "bytes": 3982,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "CUP_MANUAL_PHOTOS.md",
+      "source_sha256": "6832e8d4b01c95ca95b8b73c7772fd1a73b0d6daa29bce279a360c1384cf1b80",
+      "exported_sha256": "ddc2f51fedd5c4be4ae24f43535bd895671377a51c2e631a41ed47570e935e82",
+      "bytes": 10782,
+      "private_host_or_profile_replacements": 1
+    },
+    {
+      "path": "CUP_NEXT_STEPS_20261013.md",
+      "source_sha256": "e0a678149fc0269af14b30c7b01651d1449bbe60bfa09a1f8bae06b0ff4238f2",
+      "exported_sha256": "489d7e3dd3819352e4abb29050f7c83d3da28968751663caf7aa3449473e1bd9",
+      "bytes": 10127,
+      "private_host_or_profile_replacements": 1
+    },
+    {
+      "path": "CUP_PHOTOS_REVIEW_20261013.md",
+      "source_sha256": "24becd8fb55ed9278098f8c948ea3c1650f826454d8ac85e619ac50a59d07df8",
+      "exported_sha256": "7c6ffa1226991d3f3273c5225387b74d6a5f8c09deed559399e71e37a0f762c8",
+      "bytes": 4054,
+      "private_host_or_profile_replacements": 1
+    },
+    {
+      "path": "CUP_TRIAL_REVIEW_20261013.md",
+      "source_sha256": "f04d1032af96ed780f481e9d03b1c3a8c2cce6611dcdce268b539d341ebc7301",
+      "exported_sha256": "083263fe51230e2087b6d34204a317f0203134dfe8fb1120f2694792ad1e0cec",
+      "bytes": 5692,
+      "private_host_or_profile_replacements": 1
+    },
+    {
+      "path": "CUP_TRIAL_STEPS.md",
+      "source_sha256": "7a82272ea398f01f57607017509cb7aa9e173020f066e370df629247d5a885a5",
+      "exported_sha256": "5577e55953cf5b848c9f2790ba2524530bc36babdf3742e24367ea1104132644",
+      "bytes": 4168,
+      "private_host_or_profile_replacements": 1
+    },
+    {
+      "path": "CUP_UBUNTU_RECONSTRUCTION_20261013.md",
+      "source_sha256": "fe5c17adb16fa4ecc274e50a41dd4f6706f39138c9ee2f84410dcea9a568db16",
+      "exported_sha256": "fe5c17adb16fa4ecc274e50a41dd4f6706f39138c9ee2f84410dcea9a568db16",
+      "bytes": 10648,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "D435i_capture_steps.md",
+      "source_sha256": "b43fe3eca3a78f76568b66f12ffa1635a6c56a19ab12392bac46b3951d42137f",
+      "exported_sha256": "378e07d31c535903c7e395727e59e0d54b4b9ec33ca2e771d2feb672a7d432d8",
+      "bytes": 5187,
+      "private_host_or_profile_replacements": 3
+    },
+    {
+      "path": "D435i_connection.md",
+      "source_sha256": "04103c6b8f8c0a9da5527cf43c4bbe1c3e3117a1a9f0cee2da8edc4183a9ca60",
+      "exported_sha256": "d4ad2c42d01ba78c1a5ac48c40db40562aab55a1017ec34870389eb312f94d6b",
+      "bytes": 11922,
+      "private_host_or_profile_replacements": 3
+    },
+    {
+      "path": "D435i_to_OBJ_FoundationPose_Reconstruction_Guide_Optimized.md",
+      "source_sha256": "202f72481dd8b849f1142d55fcbcd69cc31d4b01b57a96e445dca5b5dfc4ccb2",
+      "exported_sha256": "202f72481dd8b849f1142d55fcbcd69cc31d4b01b57a96e445dca5b5dfc4ccb2",
+      "bytes": 8212,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "GIT_WORKFLOW.md",
+      "source_sha256": "87f7d8d4571b64574a325996d8d606efd8d0c4640f8f395eba2d05029bbda5e1",
+      "exported_sha256": "87f7d8d4571b64574a325996d8d606efd8d0c4640f8f395eba2d05029bbda5e1",
+      "bytes": 4981,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "MANUAL_CUP_MASKS.md",
+      "source_sha256": "5469d407c8eb34c6280eca2d4cf03f9759bd5365fcdfc40f43491663f45eff27",
+      "exported_sha256": "5469d407c8eb34c6280eca2d4cf03f9759bd5365fcdfc40f43491663f45eff27",
+      "bytes": 6682,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "POSE_AND_TRAINING_GUIDE.md",
+      "source_sha256": "6f08cf81002d708c2f26759dc0865e175b726a007ec0b1fb8d878bb14bced981",
+      "exported_sha256": "5ad6dc0db20bed9b3b4cf35d865005c1c6eeccfdbfb7eb1643af808dfacead67",
+      "bytes": 7412,
+      "private_host_or_profile_replacements": 1
+    },
+    {
+      "path": "README.md",
+      "source_sha256": "21d9ff80637bb24171f7cc6d42b6fbb9f6c399a6cab2beb085a5f86c9b525e9c",
+      "exported_sha256": "21d9ff80637bb24171f7cc6d42b6fbb9f6c399a6cab2beb085a5f86c9b525e9c",
+      "bytes": 5138,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "README_LEGACY.md",
+      "source_sha256": "334f14e5f32311fd41df41876c65f3d072be3dbc570cc850634f0cfb1c6e8201",
+      "exported_sha256": "334f14e5f32311fd41df41876c65f3d072be3dbc570cc850634f0cfb1c6e8201",
+      "bytes": 18801,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "REPRODUCTION_GUIDE.md",
+      "source_sha256": "9f0e51b84246a930057d4fc1881647450a426ac7514453863b03c1441dd9f923",
+      "exported_sha256": "0f9eb78fdb230cc5025c934d22e75928c521d6487da9cbb6832083750f21ddf6",
+      "bytes": 36700,
+      "private_host_or_profile_replacements": 5
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "source_sha256": "b7068c32b1ee3b9f80eafc1825563287f4e5274073f4d81a25a7621c48c26fdd",
+      "exported_sha256": "b7068c32b1ee3b9f80eafc1825563287f4e5274073f4d81a25a7621c48c26fdd",
+      "bytes": 1986,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "Ubuntu_environment.md",
+      "source_sha256": "a716c17fd19ffc4250d825205655caf64d7c5b8e779880b7da82eed04da31156",
+      "exported_sha256": "8570c9ee3949b900caa6ffb9431d949a09685b1a139233ea73435d792b2b92eb",
+      "bytes": 9446,
+      "private_host_or_profile_replacements": 2
+    },
+    {
+      "path": "WINDOWS_CAPTURE_UBUNTU.md",
+      "source_sha256": "2aa041172ab1f8cbaf4d5b8446777c7c2105bc31e28186474989c00f75929eee",
+      "exported_sha256": "33a6863084ac13944434ab18fc74c95b240c8caa70e15242f9d829e6ed741659",
+      "bytes": 11415,
+      "private_host_or_profile_replacements": 6
+    },
+    {
+      "path": "camera_calibration/README.md",
+      "source_sha256": "18704e7b573fec1fa6f77b0ad3b42fd24a562c8c1c203ade3dc81aaf69416871",
+      "exported_sha256": "18704e7b573fec1fa6f77b0ad3b42fd24a562c8c1c203ade3dc81aaf69416871",
+      "bytes": 11077,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/REVIEW_20261015_164319.md",
+      "source_sha256": "b06a40cff66cde7f50d0137bfe6a8cca9e4cc905f39c20922582f6735492b0e9",
+      "exported_sha256": "682fa8a6f71920c619a1d294fc50c8e78d6d10552efd58f4b3f3441cc93c4fc0",
+      "bytes": 4626,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/REVIEW_PAPER_BATCH_20261017.md",
+      "source_sha256": "32e34a79a808d2244ba0d423713afd15991d5516765920e8bf5b2ece4862f7b1",
+      "exported_sha256": "32e34a79a808d2244ba0d423713afd15991d5516765920e8bf5b2ece4862f7b1",
+      "bytes": 5080,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/REVIEW_RIGID_BOARD_20261017.md",
+      "source_sha256": "654442584f30b844d4c4b2c91aaa3d49c22cac75e872a5afb4db66a676a3d6b4",
+      "exported_sha256": "654442584f30b844d4c4b2c91aaa3d49c22cac75e872a5afb4db66a676a3d6b4",
+      "bytes": 10824,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/RIGID_BOARD_SESSION_20261017.md",
+      "source_sha256": "ca4b01e690ac697a3a12fe8a1763750c6bb57e0f79faeddcd85374fea09447bc",
+      "exported_sha256": "ca4b01e690ac697a3a12fe8a1763750c6bb57e0f79faeddcd85374fea09447bc",
+      "bytes": 4021,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/SCATTER_FIX_20261017.md",
+      "source_sha256": "44ddbb7c3362543cbce31432e16fa5ef1269548466811e20f839f1df4bf5beb7",
+      "exported_sha256": "44ddbb7c3362543cbce31432e16fa5ef1269548466811e20f839f1df4bf5beb7",
+      "bytes": 5403,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/STATUS_20261015.md",
+      "source_sha256": "1d6a5f1eab49a254059ae062cf59562bd3c34f04d5e40fb27b6817dd6f849404",
+      "exported_sha256": "1d6a5f1eab49a254059ae062cf59562bd3c34f04d5e40fb27b6817dd6f849404",
+      "bytes": 6000,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/STATUS_20261017.md",
+      "source_sha256": "ee221ac5016fb03617086f3e71c26c1aea5c5db3a84a9274bfacdc0d64911462",
+      "exported_sha256": "ee221ac5016fb03617086f3e71c26c1aea5c5db3a84a9274bfacdc0d64911462",
+      "bytes": 9220,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/analyze.py",
+      "source_sha256": "4e0b89ea4e85c9efe553e611d6b9891cb1f90cb3d302d719c93d10a471f552c0",
+      "exported_sha256": "4e0b89ea4e85c9efe553e611d6b9891cb1f90cb3d302d719c93d10a471f552c0",
+      "bytes": 18922,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/append_review_notes.py",
+      "source_sha256": "67a7690511995af47558f9a2f76f8e8ef605a2cec6882a277703af1f935ae12b",
+      "exported_sha256": "67a7690511995af47558f9a2f76f8e8ef605a2cec6882a277703af1f935ae12b",
+      "bytes": 3308,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/board.json",
+      "source_sha256": "9bd71ad9926cdc7b84b113df3b24c952d072b22637e7fce1dd491c09d549240b",
+      "exported_sha256": "9bd71ad9926cdc7b84b113df3b24c952d072b22637e7fce1dd491c09d549240b",
+      "bytes": 436,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/boundary.py",
+      "source_sha256": "0ce91f0055fc3c6177deb71baf5972f754f3bdc4e961387b493d4e9de2fdb0b4",
+      "exported_sha256": "0ce91f0055fc3c6177deb71baf5972f754f3bdc4e961387b493d4e9de2fdb0b4",
+      "bytes": 4612,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/capture.py",
+      "source_sha256": "ff55200f5e862bed8fdd5d6776eafbf69ab69fcb979dd0452fe75e535285d17a",
+      "exported_sha256": "ff55200f5e862bed8fdd5d6776eafbf69ab69fcb979dd0452fe75e535285d17a",
+      "bytes": 27958,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/capture_ir_pair_check.py",
+      "source_sha256": "9fc6abbb73a57d2b5fcbdfdbb7187083dd7419a08c2bc76c1669247aa5b2f552",
+      "exported_sha256": "9fc6abbb73a57d2b5fcbdfdbb7187083dd7419a08c2bc76c1669247aa5b2f552",
+      "bytes": 22214,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/check_epipolar.py",
+      "source_sha256": "361601b9097c1f1d20199853c88da587621e3b89b20670edbfd759dd5b344a06",
+      "exported_sha256": "361601b9097c1f1d20199853c88da587621e3b89b20670edbfd759dd5b344a06",
+      "bytes": 13916,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/check_ir_detector_consistency.py",
+      "source_sha256": "802dce1c21069add02a82932729becebba85774540aaf00762ba220bf7b6638a",
+      "exported_sha256": "802dce1c21069add02a82932729becebba85774540aaf00762ba220bf7b6638a",
+      "bytes": 14302,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/check_onchip_health.py",
+      "source_sha256": "ab1a6bd2490eb0c8a11d8d3004f725c9ae9550d5bf2bea94a9194175d3005ef8",
+      "exported_sha256": "ab1a6bd2490eb0c8a11d8d3004f725c9ae9550d5bf2bea94a9194175d3005ef8",
+      "bytes": 22364,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/common.py",
+      "source_sha256": "76fe1cf4de09ed627337bf2bcca6e370492a1c058de9f3e7387aa4994cb4128a",
+      "exported_sha256": "76fe1cf4de09ed627337bf2bcca6e370492a1c058de9f3e7387aa4994cb4128a",
+      "bytes": 5876,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/diagnose_detection_20261017.py",
+      "source_sha256": "7d28908826534458559c2bbe280d9fec23e7d2b7f80ca130c15ab299796161ed",
+      "exported_sha256": "7d28908826534458559c2bbe280d9fec23e7d2b7f80ca130c15ab299796161ed",
+      "bytes": 4463,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/evaluate_onchip_ram.py",
+      "source_sha256": "3985f2de913aa70b791563f44088694fbb68bae6f31ebf76179be5f60f51224b",
+      "exported_sha256": "3985f2de913aa70b791563f44088694fbb68bae6f31ebf76179be5f60f51224b",
+      "bytes": 6530,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/finalize_notes.py",
+      "source_sha256": "45254f04eb0cca5f7bbfdce12ca47c3663799ec37811d98eb0996b1dda8ec848",
+      "exported_sha256": "45254f04eb0cca5f7bbfdce12ca47c3663799ec37811d98eb0996b1dda8ec848",
+      "bytes": 4548,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/inspect_host.py",
+      "source_sha256": "766823d01eddba0c0151035c476075bbe0609c1abfe83619fe80eb17e8cb0d42",
+      "exported_sha256": "766823d01eddba0c0151035c476075bbe0609c1abfe83619fe80eb17e8cb0d42",
+      "bytes": 1734,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/launch_windows.ps1",
+      "source_sha256": "663e147a09eda016ed1191a235a0dcfc21da6d8f9a7400d97db9a65ac2c45eec",
+      "exported_sha256": "663e147a09eda016ed1191a235a0dcfc21da6d8f9a7400d97db9a65ac2c45eec",
+      "bytes": 3732,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/review_active_depth.py",
+      "source_sha256": "9d74f99e81dd1d28e73971e0837e13bc317927cee65b5fea3d018cfdf4252142",
+      "exported_sha256": "9d74f99e81dd1d28e73971e0837e13bc317927cee65b5fea3d018cfdf4252142",
+      "bytes": 18301,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/review_boundary_snapshot.py",
+      "source_sha256": "05a6bdff1a872ce8bbf802d0381106412041985e05c1853ac977175c7f6e24ee",
+      "exported_sha256": "05a6bdff1a872ce8bbf802d0381106412041985e05c1853ac977175c7f6e24ee",
+      "bytes": 2120,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/review_session.py",
+      "source_sha256": "8d18d33b92f4da4f7b398cadac4d7957184730e1caf71da9e5be099e10378659",
+      "exported_sha256": "8d18d33b92f4da4f7b398cadac4d7957184730e1caf71da9e5be099e10378659",
+      "bytes": 8178,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/run_ubuntu.sh",
+      "source_sha256": "23994c477f513a69bdc10c6b1bcdd2cf1098a4305e9ba720b0a41e77cfeb1e1b",
+      "exported_sha256": "23994c477f513a69bdc10c6b1bcdd2cf1098a4305e9ba720b0a41e77cfeb1e1b",
+      "bytes": 1788,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/run_windows.ps1",
+      "source_sha256": "36166d1e6a482e479346deb4eb481a39bf62aa50fd853ad5a4ec08b5ec73479f",
+      "exported_sha256": "36166d1e6a482e479346deb4eb481a39bf62aa50fd853ad5a4ec08b5ec73479f",
+      "bytes": 3111,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/session_control.py",
+      "source_sha256": "055e67a43e12e67a5e0f393a7c030407cf0a991c64e8fab30ab4de6301058397",
+      "exported_sha256": "055e67a43e12e67a5e0f393a7c030407cf0a991c64e8fab30ab4de6301058397",
+      "bytes": 1562,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/start_windows.cmd",
+      "source_sha256": "c0baf4b41c6c2e92e2699a13ef45e36dd5967cc082bdedb1611e3f0d1fff2404",
+      "exported_sha256": "c0baf4b41c6c2e92e2699a13ef45e36dd5967cc082bdedb1611e3f0d1fff2404",
+      "bytes": 114,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/summarize_factory.py",
+      "source_sha256": "dc95ca4b5be17c33ce0fc2d20731f8f52f312193ba0959b98989fc7d2b48f5c7",
+      "exported_sha256": "dc95ca4b5be17c33ce0fc2d20731f8f52f312193ba0959b98989fc7d2b48f5c7",
+      "bytes": 3260,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/verify_capture_controls.py",
+      "source_sha256": "7492a3d8fd69b308aea70efe6252557ea33835851acf0420a2b1f4da8b6caa8c",
+      "exported_sha256": "7492a3d8fd69b308aea70efe6252557ea33835851acf0420a2b1f4da8b6caa8c",
+      "bytes": 3999,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/verify_evidence.py",
+      "source_sha256": "1a7af56edf564372b3e511d42a3d3248ea0dc5d81f327d2398e006b96d8829de",
+      "exported_sha256": "1a7af56edf564372b3e511d42a3d3248ea0dc5d81f327d2398e006b96d8829de",
+      "bytes": 1320,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/verify_math.py",
+      "source_sha256": "ead70b9a0c2456024bcfff79f8fd2a6f433f8fde45009c7102fa41e1d7aca5d3",
+      "exported_sha256": "ead70b9a0c2456024bcfff79f8fd2a6f433f8fde45009c7102fa41e1d7aca5d3",
+      "bytes": 7467,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "camera_calibration/verify_ram_restore.py",
+      "source_sha256": "7e94609f6a79557cb0150bdd74340e9f8a7e9b52fd49e73ea824bda357edfaeb",
+      "exported_sha256": "7e94609f6a79557cb0150bdd74340e9f8a7e9b52fd49e73ea824bda357edfaeb",
+      "bytes": 5093,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "docs/PROJECT_MAP.md",
+      "source_sha256": "7c8a8d025bcae6e614b84d851eb6b9da95516fe628026e860144ae655e7d32e4",
+      "exported_sha256": "7c8a8d025bcae6e614b84d851eb6b9da95516fe628026e860144ae655e7d32e4",
+      "bytes": 2425,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "docs/QUICKSTART.md",
+      "source_sha256": "d3c06e3d9b8c02e295a25c39b5964416d953e87a2ba5ec5fefc9f8766748ca9d",
+      "exported_sha256": "d3c06e3d9b8c02e295a25c39b5964416d953e87a2ba5ec5fefc9f8766748ca9d",
+      "bytes": 5808,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/ALIGNMENT_BOX_CHECK_EXPERIMENT_20261014_135434.md",
+      "source_sha256": "8490335ecced50fb5d7a95f1ee57cc77dd14852ff674e069f623299743d20624",
+      "exported_sha256": "8490335ecced50fb5d7a95f1ee57cc77dd14852ff674e069f623299743d20624",
+      "bytes": 2392,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/ALIGNMENT_BOX_CHECK_ISSUES_20261014_135434.md",
+      "source_sha256": "44c52e440fc64604cd479f61bb2bbbc4d11d49ae9388ff49c92c65b02f6c49dd",
+      "exported_sha256": "44c52e440fc64604cd479f61bb2bbbc4d11d49ae9388ff49c92c65b02f6c49dd",
+      "bytes": 1292,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CAMERA_CALIBRATION_REVIEW_SNAPSHOT_20261015.md",
+      "source_sha256": "b06a40cff66cde7f50d0137bfe6a8cca9e4cc905f39c20922582f6735492b0e9",
+      "exported_sha256": "682fa8a6f71920c619a1d294fc50c8e78d6d10552efd58f4b3f3441cc93c4fc0",
+      "bytes": 4626,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CAMERA_PAPER_FINAL_SESSION_EXPERIMENT_20261017.md",
+      "source_sha256": "7175cc66d7a0a1fb645a5efd4b8d4270475f5c4529b0b828cfcfee0bc1c70f5d",
+      "exported_sha256": "7175cc66d7a0a1fb645a5efd4b8d4270475f5c4529b0b828cfcfee0bc1c70f5d",
+      "bytes": 1079,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CAMERA_PAPER_FINAL_SESSION_ISSUES_20261017.md",
+      "source_sha256": "46680868c9ac3bbf4fb6890b88ced79b74f2af05d75e9f3fd3617491a8a3d25c",
+      "exported_sha256": "46680868c9ac3bbf4fb6890b88ced79b74f2af05d75e9f3fd3617491a8a3d25c",
+      "bytes": 1140,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CAMERA_REVALIDATION_SESSION_EXPERIMENT_20261017.md",
+      "source_sha256": "72679020d5abbdbd98ca72d9d117c6fef7deeef2194bb12630bcdb8ddaad3d43",
+      "exported_sha256": "72679020d5abbdbd98ca72d9d117c6fef7deeef2194bb12630bcdb8ddaad3d43",
+      "bytes": 870,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CAMERA_REVALIDATION_SESSION_ISSUES_20261017.md",
+      "source_sha256": "f3a8a55663a9540fcd300c441f45a11ab2c4ec6d4e50d00d111bbb39bb09f362",
+      "exported_sha256": "f3a8a55663a9540fcd300c441f45a11ab2c4ec6d4e50d00d111bbb39bb09f362",
+      "bytes": 1030,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CAMERA_RIGID_FINAL_EXPERIMENT_20261017.md",
+      "source_sha256": "e1aa6fa35cd34ebd6932d9a0d4bc8abb27f4e581817420b376766d91615b972f",
+      "exported_sha256": "e1aa6fa35cd34ebd6932d9a0d4bc8abb27f4e581817420b376766d91615b972f",
+      "bytes": 1803,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CAMERA_RIGID_FINAL_ISSUES_20261017.md",
+      "source_sha256": "ebf4061be4cea96516a47ef31cd668ce570496ff72c40f309ddec3cf22a08f8d",
+      "exported_sha256": "ebf4061be4cea96516a47ef31cd668ce570496ff72c40f309ddec3cf22a08f8d",
+      "bytes": 1576,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CAMERA_RIGID_START_SESSION_EXPERIMENT_20261017.md",
+      "source_sha256": "ff055dbd2f5950e21d91969566c350b9b178ac2eb61dec51512f88af2dce58d2",
+      "exported_sha256": "ff055dbd2f5950e21d91969566c350b9b178ac2eb61dec51512f88af2dce58d2",
+      "bytes": 949,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CAMERA_RIGID_START_SESSION_ISSUES_20261017.md",
+      "source_sha256": "2dfdc9534db17d496c6e852dbe50b59b5f213659c84909d8d806f47d4780e6bc",
+      "exported_sha256": "2dfdc9534db17d496c6e852dbe50b59b5f213659c84909d8d806f47d4780e6bc",
+      "bytes": 837,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CAMERA_SCATTER_SESSION_EXPERIMENT_20261017.md",
+      "source_sha256": "b28c7cc82eac835161a49d743280e56eb825b2e8fda6a03cdd60f5be0e5f7f3f",
+      "exported_sha256": "b28c7cc82eac835161a49d743280e56eb825b2e8fda6a03cdd60f5be0e5f7f3f",
+      "bytes": 1251,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CAMERA_SCATTER_SESSION_ISSUES_20261017.md",
+      "source_sha256": "9b99961a217c9083b4832cd1d13a23b147c8e2be814c12db728a6194ff9c18b1",
+      "exported_sha256": "9b99961a217c9083b4832cd1d13a23b147c8e2be814c12db728a6194ff9c18b1",
+      "bytes": 1172,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CAPTURE_READINESS_ISSUES_20261014_1524.md",
+      "source_sha256": "f856a4b9ba9ae97af5645a60bb9f2b57adec2901079bd1c19b78e166c554e65c",
+      "exported_sha256": "f856a4b9ba9ae97af5645a60bb9f2b57adec2901079bd1c19b78e166c554e65c",
+      "bytes": 925,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CAPTURE_READINESS_REVIEW_20261014_1524.md",
+      "source_sha256": "9c50cf3a0f5902edf15b889df47d9acb7513c4b201a7c468632637035294e3d0",
+      "exported_sha256": "9c50cf3a0f5902edf15b889df47d9acb7513c4b201a7c468632637035294e3d0",
+      "bytes": 2014,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_ARUCO_ACCURACY_PROTOCOL_20261014.md",
+      "source_sha256": "4f51f27ae6613064551ab6fe14e423245aaa756a399c4f2ad8b0cdf5c6b13eee",
+      "exported_sha256": "4f51f27ae6613064551ab6fe14e423245aaa756a399c4f2ad8b0cdf5c6b13eee",
+      "bytes": 7662,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_ARUCO_FILTERED_165330_ISSUES_20261015.md",
+      "source_sha256": "6ccc0a64f9650968de2c6faecd72d23477a38250ca023991345859876db12ff2",
+      "exported_sha256": "6ccc0a64f9650968de2c6faecd72d23477a38250ca023991345859876db12ff2",
+      "bytes": 1071,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_ARUCO_FILTERED_165330_RESULT_20261015.md",
+      "source_sha256": "8639f2e740a8c429f98929eb93aa48be1f3b0110d3bd16c2b1fac14eaa985a3e",
+      "exported_sha256": "8639f2e740a8c429f98929eb93aa48be1f3b0110d3bd16c2b1fac14eaa985a3e",
+      "bytes": 4537,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_ARUCO_ID6_ISSUES_20261015.md",
+      "source_sha256": "d17cab26a044f5f2e875ff41f37e907f4c98c3df7d972042c46e3055b021c2c4",
+      "exported_sha256": "d17cab26a044f5f2e875ff41f37e907f4c98c3df7d972042c46e3055b021c2c4",
+      "bytes": 1850,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_ARUCO_ID6_RESULT_20261015.md",
+      "source_sha256": "9dbce8a773664aac20cbd57e2aee8a2d0988955f0a1988518b8417b4c8e31e73",
+      "exported_sha256": "9dbce8a773664aac20cbd57e2aee8a2d0988955f0a1988518b8417b4c8e31e73",
+      "bytes": 7393,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_ARUCO_RUN_162108_ISSUES_20261015.md",
+      "source_sha256": "ed38890424788bb90e959e4114bcfb92d568475e0e02dd27ce6dbb97d9ac857b",
+      "exported_sha256": "ed38890424788bb90e959e4114bcfb92d568475e0e02dd27ce6dbb97d9ac857b",
+      "bytes": 1302,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_ARUCO_RUN_162108_RESULT_20261015.md",
+      "source_sha256": "abed1eab17a3cbe2deb48159f474d158675318b55960b46267fe5da25d24d12d",
+      "exported_sha256": "abed1eab17a3cbe2deb48159f474d158675318b55960b46267fe5da25d24d12d",
+      "bytes": 6542,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_ARUCO_SMALL_MOTION_165330_ISSUES_20261015.md",
+      "source_sha256": "074f32f6d7eaac521c3ab379b3ca3d4d56c293cbd4e149bcfc11a49ff26ec9b9",
+      "exported_sha256": "074f32f6d7eaac521c3ab379b3ca3d4d56c293cbd4e149bcfc11a49ff26ec9b9",
+      "bytes": 1404,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_ARUCO_SMALL_MOTION_165330_RESULT_20261015.md",
+      "source_sha256": "5a17c2f6bda1606178476219235061509ae6b0ca3641e091ef99c6884f789308",
+      "exported_sha256": "5a17c2f6bda1606178476219235061509ae6b0ca3641e091ef99c6884f789308",
+      "bytes": 5169,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_AUTO_RECOVERY_SAM2_ISSUES_20261015.md",
+      "source_sha256": "9d13461e5fbd12ec2e5d66fbed5f58ddea22aa7790c40d0e40ecffc62d686f39",
+      "exported_sha256": "9d13461e5fbd12ec2e5d66fbed5f58ddea22aa7790c40d0e40ecffc62d686f39",
+      "bytes": 2524,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_AUTO_RECOVERY_SAM2_RESULT_20261015.md",
+      "source_sha256": "026e869d88f61379dd42be8216e053f0467ffa63d731b87280d04f152f308c1e",
+      "exported_sha256": "026e869d88f61379dd42be8216e053f0467ffa63d731b87280d04f152f308c1e",
+      "bytes": 7266,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_CAMERA_CALIBRATION_GUIDE_20261014.md",
+      "source_sha256": "058623319f4e7799bc66a14cf12ab540879ec3e16a877dfef0feff7dac3b237a",
+      "exported_sha256": "f2b6ecff78c15511446f36efb8fbb8781b6bf79d4c57accbd32462fa52ccfe9a",
+      "bytes": 6234,
+      "private_host_or_profile_replacements": 1
+    },
+    {
+      "path": "reports/CUP_CAMERA_CALIBRATION_SESSION_EXPERIMENT_20261014.md",
+      "source_sha256": "9ae5f8464bbb705fbd514333d08e6b7d8a460d4fbfa1dff01a918f9d6771aeba",
+      "exported_sha256": "9ae5f8464bbb705fbd514333d08e6b7d8a460d4fbfa1dff01a918f9d6771aeba",
+      "bytes": 905,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_CAMERA_CALIBRATION_SESSION_ISSUES_20261014.md",
+      "source_sha256": "2c4dd130e8b284749ed0378a49e47d1559984730d3c722ff526ebfae5d375712",
+      "exported_sha256": "2c4dd130e8b284749ed0378a49e47d1559984730d3c722ff526ebfae5d375712",
+      "bytes": 827,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_CAMERA_SYNC_RECEIPT_EXPERIMENT_20261014.md",
+      "source_sha256": "263ee1301423602282f94567e37ad5c938ff21822dab18beab3c9a1cec1215ff",
+      "exported_sha256": "263ee1301423602282f94567e37ad5c938ff21822dab18beab3c9a1cec1215ff",
+      "bytes": 857,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_CAMERA_SYNC_RECEIPT_ISSUES_20261014.md",
+      "source_sha256": "ebb92d9acf49a7b237380d4554e2fe26423517fb24e6fad96b5bff768aac090b",
+      "exported_sha256": "ebb92d9acf49a7b237380d4554e2fe26423517fb24e6fad96b5bff768aac090b",
+      "bytes": 819,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_CAPTURE_READINESS_20261014_153348.md",
+      "source_sha256": "0007b56e45e77a6a37d7218ad03d32a74b3137637af7fe79f8a7a2b3ead0e377",
+      "exported_sha256": "cad11e10bd10df9671a6074996dd5317c77e980189c984f3cf40c387297e3f11",
+      "bytes": 3655,
+      "private_host_or_profile_replacements": 1
+    },
+    {
+      "path": "reports/CUP_CAPTURE_READINESS_ISSUES_20261014_153348.md",
+      "source_sha256": "af952ace7f10c4654608721c48f264a970f383907c29554bd495557dd0f29afd",
+      "exported_sha256": "af952ace7f10c4654608721c48f264a970f383907c29554bd495557dd0f29afd",
+      "bytes": 1488,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_DIMENSIONS_SESSION_EXPERIMENT_20261014.md",
+      "source_sha256": "a52e06f5abd491a26d972b5c2581476763399266ff4bcaba46500cc2f40afa75",
+      "exported_sha256": "a52e06f5abd491a26d972b5c2581476763399266ff4bcaba46500cc2f40afa75",
+      "bytes": 961,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_DIMENSIONS_SESSION_ISSUES_20261014.md",
+      "source_sha256": "e1f311588a718379dc0c25856c700a38fac37d8d581153abf03a174bc569ae30",
+      "exported_sha256": "e1f311588a718379dc0c25856c700a38fac37d8d581153abf03a174bc569ae30",
+      "bytes": 673,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_FAST_ARUCO_POST_VALIDATION_20261014.md",
+      "source_sha256": "c2c2ceb2dc22bf42ad6704fef1d0e9f7934176ef4ddb3b8f75999b8bca5e6e1d",
+      "exported_sha256": "c2c2ceb2dc22bf42ad6704fef1d0e9f7934176ef4ddb3b8f75999b8bca5e6e1d",
+      "bytes": 1709,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_FAST_ARUCO_PROFILE_20261014.json",
+      "source_sha256": "19b985f34c62e965073d9da248c8960561d3235ae9946a97c5f2bce78b389692",
+      "exported_sha256": "19b985f34c62e965073d9da248c8960561d3235ae9946a97c5f2bce78b389692",
+      "bytes": 215607,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_FAST_ARUCO_RESULT_20261014.md",
+      "source_sha256": "7407b2e6a7267e022e39c6902d55701c8dbd1a17fe98ae0d437b029d6c39055e",
+      "exported_sha256": "6e0afd138f1b8c5c453b3b2df0a4bf037c29f8cf4cc5ac931dde0e50b416fc45",
+      "bytes": 2665,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_FAST_ARUCO_SETUP_ISSUES_20261014.md",
+      "source_sha256": "a20ae2f46cbe39a1e3eb71c5a189643a21180c1c374c2960e761ac9a772ade18",
+      "exported_sha256": "a20ae2f46cbe39a1e3eb71c5a189643a21180c1c374c2960e761ac9a772ade18",
+      "bytes": 2678,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_FINAL_SYNC_EXPERIMENT_20261014.md",
+      "source_sha256": "a3879113b7a0a373db1a23baad14ec79c5046f791eb7e351dcd9931a0b6aaad9",
+      "exported_sha256": "a3879113b7a0a373db1a23baad14ec79c5046f791eb7e351dcd9931a0b6aaad9",
+      "bytes": 1745,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_FINAL_SYNC_ISSUES_20261014.md",
+      "source_sha256": "ac75c969a69b176e8e917fb9961aa95fa850d933de89ddec9db2657a6b1d9c38",
+      "exported_sha256": "ac75c969a69b176e8e917fb9961aa95fa850d933de89ddec9db2657a6b1d9c38",
+      "bytes": 875,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_IMPROVEMENT_PLAN_SESSION_EXPERIMENT_20261014.md",
+      "source_sha256": "c1dadd7371fa101e3acf37e9dc055da748bc12777dae225fbf1b966c27dc0e4e",
+      "exported_sha256": "c1dadd7371fa101e3acf37e9dc055da748bc12777dae225fbf1b966c27dc0e4e",
+      "bytes": 1096,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_IMPROVEMENT_PLAN_SESSION_ISSUES_20261014.md",
+      "source_sha256": "08f4fc2ab0a2de7a5868dd08829239bdb220f5e0671635edecc298f453032890",
+      "exported_sha256": "08f4fc2ab0a2de7a5868dd08829239bdb220f5e0671635edecc298f453032890",
+      "bytes": 970,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_LIVE_DRIFT_ANALYSIS_20261014.md",
+      "source_sha256": "9fcf730682bb46493846eb0baa965b2bcb531c1023f3e7f1a2b057527d095c64",
+      "exported_sha256": "9fcf730682bb46493846eb0baa965b2bcb531c1023f3e7f1a2b057527d095c64",
+      "bytes": 6812,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_LIVE_DRIFT_ISSUES_20261014.md",
+      "source_sha256": "ca771b854d9b74c0d311aeaaa255c07d29fd7650bc69571dfa51bedfb7ebd30d",
+      "exported_sha256": "ca771b854d9b74c0d311aeaaa255c07d29fd7650bc69571dfa51bedfb7ebd30d",
+      "bytes": 1631,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_LIVE_POSE_20261014.md",
+      "source_sha256": "4bdf2435d7c29d3e1a0f4d884d0815648a8113d2efd968e0d77f8f0eb2a3ae76",
+      "exported_sha256": "7a2c8451d1b21453bc8ebac431655b47bac5b1d36142fe58b4a7ac9e7190df5e",
+      "bytes": 7734,
+      "private_host_or_profile_replacements": 1
+    },
+    {
+      "path": "reports/CUP_LIVE_SETUP_ISSUES_20261014.md",
+      "source_sha256": "278981d91a091de036ad00c7c1a465ae0c522a508134016339d82ec6247aa08e",
+      "exported_sha256": "278981d91a091de036ad00c7c1a465ae0c522a508134016339d82ec6247aa08e",
+      "bytes": 1395,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_NEW72_FOUNDATIONPOSE_ISSUES_20261014.md",
+      "source_sha256": "2db77fc20c15989ce82d447dd4a05e6dbb83696871c3a2ae840331c7ced8ef70",
+      "exported_sha256": "2db77fc20c15989ce82d447dd4a05e6dbb83696871c3a2ae840331c7ced8ef70",
+      "bytes": 1442,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_NEW72_FOUNDATIONPOSE_PILOT_20261014.md",
+      "source_sha256": "36b5900138e8b420bee0b8acf6781507a335376331f05892ee236a1ec7f1796d",
+      "exported_sha256": "36b5900138e8b420bee0b8acf6781507a335376331f05892ee236a1ec7f1796d",
+      "bytes": 6868,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_NEW72_TAIL_SYNC_CLOSURE_20261014.md",
+      "source_sha256": "865531ae6b427bf04fb7d6524cc72bf938f22a6d5470ed9b61b465e185f504fd",
+      "exported_sha256": "865531ae6b427bf04fb7d6524cc72bf938f22a6d5470ed9b61b465e185f504fd",
+      "bytes": 1381,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_NEW72_TRANSFER_READY_20261014.md",
+      "source_sha256": "4d23a5927d32fc48fc1c6cdbab07e8b99c62031e5f963ab2aeebd692dbdaece6",
+      "exported_sha256": "4d23a5927d32fc48fc1c6cdbab07e8b99c62031e5f963ab2aeebd692dbdaece6",
+      "bytes": 3327,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_NEW72_UBUNTU_ISSUES_20261014.md",
+      "source_sha256": "e5a7d388abc3fbaf2996aa3c41f320d1f8ed793ceec5eca66d327366e5d80d23",
+      "exported_sha256": "e5a7d388abc3fbaf2996aa3c41f320d1f8ed793ceec5eca66d327366e5d80d23",
+      "bytes": 2639,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_NEW72_UBUNTU_RESULT_20261014.md",
+      "source_sha256": "fdfaf56a3c31e7bd5e55b6b0f7ff3886377ab0b70460856f771a111df8e09402",
+      "exported_sha256": "fdfaf56a3c31e7bd5e55b6b0f7ff3886377ab0b70460856f771a111df8e09402",
+      "bytes": 7719,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_NO_ARUCO_FPS_ISSUES_20261015.md",
+      "source_sha256": "d67cdcacd5a2feb300a68a5d0f8bd2e387edfe1b477696ce9ef819945dab12da",
+      "exported_sha256": "d67cdcacd5a2feb300a68a5d0f8bd2e387edfe1b477696ce9ef819945dab12da",
+      "bytes": 1472,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_NO_ARUCO_FPS_START_20261015.md",
+      "source_sha256": "65f3317e8eb445429a230658d5ce1c6a28f43f3989ebb48661a23f921f26fb8d",
+      "exported_sha256": "65f3317e8eb445429a230658d5ce1c6a28f43f3989ebb48661a23f921f26fb8d",
+      "bytes": 3261,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_PILOT_SESSION_EXPERIMENT_20261014.md",
+      "source_sha256": "71f2fc04ff60807a76842401d8e166ae7ece8f5a4c7c274cc98a875d7710a3d4",
+      "exported_sha256": "71f2fc04ff60807a76842401d8e166ae7ece8f5a4c7c274cc98a875d7710a3d4",
+      "bytes": 2567,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_PILOT_SESSION_ISSUES_20261014.md",
+      "source_sha256": "74e19814ceb5c1ad74d916cca7e58d8b57286389aa63667910f953869587f253",
+      "exported_sha256": "74e19814ceb5c1ad74d916cca7e58d8b57286389aa63667910f953869587f253",
+      "bytes": 2076,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_POSE_PILOT_DIMENSIONS_UPDATE_20261014.md",
+      "source_sha256": "f9ffe806db20f48cf2d9525c36d2e2d550fb085c8e7cf8b87fad73bb9657629a",
+      "exported_sha256": "f9ffe806db20f48cf2d9525c36d2e2d550fb085c8e7cf8b87fad73bb9657629a",
+      "bytes": 6955,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_POSE_PILOT_RESULTS_20261014.md",
+      "source_sha256": "ec96d6d47531a0f5cc0b2fdd324fafb9093cb9c86799610504136abc98f3475b",
+      "exported_sha256": "ec96d6d47531a0f5cc0b2fdd324fafb9093cb9c86799610504136abc98f3475b",
+      "bytes": 6453,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_RECONNECT_TEST_EXPERIMENT_20261013.md",
+      "source_sha256": "df4c0109bdbb73dc9464e489ef59121cc2cebfa8eddece65b01a616a665c3d5c",
+      "exported_sha256": "df4c0109bdbb73dc9464e489ef59121cc2cebfa8eddece65b01a616a665c3d5c",
+      "bytes": 1726,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_RECONNECT_TEST_ISSUES_20261013.md",
+      "source_sha256": "befcadf45ccbc8a953deac83deda2a241d785107cbb3bc71569a9145ddc7bcc0",
+      "exported_sha256": "befcadf45ccbc8a953deac83deda2a241d785107cbb3bc71569a9145ddc7bcc0",
+      "bytes": 1079,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_RECOVERED_ACCURACY_20261018_172656.md",
+      "source_sha256": "3229e113b36cb70416b2650ac0182f27d6d68e9039db3df0eaf3fba71081eb31",
+      "exported_sha256": "3229e113b36cb70416b2650ac0182f27d6d68e9039db3df0eaf3fba71081eb31",
+      "bytes": 5920,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_RECOVERED_EXPERIMENT_20261018_172656.md",
+      "source_sha256": "6b7f71e985546f9fdb3e9ab297b6a2bc8e047f6ac05d792f4c275852cefabc61",
+      "exported_sha256": "6b7f71e985546f9fdb3e9ab297b6a2bc8e047f6ac05d792f4c275852cefabc61",
+      "bytes": 1158,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_RECOVERED_ISSUES_20261018_172656.md",
+      "source_sha256": "0171b82673b5ad5e585ab4cf628cf1eaa20537911bc7f35a13df0f386597a48f",
+      "exported_sha256": "0171b82673b5ad5e585ab4cf628cf1eaa20537911bc7f35a13df0f386597a48f",
+      "bytes": 773,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_REFERENCE_SESSION_EXPERIMENT_20261013.md",
+      "source_sha256": "57ec69781e5cb6782f0c3cc06b5cb67844f4f238e12db9f4f078a363c4ead97d",
+      "exported_sha256": "57ec69781e5cb6782f0c3cc06b5cb67844f4f238e12db9f4f078a363c4ead97d",
+      "bytes": 3492,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_REFERENCE_SESSION_ISSUES_20261013.md",
+      "source_sha256": "5a69b78fc13f752e7d06b38d79d4ea3875b140647e06f11240f9567eda8ccf73",
+      "exported_sha256": "5a69b78fc13f752e7d06b38d79d4ea3875b140647e06f11240f9567eda8ccf73",
+      "bytes": 3039,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_REGISTRATION_RECONSTRUCTION_PLAN_20261014.md",
+      "source_sha256": "9d7ca6f959f28d5984f314eb1a9d5f7a7f381fab251571b8bb23aef4ce6f4544",
+      "exported_sha256": "e0bbbbe63693a8249e9c78011fb2abf46fb5f336c6501d69dc49fa30ead64b8a",
+      "bytes": 9898,
+      "private_host_or_profile_replacements": 1
+    },
+    {
+      "path": "reports/CUP_RESTART_WAITING_ROI_FIX_20261015.md",
+      "source_sha256": "760aa05a11b8d61ca8eb9062b665a8f0a549f93ed76ddb745b7ab8a433dd1500",
+      "exported_sha256": "760aa05a11b8d61ca8eb9062b665a8f0a549f93ed76ddb745b7ab8a433dd1500",
+      "bytes": 2003,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_RETURN_FAILURE_REVIEW_20261018.md",
+      "source_sha256": "8c012accbe8010e1ce322f3e796ae8c94f64f8bb8457ff24671371b1a1ac341c",
+      "exported_sha256": "8c012accbe8010e1ce322f3e796ae8c94f64f8bb8457ff24671371b1a1ac341c",
+      "bytes": 4740,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_RETURN_REVIEW_EXPERIMENT_20261018.md",
+      "source_sha256": "ba79fe6ef6ab2df6acb2dbf8e0aac3ba3773d1b5f3741b7ce43cc4424808a1dd",
+      "exported_sha256": "ba79fe6ef6ab2df6acb2dbf8e0aac3ba3773d1b5f3741b7ce43cc4424808a1dd",
+      "bytes": 1079,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_RETURN_REVIEW_ISSUES_20261018.md",
+      "source_sha256": "0c3d84c1ced47bc16bbdab9ed7d20201413a0af4a2f90fa93a3be05c8175d964",
+      "exported_sha256": "0c3d84c1ced47bc16bbdab9ed7d20201413a0af4a2f90fa93a3be05c8175d964",
+      "bytes": 846,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_SAM2_ASSISTED_MASKS_20261017.md",
+      "source_sha256": "3ed1ac8aa2c818e34c2924c0f9cd54264ebc0b3bb3ec070705da11dfb056035d",
+      "exported_sha256": "3ed1ac8aa2c818e34c2924c0f9cd54264ebc0b3bb3ec070705da11dfb056035d",
+      "bytes": 6618,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_SAM2_ASSISTED_MASKS_EXPERIMENT_20261017.md",
+      "source_sha256": "8de8e8dbd05631ab690ebe6f878a1dbf0c2ba4efe14515d0901d23ccc2fb5ba9",
+      "exported_sha256": "8de8e8dbd05631ab690ebe6f878a1dbf0c2ba4efe14515d0901d23ccc2fb5ba9",
+      "bytes": 1573,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_SAM2_ASSISTED_MASKS_ISSUES_20261017.md",
+      "source_sha256": "7e82c4bc727de75c42f08989e42b8baf028b923d46f91038a1eae65d65f6cb72",
+      "exported_sha256": "7e82c4bc727de75c42f08989e42b8baf028b923d46f91038a1eae65d65f6cb72",
+      "bytes": 1628,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_SAM_INITIALIZATION_ISSUES_20261015.md",
+      "source_sha256": "37abc9eb0f098e2228919ee22329a0ed7837c6babe6c8b2efe79e0c25d39555d",
+      "exported_sha256": "37abc9eb0f098e2228919ee22329a0ed7837c6babe6c8b2efe79e0c25d39555d",
+      "bytes": 1615,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_SAM_INITIALIZATION_RESULT_20261015.md",
+      "source_sha256": "48a97afa48e74cd1571835e053b5381868376d1164913a40eab7e57207c1c0c6",
+      "exported_sha256": "48a97afa48e74cd1571835e053b5381868376d1164913a40eab7e57207c1c0c6",
+      "bytes": 4643,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_SIDE72_REVIEW_ISSUES_20261014_161656.md",
+      "source_sha256": "a935a55bd2733750ab9dbc93efe2110abac2c6882f1487f5c8285f48d67e7265",
+      "exported_sha256": "a935a55bd2733750ab9dbc93efe2110abac2c6882f1487f5c8285f48d67e7265",
+      "bytes": 2042,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_SIDE72_REVIEW_SESSION_20261014_161656.md",
+      "source_sha256": "3607fad686ce9aaa34e2f0acc9d865872ae01ba86eda344defd49cea6642340a",
+      "exported_sha256": "3607fad686ce9aaa34e2f0acc9d865872ae01ba86eda344defd49cea6642340a",
+      "bytes": 6754,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_SIDE8_REVIEW_20261014_153854.md",
+      "source_sha256": "6f9936e93cb19b690bfa292c7098c97e4e53934b280d3045957b07e00db3bd1e",
+      "exported_sha256": "81b8bd20cd2dc3ae54ad1425ee10f88895aa8fab1a59eb5942227f0ec9b18360",
+      "bytes": 3563,
+      "private_host_or_profile_replacements": 1
+    },
+    {
+      "path": "reports/CUP_SIDE8_SESSION_ISSUES_20261014_153854.md",
+      "source_sha256": "0edb2622db589d36f14056aecbbc8244ccece7e8413b1bcfe464d42f51e58019",
+      "exported_sha256": "0edb2622db589d36f14056aecbbc8244ccece7e8413b1bcfe464d42f51e58019",
+      "bytes": 1570,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_TRANSFER_RECOVERY_EXPERIMENT_20261013.md",
+      "source_sha256": "84c92ee9b5d5d8d409c89af1d9d6356591cc89b8294c2c5cd422fce447aff4ce",
+      "exported_sha256": "84c92ee9b5d5d8d409c89af1d9d6356591cc89b8294c2c5cd422fce447aff4ce",
+      "bytes": 1433,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/CUP_TRANSFER_RECOVERY_ISSUES_20261013.md",
+      "source_sha256": "46fc5bb6f741ea65b74b422b30b419fee8ccdb64dc459509fe1be297eadf4b29",
+      "exported_sha256": "46fc5bb6f741ea65b74b422b30b419fee8ccdb64dc459509fe1be297eadf4b29",
+      "bytes": 818,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/FOUNDATIONPOSE_REPRODUCTION_SUMMARY_20261015.md",
+      "source_sha256": "94e7570db444290ff506badc4683f50a57bb72b299bbcc29613d8fc10718d824",
+      "exported_sha256": "fa504f0271ce1f930c7638e05573f7448101313b4470a1771f3c210dcd13fdc1",
+      "bytes": 16994,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/GITHUB_PUBLICATION_20261026.md",
+      "source_sha256": "80fae9533c4fcd0f13ddb0cd4817afee9b8a86085bb41eb212f52205b018648b",
+      "exported_sha256": "80fae9533c4fcd0f13ddb0cd4817afee9b8a86085bb41eb212f52205b018648b",
+      "bytes": 2467,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/GIT_TRACEABILITY_ISSUES_20261015.md",
+      "source_sha256": "4e8509d2c29fee46b3b7aa9da689fa8b61d84af334ddd1a38c0d9e2d046bf98d",
+      "exported_sha256": "4e8509d2c29fee46b3b7aa9da689fa8b61d84af334ddd1a38c0d9e2d046bf98d",
+      "bytes": 1073,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/GIT_TRACEABILITY_RESULT_20261015.md",
+      "source_sha256": "4bfd95aa9a6fc01b28c7bd7acab19229326e2323a326a57cc73a02f52f3eac2a",
+      "exported_sha256": "4bfd95aa9a6fc01b28c7bd7acab19229326e2323a326a57cc73a02f52f3eac2a",
+      "bytes": 4048,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/OBJ_DELIVERY_PRELOGGER_ERROR_20261014.md",
+      "source_sha256": "09c44bdfd82a4434f6e6ccb6c9c788ff50e0a5738bd9ad56b2f2fe99000b82b8",
+      "exported_sha256": "09c44bdfd82a4434f6e6ccb6c9c788ff50e0a5738bd9ad56b2f2fe99000b82b8",
+      "bytes": 1258,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/OBJ_DEPTH_DENSITY_DIAGNOSIS_20261014.md",
+      "source_sha256": "0cb182738d6cee45b855ce7565818cc6dacb6895d97866ba6be4b60ca14c7611",
+      "exported_sha256": "40532532b3118dbc40719a73ece0d4f27bbbbad078bd7c5e10ea6a9a3ba415c0",
+      "bytes": 7777,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/OBJ_DEPTH_DENSITY_ISSUES_20261014.md",
+      "source_sha256": "b6a39f7290c7c0934003ff7e303b941824d2c6fc1885c4017b942da43c370eea",
+      "exported_sha256": "b6a39f7290c7c0934003ff7e303b941824d2c6fc1885c4017b942da43c370eea",
+      "bytes": 2692,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/OBJ_ENVIRONMENT_SETUP_20261014.md",
+      "source_sha256": "b30450355298ec794cd2a267bb1d6de782b22d62d96f3d1a779f1cb5c488fd51",
+      "exported_sha256": "1b93cf6b0a275ddff59e9c4038edb8176bc40e23e0360e691841199b4f0411b7",
+      "bytes": 8285,
+      "private_host_or_profile_replacements": 4
+    },
+    {
+      "path": "reports/OBJ_SETUP_DELIVERY_EXPERIMENT_20261014.md",
+      "source_sha256": "43079c2bd2fda57f3f2fd13a5b207976f233c4ca1fefce31ed657a651632e265",
+      "exported_sha256": "43079c2bd2fda57f3f2fd13a5b207976f233c4ca1fefce31ed657a651632e265",
+      "bytes": 1667,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/OBJ_SETUP_DELIVERY_ISSUES_20261014.md",
+      "source_sha256": "7c4e040b427c5727090ec0ec9220111791952c6b7c83c87e48ba5011a1516ccd",
+      "exported_sha256": "7c4e040b427c5727090ec0ec9220111791952c6b7c83c87e48ba5011a1516ccd",
+      "bytes": 976,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/OBJ_SETUP_SESSION_EXPERIMENT_20261014.md",
+      "source_sha256": "b30d6f1073117c967374eb8626d1f80e42c4d003a0746dfecbaa529e734752d4",
+      "exported_sha256": "766d3df16be1ff3f95eb7eaf5a5f4c47d3aa70050b424a0b25362940e52beb95",
+      "bytes": 2579,
+      "private_host_or_profile_replacements": 1
+    },
+    {
+      "path": "reports/OBJ_SETUP_SESSION_ISSUES_20261014.md",
+      "source_sha256": "ae42972c66ef72fac868796d8e7cb29d80071f924ba14d9d021dfb661eddc3ed",
+      "exported_sha256": "ae42972c66ef72fac868796d8e7cb29d80071f924ba14d9d021dfb661eddc3ed",
+      "bytes": 3531,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP72_CAPTURE_REVIEW_20261017.md",
+      "source_sha256": "84cc9baba55b1a2e6507dade772ad6a42ab10c5e055dc43ce0a30de156a1768f",
+      "exported_sha256": "e82b906f62c2c1e6e25e26bbefc307eb89c78a42374393ebcb3494972326d828",
+      "bytes": 5134,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP72_REVIEW_EXPERIMENT_20261017.md",
+      "source_sha256": "a21a72d4b393b992a088211dcb5eec65001130188e9d6c40e8b814d371d70e8a",
+      "exported_sha256": "a21a72d4b393b992a088211dcb5eec65001130188e9d6c40e8b814d371d70e8a",
+      "bytes": 1654,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP72_REVIEW_ISSUES_20261017.md",
+      "source_sha256": "66bfede8e4ba0ee3499e265b7fab824ee69d248038dbc46c14b71b4bf7fb63a8",
+      "exported_sha256": "66bfede8e4ba0ee3499e265b7fab824ee69d248038dbc46c14b71b4bf7fb63a8",
+      "bytes": 1291,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP_CAMERA_MOTION_REVIEW_20261018.md",
+      "source_sha256": "9672aa9b0413e2bde604636b97644ca2a24eda116f2ae56a798334a52a8cbcd4",
+      "exported_sha256": "9672aa9b0413e2bde604636b97644ca2a24eda116f2ae56a798334a52a8cbcd4",
+      "bytes": 5174,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP_CAPTURE_AND_MANUAL_MASKS_20261017.md",
+      "source_sha256": "1907362622daa71160a469c6bad9c3856745c95dde73d5d6677ee497b6d4d694",
+      "exported_sha256": "1907362622daa71160a469c6bad9c3856745c95dde73d5d6677ee497b6d4d694",
+      "bytes": 5312,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP_COLOR_HANDLE_EXPERIMENT_20261017.md",
+      "source_sha256": "7a3f52a17e8ff072f2433bcde23a1e3125e6d6cfbf98a694c65e5e3947459669",
+      "exported_sha256": "7a3f52a17e8ff072f2433bcde23a1e3125e6d6cfbf98a694c65e5e3947459669",
+      "bytes": 1030,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP_COLOR_HANDLE_ISSUES_20261017.md",
+      "source_sha256": "5abe42d021228d5d7f13a8e4b2cffac7d00bb39601d4655e1fdca7ae01d9d682",
+      "exported_sha256": "5abe42d021228d5d7f13a8e4b2cffac7d00bb39601d4655e1fdca7ae01d9d682",
+      "bytes": 939,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP_COLOR_HANDLE_REVIEW_20261017.md",
+      "source_sha256": "1f8c5ebfdaa34689fdfe624374bd3ca4ab5eff4254addf5f80b67dfe212522eb",
+      "exported_sha256": "1f8c5ebfdaa34689fdfe624374bd3ca4ab5eff4254addf5f80b67dfe212522eb",
+      "bytes": 5761,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP_HANDLE_DASHBOARD_FIX_20261018.md",
+      "source_sha256": "492bc85b1d28c9b9729628532ffbcf93df70ff3fc9cf1df7182197e644cb992c",
+      "exported_sha256": "492bc85b1d28c9b9729628532ffbcf93df70ff3fc9cf1df7182197e644cb992c",
+      "bytes": 4190,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP_HANDLE_MOTION_EXPERIMENT_20261018.md",
+      "source_sha256": "321279f00e7c5f12e9ed232f869a6a3bebae747f6788d722746cfd5a6ef2edf9",
+      "exported_sha256": "321279f00e7c5f12e9ed232f869a6a3bebae747f6788d722746cfd5a6ef2edf9",
+      "bytes": 1332,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP_HANDLE_MOTION_ISSUES_20261018.md",
+      "source_sha256": "e843aae202919ac0150b47628bcdf67a5caa9222200ed84675db3264a2957b5a",
+      "exported_sha256": "e843aae202919ac0150b47628bcdf67a5caa9222200ed84675db3264a2957b5a",
+      "bytes": 1112,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP_INTERFACE_ISSUES_20261018.md",
+      "source_sha256": "1696cd004548b9dd35bc90fc1a01aa6d7ae9d15eaa27c8f270fa84c2a6449966",
+      "exported_sha256": "1696cd004548b9dd35bc90fc1a01aa6d7ae9d15eaa27c8f270fa84c2a6449966",
+      "bytes": 530,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP_INTERFACE_REOPEN_20261018.md",
+      "source_sha256": "29a60b91ffb03139e87b52f222297a5dc3097815eb2c210677508c6cd0daf324",
+      "exported_sha256": "29a60b91ffb03139e87b52f222297a5dc3097815eb2c210677508c6cd0daf324",
+      "bytes": 2223,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP_LAST_FRAME_RETAKE_20261017.md",
+      "source_sha256": "435da87675f6b6bba4f130d449fa22244ebccbe4542189b2519746ba7c24b1c3",
+      "exported_sha256": "435da87675f6b6bba4f130d449fa22244ebccbe4542189b2519746ba7c24b1c3",
+      "bytes": 3027,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP_LAST_RETAKE_EXPERIMENT_20261017.md",
+      "source_sha256": "0f22b2d47204ce4acb90a508071f69cca8a08a9ae3f69cb74f73ce94881cb82c",
+      "exported_sha256": "0f22b2d47204ce4acb90a508071f69cca8a08a9ae3f69cb74f73ce94881cb82c",
+      "bytes": 934,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP_LAST_RETAKE_ISSUES_20261017.md",
+      "source_sha256": "8226cff0c873f734fed8972016ebdea93c5f4542795d07cb8d1236f2a5037f56",
+      "exported_sha256": "8226cff0c873f734fed8972016ebdea93c5f4542795d07cb8d1236f2a5037f56",
+      "bytes": 822,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP_LIVE_NEW_MODEL_20261018.md",
+      "source_sha256": "79fd0eee6f0edd071242965b1a2796cb580707ba3b7d95b0fac77fdb9bae842f",
+      "exported_sha256": "79fd0eee6f0edd071242965b1a2796cb580707ba3b7d95b0fac77fdb9bae842f",
+      "bytes": 6361,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP_LIVE_NEW_MODEL_EXPERIMENT_20261018.md",
+      "source_sha256": "55316ad06b74c54afe3dc5c60fa33237b1e7fc2f864c4e1bfa572973484ef19f",
+      "exported_sha256": "55316ad06b74c54afe3dc5c60fa33237b1e7fc2f864c4e1bfa572973484ef19f",
+      "bytes": 1410,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP_LIVE_NEW_MODEL_ISSUES_20261018.md",
+      "source_sha256": "cfd26d7d65adf95918801204c5fa669e9ca81524fe4cf7a9f63709d36a6dc247",
+      "exported_sha256": "cfd26d7d65adf95918801204c5fa669e9ca81524fe4cf7a9f63709d36a6dc247",
+      "bytes": 1144,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP_MANUAL_MASK_READY_EXPERIMENT_20261017.md",
+      "source_sha256": "fb06fc13b33a4b23abd40c0dda5c07160970ac8b7326c458416de4b951d75b63",
+      "exported_sha256": "fb06fc13b33a4b23abd40c0dda5c07160970ac8b7326c458416de4b951d75b63",
+      "bytes": 1227,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP_MANUAL_MASK_READY_ISSUES_20261017.md",
+      "source_sha256": "e6518c8cc8a584a1c31ed161b8fefa6a6fba527d4ac03482f4021498fe306166",
+      "exported_sha256": "e6518c8cc8a584a1c31ed161b8fefa6a6fba527d4ac03482f4021498fe306166",
+      "bytes": 870,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP_REVIEWED72_MESH_EXPERIMENT_20261017.md",
+      "source_sha256": "4301f4750eb46645862fc2a13d213075b05c013c628e55fa4fda6925c29383e6",
+      "exported_sha256": "4301f4750eb46645862fc2a13d213075b05c013c628e55fa4fda6925c29383e6",
+      "bytes": 1777,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP_REVIEWED72_MESH_ISSUES_20261017.md",
+      "source_sha256": "c910080a4f53e7867dea534d8c80a6c438a6f337d364301a8df90ff1412594a3",
+      "exported_sha256": "c910080a4f53e7867dea534d8c80a6c438a6f337d364301a8df90ff1412594a3",
+      "bytes": 1789,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP_REVIEWED72_MESH_RESULT_20261017.md",
+      "source_sha256": "2781e7e30dacd1e2d6a18d1b44cc4362cce4a787d3de8c0108c60430fe42e4f4",
+      "exported_sha256": "cee763ed602e4e5e4ea160280f2f8409a53f1ba77e537a1be09db5ab5fc6bafd",
+      "bytes": 9078,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP_START_EXPERIMENT_20261017.md",
+      "source_sha256": "1b665cdb2732d1fe6089cfd6ec3207cc0823023ade49ffd66ad5da1c328587f6",
+      "exported_sha256": "1b665cdb2732d1fe6089cfd6ec3207cc0823023ade49ffd66ad5da1c328587f6",
+      "bytes": 937,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RED_CUP_START_ISSUES_20261017.md",
+      "source_sha256": "070170641d217cd90e1329a4d5a026210a501c6f58c1e75be15e1b3173b6e31b",
+      "exported_sha256": "070170641d217cd90e1329a4d5a026210a501c6f58c1e75be15e1b3173b6e31b",
+      "bytes": 825,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/REPRODUCTION_SUMMARY_SESSION_EXPERIMENT_20261015.md",
+      "source_sha256": "73061dc004687f8e1c53ecb37e0589d604901ca07ece2d86ec95ef9f1dfd0c4d",
+      "exported_sha256": "73061dc004687f8e1c53ecb37e0589d604901ca07ece2d86ec95ef9f1dfd0c4d",
+      "bytes": 868,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/REPRODUCTION_SUMMARY_SESSION_ISSUES_20261015.md",
+      "source_sha256": "8f7aef62e36670c9b161ed2475eebf7ceba92f7fd96c630cd2bef7e7cf80ab0f",
+      "exported_sha256": "8f7aef62e36670c9b161ed2475eebf7ceba92f7fd96c630cd2bef7e7cf80ab0f",
+      "bytes": 1236,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RGBD_ALIGNMENT_CHECK_GUIDE_20261014.md",
+      "source_sha256": "feb47607986acf78d5f0d793784fb66f5c0edbb7b915274167dfefd50fa33855",
+      "exported_sha256": "783c43a5632d773dcd4b21507f52ad60c622f4dacc7ef5074d4fb196c26e4c33",
+      "bytes": 5241,
+      "private_host_or_profile_replacements": 1
+    },
+    {
+      "path": "reports/RGBD_ALIGNMENT_SESSION_EXPERIMENT_20261014.md",
+      "source_sha256": "cb3ff5b9512802d2bd39536d5a0a2345218975e6c4441df6e5a7264b7a785bb9",
+      "exported_sha256": "cb3ff5b9512802d2bd39536d5a0a2345218975e6c4441df6e5a7264b7a785bb9",
+      "bytes": 1781,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/RGBD_ALIGNMENT_SESSION_ISSUES_20261014.md",
+      "source_sha256": "215e809f32d0f3b373200356fd5bccfdd1cf26b4a398efcf2349c65681e4308d",
+      "exported_sha256": "215e809f32d0f3b373200356fd5bccfdd1cf26b4a398efcf2349c65681e4308d",
+      "bytes": 1317,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/UBUNTU_REALSENSE_VIEWER_20261018.md",
+      "source_sha256": "2b1077ced74222e97622d79cd75a397d2a8bf866ee306885a1ebce38c1fd3579",
+      "exported_sha256": "2b1077ced74222e97622d79cd75a397d2a8bf866ee306885a1ebce38c1fd3579",
+      "bytes": 5412,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/UBUNTU_VIEWER_EXPERIMENT_20261018.md",
+      "source_sha256": "d2ff4ff6744ea77c8d90efae81b2a70d82b4c00e3ccc6546b8df45aabd255f47",
+      "exported_sha256": "d2ff4ff6744ea77c8d90efae81b2a70d82b4c00e3ccc6546b8df45aabd255f47",
+      "bytes": 1111,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/UBUNTU_VIEWER_ISSUES_20261018.md",
+      "source_sha256": "22df56c7e521bd366961dd0548786436681ae991f7f69af4aa4528899f8e873c",
+      "exported_sha256": "22df56c7e521bd366961dd0548786436681ae991f7f69af4aa4528899f8e873c",
+      "bytes": 988,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/WINDOWS_ALL_E_STORAGE_ISSUES_20261015.md",
+      "source_sha256": "0c636e4b7f94f068ded57fb88abce76976e93aec5f99b8f9fa9bad3b1381e0cd",
+      "exported_sha256": "87cabaf76c77b3263df84847f1af67e44d9f35c0c19dbf7e1c0c729c93898d6e",
+      "bytes": 2724,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/WINDOWS_ALL_E_STORAGE_RESULT_20261015.md",
+      "source_sha256": "4c1c43bb3dacdb1f58f76391e7fced446fb2f6156088f4465475dd7a585a98f6",
+      "exported_sha256": "283cd5d4c7154138872f64dde9676a66e20c8ceb4997e1da92260421e29e47c2",
+      "bytes": 2354,
+      "private_host_or_profile_replacements": 1
+    },
+    {
+      "path": "reports/WINDOWS_E_DRIVE_CAPTURE_20261014.md",
+      "source_sha256": "52f55a4bf075d4ee92988c18b04bcccec8e2df4cb5a177c8a455d91c77c3bb41",
+      "exported_sha256": "17de381bf302440978b1e8eefbad4c25de8aca20bb0bc75e82ea88d77421f02c",
+      "bytes": 4905,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/WINDOWS_E_DRIVE_CAPTURE_ISSUES_20261014.md",
+      "source_sha256": "9b89281c3784ded775a9751db7a6a2403a3daa22ee6ab5fa1f08442345d110bc",
+      "exported_sha256": "9b89281c3784ded775a9751db7a6a2403a3daa22ee6ab5fa1f08442345d110bc",
+      "bytes": 1645,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/WINDOWS_VIEWER_INSTALL_EXPERIMENT_20261014.md",
+      "source_sha256": "da56538b340e43b8c5cc8810e028d64cc56347e554c07075f7b3d753707caa12",
+      "exported_sha256": "a0219da57329dfb66a65896550459bb87cfa665e0c9901fa5bf168a44462bbf7",
+      "bytes": 1795,
+      "private_host_or_profile_replacements": 2
+    },
+    {
+      "path": "reports/WINDOWS_VIEWER_INSTALL_ISSUES_20261014.md",
+      "source_sha256": "cdffe47888ad0e517d320b149663f66832a911bc31c2663b1fae2a9f002dcc3e",
+      "exported_sha256": "cdffe47888ad0e517d320b149663f66832a911bc31c2663b1fae2a9f002dcc3e",
+      "bytes": 946,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/bundlesdf_deployment_completed_20261013.md",
+      "source_sha256": "cc5b41128ac20b26d4f34f0c5e307f21f368aee47e0893ccbae76877650be158",
+      "exported_sha256": "cc5b41128ac20b26d4f34f0c5e307f21f368aee47e0893ccbae76877650be158",
+      "bytes": 6957,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/bundlesdf_deployment_probe_20261013.md",
+      "source_sha256": "31d2c0f381c6e255d5e383268c7df746215198744d386ae1c069d42abbfe0be8",
+      "exported_sha256": "31d2c0f381c6e255d5e383268c7df746215198744d386ae1c069d42abbfe0be8",
+      "bytes": 6480,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/bundlesdf_runtime_ray_device_20261013.md",
+      "source_sha256": "d758dc28be4bbf0b44c226750ed2bcfc0d672d59d6f220645f9c2e6cf2330444",
+      "exported_sha256": "d758dc28be4bbf0b44c226750ed2bcfc0d672d59d6f220645f9c2e6cf2330444",
+      "bytes": 1788,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/bundlesdf_top36_coordinates_20261013.md",
+      "source_sha256": "92adfaef0d8730360d9cd231fcfd778034905863ab3c63ed3052f70c84f14535",
+      "exported_sha256": "92adfaef0d8730360d9cd231fcfd778034905863ab3c63ed3052f70c84f14535",
+      "bytes": 2658,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/bundlesdf_v4_coordinates_and_exit_20261013.md",
+      "source_sha256": "760efe4edcbab816e7cfc9ef1e1d58fd8ea1dab10cf5e3204497916c91fdb23b",
+      "exported_sha256": "760efe4edcbab816e7cfc9ef1e1d58fd8ea1dab10cf5e3204497916c91fdb23b",
+      "bytes": 5892,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/cup_check_experiment_notes_20261013.md",
+      "source_sha256": "d5f41c3a8498ccf530a687bb8b948177d9031f01803d3fb0243e9f8093d1bf6f",
+      "exported_sha256": "480fcaeedf7da2a3d04141c92dc48df50d3dec18fdb6b3f0016ea3af6a40ecc4",
+      "bytes": 1938,
+      "private_host_or_profile_replacements": 1
+    },
+    {
+      "path": "reports/cup_check_issue_notes_20261013.md",
+      "source_sha256": "2cc58668ddd88d9fef1ecebd04581a1ed7d9ea95275441a76c91eb70fbbb401b",
+      "exported_sha256": "2cc58668ddd88d9fef1ecebd04581a1ed7d9ea95275441a76c91eb70fbbb401b",
+      "bytes": 1677,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/cup_light_recheck_experiment_notes_20261013.md",
+      "source_sha256": "9283984d8242651f8d37363c23841c827ba888274a3914fd7d8d9bd4ab11a33a",
+      "exported_sha256": "9283984d8242651f8d37363c23841c827ba888274a3914fd7d8d9bd4ab11a33a",
+      "bytes": 1401,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/cup_light_recheck_issue_notes_20261013.md",
+      "source_sha256": "83ba3bc5e1cabc0128dcd4ac871257b9c1dbfa3b6270c3b277306b404a3e07c5",
+      "exported_sha256": "83ba3bc5e1cabc0128dcd4ac871257b9c1dbfa3b6270c3b277306b404a3e07c5",
+      "bytes": 1021,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/cup_manual_photos_experiment_notes_20261013.md",
+      "source_sha256": "7f604e71895c102a71eb3b7bb10dcf2dccbf45ae255530abc799571859f6d263",
+      "exported_sha256": "7f604e71895c102a71eb3b7bb10dcf2dccbf45ae255530abc799571859f6d263",
+      "bytes": 1933,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/cup_manual_photos_issue_notes_20261013.md",
+      "source_sha256": "37d2837ca5ff4cd8a733b7658bbed7358918eddb1b4813db544e08659380c4c6",
+      "exported_sha256": "37d2837ca5ff4cd8a733b7658bbed7358918eddb1b4813db544e08659380c4c6",
+      "bytes": 897,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/cup_photos_review_experiment_notes_20261013.md",
+      "source_sha256": "a58c894870e9bc99cfbca80cf59529b664abf839a734100e868d369a1633c6af",
+      "exported_sha256": "a58c894870e9bc99cfbca80cf59529b664abf839a734100e868d369a1633c6af",
+      "bytes": 1952,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/cup_photos_review_issue_notes_20261013.md",
+      "source_sha256": "91f22cfe8e23f0385946b23034286a3ed273572d00e7fc6df96a409f11fea1f0",
+      "exported_sha256": "91f22cfe8e23f0385946b23034286a3ed273572d00e7fc6df96a409f11fea1f0",
+      "bytes": 1268,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/cup_trial_review_experiment_notes_20261013.md",
+      "source_sha256": "e0996a3f8608b9068b3176fc5b282b4602b16e0be110634b3d4219780d99f73a",
+      "exported_sha256": "e0996a3f8608b9068b3176fc5b282b4602b16e0be110634b3d4219780d99f73a",
+      "bytes": 1625,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/cup_trial_review_issue_notes_20261013.md",
+      "source_sha256": "690e14fba5215f0053756f2d32b483440772924f3fa5fd8acabc5203ce0b925e",
+      "exported_sha256": "690e14fba5215f0053756f2d32b483440772924f3fa5fd8acabc5203ce0b925e",
+      "bytes": 1423,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/pose_route_top_preview_experiment_notes_20261013.md",
+      "source_sha256": "b3123631a9817dab3d423ed1a35553938e24a55323779cc459fae5654df8cd52",
+      "exported_sha256": "b3123631a9817dab3d423ed1a35553938e24a55323779cc459fae5654df8cd52",
+      "bytes": 2446,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/pose_route_top_preview_issue_notes_20261013.md",
+      "source_sha256": "70e60740767ed0e2d6be72383399f2972112704239d6cfc58990fdc624b728f3",
+      "exported_sha256": "70e60740767ed0e2d6be72383399f2972112704239d6cfc58990fdc624b728f3",
+      "bytes": 1412,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/windows_setup_experiment_notes_20261013.md",
+      "source_sha256": "7e4191d266e84ad4e8484fcf8772c529a015b1464f267ae5844e07452c8608f4",
+      "exported_sha256": "701ecbb7ad204cf949e9d4fa3aa158e2758df7358a38fd4cd2c08575c50bc886",
+      "bytes": 1409,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "reports/windows_setup_issue_notes_20261013.md",
+      "source_sha256": "946fb4d32fec4d666893737a211077c0007621d78c4fe1074f32613d37dea9a1",
+      "exported_sha256": "dd8023f53b8b6fad4eca755277dc13cd81442ba25c84cf7a73357d6f0c9db7c0",
+      "bytes": 1055,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/99-foundationpose-d435i.rules",
+      "source_sha256": "3ccbfc6596028b61c68bbc5a01d5498335a84fc5c86f8d7c7ac2dfc3a2ec28b0",
+      "exported_sha256": "3ccbfc6596028b61c68bbc5a01d5498335a84fc5c86f8d7c7ac2dfc3a2ec28b0",
+      "bytes": 248,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/99-realsense-libusb.rules",
+      "source_sha256": "15e8d0221f4fd287f8b67f8aedf6d69c788bfd8d82f3e4742422ab75a40af3e4",
+      "exported_sha256": "15e8d0221f4fd287f8b67f8aedf6d69c788bfd8d82f3e4742422ab75a40af3e4",
+      "bytes": 10583,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/accelerate_bundlesdf_apt_20261013.py",
+      "source_sha256": "9e8bc086de591a8215379b68a06f918ecb580876e87bdb9bd2afb5c8584f8cb4",
+      "exported_sha256": "9e8bc086de591a8215379b68a06f918ecb580876e87bdb9bd2afb5c8584f8cb4",
+      "bytes": 2709,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/analyze_cup_aruco_id6.py",
+      "source_sha256": "37229d595c9996357dfae31c8fc566dfc5bd45f0a2247a72a80aa7247349bb8a",
+      "exported_sha256": "37229d595c9996357dfae31c8fc566dfc5bd45f0a2247a72a80aa7247349bb8a",
+      "bytes": 11993,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/analyze_cup_live_drift.py",
+      "source_sha256": "46b0cec73c2c07d81a9c00dc00afbc2c3a8905dcbca250b225d3a3f61017b9b0",
+      "exported_sha256": "46b0cec73c2c07d81a9c00dc00afbc2c3a8905dcbca250b225d3a3f61017b9b0",
+      "bytes": 7614,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/analyze_redcup_live_trial.py",
+      "source_sha256": "6d05b03371a4acb553557e520019a81f73252c0b7a36b9c7434c94b377fcc11e",
+      "exported_sha256": "6d05b03371a4acb553557e520019a81f73252c0b7a36b9c7434c94b377fcc11e",
+      "bytes": 5052,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/append_cup_live_environment_note.py",
+      "source_sha256": "2b9fcc96186a386a0909e539838a025e9885f96417715ded71ec5957aae65a89",
+      "exported_sha256": "2b9fcc96186a386a0909e539838a025e9885f96417715ded71ec5957aae65a89",
+      "bytes": 3736,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/append_cup_sam_note.py",
+      "source_sha256": "decd55a1a0ef1ac9359b7b00d0efa6fcf17b9aa3d2439b042e6bf1f0dc34216d",
+      "exported_sha256": "decd55a1a0ef1ac9359b7b00d0efa6fcf17b9aa3d2439b042e6bf1f0dc34216d",
+      "bytes": 2411,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/append_git_workflow_note.py",
+      "source_sha256": "2c5dd763109547e67a4ab247622ab8898cde530ff4feb73508ccd6b78b61dbb0",
+      "exported_sha256": "2c5dd763109547e67a4ab247622ab8898cde530ff4feb73508ccd6b78b61dbb0",
+      "bytes": 1596,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/append_manual_records.py",
+      "source_sha256": "42cf4b7bfee87348d0dcb11935b1fb210b0f14f126504b2c309486df285f9024",
+      "exported_sha256": "42cf4b7bfee87348d0dcb11935b1fb210b0f14f126504b2c309486df285f9024",
+      "bytes": 1763,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/append_no_aruco_fps_note.py",
+      "source_sha256": "196b95b4df2b8814c784ed3fccf3330886b11ce2f30977718cc25055215cc3c1",
+      "exported_sha256": "196b95b4df2b8814c784ed3fccf3330886b11ce2f30977718cc25055215cc3c1",
+      "bytes": 1359,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/append_obj_environment_note.py",
+      "source_sha256": "6fdff4a10459cbc338869cf08cbaaa66318da6617c55ad9f7427621babc7ec6c",
+      "exported_sha256": "6fdff4a10459cbc338869cf08cbaaa66318da6617c55ad9f7427621babc7ec6c",
+      "bytes": 1703,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/append_reacquisition_note.py",
+      "source_sha256": "21996a62f79aefba79ba078cf67d2b13de33966e7fdbfea6a9a6477898c5a079",
+      "exported_sha256": "21996a62f79aefba79ba078cf67d2b13de33966e7fdbfea6a9a6477898c5a079",
+      "bytes": 2514,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/archive_cup_fast_aruco.py",
+      "source_sha256": "0897faab3c60f32c42b8dec63415360cd5d6a08957f92ff3b0b831058935fc2b",
+      "exported_sha256": "0897faab3c60f32c42b8dec63415360cd5d6a08957f92ff3b0b831058935fc2b",
+      "bytes": 8514,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/archive_cup_live_drift.py",
+      "source_sha256": "a70a756084d4c39f8376be0f2b2558063464ed816a23507b35f96d15f30186b9",
+      "exported_sha256": "a70a756084d4c39f8376be0f2b2558063464ed816a23507b35f96d15f30186b9",
+      "bytes": 2674,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/archive_cup_sam_verification.py",
+      "source_sha256": "08bd95edc80225df228d76e7b4379430252ee6cdc53eb16fcab9061c4349eebc",
+      "exported_sha256": "08bd95edc80225df228d76e7b4379430252ee6cdc53eb16fcab9061c4349eebc",
+      "bytes": 1880,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/archive_new72_reconstruction_results.ps1",
+      "source_sha256": "fe50a676a63549ab211986a42ce693ce76e80946aa92d6c6558f291dad5260d1",
+      "exported_sha256": "fe50a676a63549ab211986a42ce693ce76e80946aa92d6c6558f291dad5260d1",
+      "bytes": 1094,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/archive_reacquisition_evidence.py",
+      "source_sha256": "39ef46f0f8ec9e5c2c60b1151f5d6c3abaa325e6ae88d799fd77c7f7a52c095b",
+      "exported_sha256": "39ef46f0f8ec9e5c2c60b1151f5d6c3abaa325e6ae88d799fd77c7f7a52c095b",
+      "bytes": 3905,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/archive_redcup_handle_review.py",
+      "source_sha256": "d287dc5291fb335563fcd92289a553702c431c899c4342a3dd57b124071d3f3b",
+      "exported_sha256": "d287dc5291fb335563fcd92289a553702c431c899c4342a3dd57b124071d3f3b",
+      "bytes": 4194,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/archive_side72_review.ps1",
+      "source_sha256": "4f76d62c453222c494c375b376866207cfc72264d5d36b9691cf8d49f5910dc5",
+      "exported_sha256": "4f76d62c453222c494c375b376866207cfc72264d5d36b9691cf8d49f5910dc5",
+      "bytes": 1322,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/archive_windows_cup_check_20261013.ps1",
+      "source_sha256": "6a8f55dcfb8ae549506bca9c9b6a8ea8cfc386c746d1f17508cf13daf42c5b75",
+      "exported_sha256": "283ff23ab239d3965dba7f1b7339cc3f285f660987e71b44097668bcae7d982f",
+      "bytes": 4109,
+      "private_host_or_profile_replacements": 3
+    },
+    {
+      "path": "setup/assess_cup_sequence_regions.py",
+      "source_sha256": "bb9d332b5188b5a768a679a586d7a6668fffda37054c16b1e60efece9b9be219",
+      "exported_sha256": "bb9d332b5188b5a768a679a586d7a6668fffda37054c16b1e60efece9b9be219",
+      "bytes": 3798,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/assess_cup_snapshot.py",
+      "source_sha256": "a5dcf7729cc8c12f7ad7c064ff313fdb84046b992d4f74bdcab5c19b2ea0b98d",
+      "exported_sha256": "a5dcf7729cc8c12f7ad7c064ff313fdb84046b992d4f74bdcab5c19b2ea0b98d",
+      "bytes": 4793,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/assess_rgbd_regions.py",
+      "source_sha256": "d58997c30e765a69549b7e5d2108a6ca9563bfb4a7a6548d53fedf89c196333e",
+      "exported_sha256": "d58997c30e765a69549b7e5d2108a6ca9563bfb4a7a6548d53fedf89c196333e",
+      "bytes": 4197,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/audit_bundlesdf_pose_gauge_20261013.py",
+      "source_sha256": "b29a52d7890967fd53721aac60bcadce29a85190dcb83e08439f945bdc89feac",
+      "exported_sha256": "b29a52d7890967fd53721aac60bcadce29a85190dcb83e08439f945bdc89feac",
+      "bytes": 4604,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/audit_cup_handle_samples.py",
+      "source_sha256": "c7e4d95d43bebe3b5ea96f8f008b74ba38471ca2ae22849160a8870365b3f30e",
+      "exported_sha256": "c7e4d95d43bebe3b5ea96f8f008b74ba38471ca2ae22849160a8870365b3f30e",
+      "bytes": 4876,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/audit_geometric_cup_mesh.py",
+      "source_sha256": "9ee550532ec020eb9bb51f4cb00c98f6dfb62905c061f8625a94c574af5b5f74",
+      "exported_sha256": "9ee550532ec020eb9bb51f4cb00c98f6dfb62905c061f8625a94c574af5b5f74",
+      "bytes": 4232,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/audit_reviewed_cup_masks.py",
+      "source_sha256": "d02ed2a7089b0ec948fd25753da09346b3e07aa49d0d484fe7dde8bb8b1285ef",
+      "exported_sha256": "d02ed2a7089b0ec948fd25753da09346b3e07aa49d0d484fe7dde8bb8b1285ef",
+      "bytes": 8002,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/benchmark_cup_live_acceleration.py",
+      "source_sha256": "e3114ea37cf7b8e0d44a6fd5beedf0d439752c87b77b41e3f661a61115ef54b5",
+      "exported_sha256": "e3114ea37cf7b8e0d44a6fd5beedf0d439752c87b77b41e3f661a61115ef54b5",
+      "bytes": 8201,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/capture_d435i.py",
+      "source_sha256": "7baa0c295627295e5ff5bbbc18b0d24e65dd839c8e4223f9b20e6e56c0c40651",
+      "exported_sha256": "7baa0c295627295e5ff5bbbc18b0d24e65dd839c8e4223f9b20e6e56c0c40651",
+      "bytes": 16785,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/capture_d435i_photos.py",
+      "source_sha256": "866b3dd8ee38cf8d2f8bd93bac641df9db487510db86be25af50786fec8bc704",
+      "exported_sha256": "866b3dd8ee38cf8d2f8bd93bac641df9db487510db86be25af50786fec8bc704",
+      "bytes": 22758,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/check_capture_files.py",
+      "source_sha256": "4719772c3ddb602e70e7b49306a5c7efa0eb059f8149fcc79a2899b065e19e08",
+      "exported_sha256": "4719772c3ddb602e70e7b49306a5c7efa0eb059f8149fcc79a2899b065e19e08",
+      "bytes": 2153,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/check_cup_manual_dimensions.py",
+      "source_sha256": "ee85047ed4949d2f8238c1690c0a77436294cea729163972d9d0c9080a2bdbd9",
+      "exported_sha256": "ee85047ed4949d2f8238c1690c0a77436294cea729163972d9d0c9080a2bdbd9",
+      "bytes": 5210,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/check_cup_pilot_final_state.py",
+      "source_sha256": "941c229467b12a02fea649d2c2dbd49a22d2f751383ac5993b479cd81baefa88",
+      "exported_sha256": "941c229467b12a02fea649d2c2dbd49a22d2f751383ac5993b479cd81baefa88",
+      "bytes": 6767,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/check_cup_sam_sources.py",
+      "source_sha256": "9444aecaaefaa75620b035576346521f806606a1af7b04466cb5b3720b15a36e",
+      "exported_sha256": "9444aecaaefaa75620b035576346521f806606a1af7b04466cb5b3720b15a36e",
+      "bytes": 1000,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/cleanup_orphan_sam2_transports.py",
+      "source_sha256": "2407ba2876d24a7d6d6bf5a78ceff2d0e8a42e803a9b52d6b2a26b10ca807de7",
+      "exported_sha256": "2407ba2876d24a7d6d6bf5a78ceff2d0e8a42e803a9b52d6b2a26b10ca807de7",
+      "bytes": 759,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/clear_recent_obj_captures.ps1",
+      "source_sha256": "1628fd0479780bc4b615e390b672f9d5254b49ae7d9bafa6900f4f85b8bc817f",
+      "exported_sha256": "1628fd0479780bc4b615e390b672f9d5254b49ae7d9bafa6900f4f85b8bc817f",
+      "bytes": 4655,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/collect_host_log.sh",
+      "source_sha256": "d19a4337fd08f0616eabf80e854978cc8060734c2c2179f88ba4f6a7099b5a67",
+      "exported_sha256": "d19a4337fd08f0616eabf80e854978cc8060734c2c2179f88ba4f6a7099b5a67",
+      "bytes": 366,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/compare_cup_handle_yaw.py",
+      "source_sha256": "2d9865b1c0fc15d881e34d8379dd568590f8e216bbd625b71944f7dfdab3a718",
+      "exported_sha256": "2d9865b1c0fc15d881e34d8379dd568590f8e216bbd625b71944f7dfdab3a718",
+      "bytes": 4443,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/compare_cup_live_reinitialization.py",
+      "source_sha256": "d60b7fc1b48c025bb9ae6bfc2b9f35da717d80ea04ad072f7b422e5b3dfd4f84",
+      "exported_sha256": "d60b7fc1b48c025bb9ae6bfc2b9f35da717d80ea04ad072f7b422e5b3dfd4f84",
+      "bytes": 4612,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/compare_cup_sam2.py",
+      "source_sha256": "b68324d3766fea23fa7c90c213eddd31e37980ad3dc864e837f5e3aaf49e3fcf",
+      "exported_sha256": "b68324d3766fea23fa7c90c213eddd31e37980ad3dc864e837f5e3aaf49e3fcf",
+      "bytes": 2864,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/compare_d435i_depth_presets.py",
+      "source_sha256": "a5c56c12c6f3433bc1192fce654df5dda45a284af7c9c0e6e200096808f6f5ef",
+      "exported_sha256": "a5c56c12c6f3433bc1192fce654df5dda45a284af7c9c0e6e200096808f6f5ef",
+      "bytes": 8735,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/compose_rgbd_retake.py",
+      "source_sha256": "9bde753680e71d1019e9b48366fa079cd23be3291b012695b6258ceaf46a2b41",
+      "exported_sha256": "9bde753680e71d1019e9b48366fa079cd23be3291b012695b6258ceaf46a2b41",
+      "bytes": 9525,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/conda_cache_inspect.sh",
+      "source_sha256": "7011b47f837fb0e28494914fd9f1d822561e3ef491418e7bf8de20e43e176d9f",
+      "exported_sha256": "7011b47f837fb0e28494914fd9f1d822561e3ef491418e7bf8de20e43e176d9f",
+      "bytes": 1980,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/conda_core_prepare.sh",
+      "source_sha256": "d9fcced7e465a9de492051945071313aa9bb1e58b60aa362af9affa14cdd211b",
+      "exported_sha256": "d9fcced7e465a9de492051945071313aa9bb1e58b60aa362af9affa14cdd211b",
+      "bytes": 2511,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/conda_gpu_build.sh",
+      "source_sha256": "86b6a02829ed5a74ee0130013f67dc1fa494cd4d5b9aac381c6d74b5ba482b52",
+      "exported_sha256": "86b6a02829ed5a74ee0130013f67dc1fa494cd4d5b9aac381c6d74b5ba482b52",
+      "bytes": 1693,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/conda_prepare.sh",
+      "source_sha256": "5507ba7e0018f4a7faa5ccd02788819038c70278af650a097c0a0332c40b7e1e",
+      "exported_sha256": "5507ba7e0018f4a7faa5ccd02788819038c70278af650a097c0a0332c40b7e1e",
+      "bytes": 3593,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/conda_run.sh",
+      "source_sha256": "59457569fb13ab81efc2749203493e7d0dc7ed0505e376c278252904c38f2dc0",
+      "exported_sha256": "59457569fb13ab81efc2749203493e7d0dc7ed0505e376c278252904c38f2dc0",
+      "bytes": 591,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/conda_verify.sh",
+      "source_sha256": "93c5ca36666ee32655bf3e692096f3ea7767a590ff492730b6f7bf42ab41e21b",
+      "exported_sha256": "93c5ca36666ee32655bf3e692096f3ea7767a590ff492730b6f7bf42ab41e21b",
+      "bytes": 1309,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/conda_wheel_urls.sh",
+      "source_sha256": "7d5baf8f11d47bf5c339fb5106fb46ae1c288d609d65093de09e949e0c02fa2e",
+      "exported_sha256": "7d5baf8f11d47bf5c339fb5106fb46ae1c288d609d65093de09e949e0c02fa2e",
+      "bytes": 1295,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/configure_cup_aruco_id6.py",
+      "source_sha256": "3a7c0794a0df80ba31a8cc259cf2ea8b8de8a5f62158a81624c883e86335a502",
+      "exported_sha256": "3a7c0794a0df80ba31a8cc259cf2ea8b8de8a5f62158a81624c883e86335a502",
+      "bytes": 3658,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/configure_d435i_permissions.sh",
+      "source_sha256": "394873d295c517bdc5da3c08fdc08215295f7cc8c3029189c901cd3f52a2f677",
+      "exported_sha256": "394873d295c517bdc5da3c08fdc08215295f7cc8c3029189c901cd3f52a2f677",
+      "bytes": 995,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/create_container.sh",
+      "source_sha256": "d37f8c1e2354ca506fc716f2aa21a166ec4065d65861dc334051e2e08f54115f",
+      "exported_sha256": "d37f8c1e2354ca506fc716f2aa21a166ec4065d65861dc334051e2e08f54115f",
+      "bytes": 1569,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/cup_aruco_reference.py",
+      "source_sha256": "cd1382f6284f82ce1c0926d4672d53a473cd4547e36d062bfbf2ac4ed443adb9",
+      "exported_sha256": "cd1382f6284f82ce1c0926d4672d53a473cd4547e36d062bfbf2ac4ed443adb9",
+      "bytes": 7517,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/cup_handle_yaw.py",
+      "source_sha256": "26d3dc9ae489d43445cb6dbd84fb5ef3a2a0e0653b183ec0c729b694144da858",
+      "exported_sha256": "26d3dc9ae489d43445cb6dbd84fb5ef3a2a0e0653b183ec0c729b694144da858",
+      "bytes": 2294,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/cup_live_control.py",
+      "source_sha256": "aba9166b42169b06975769c257a00743ea8dd7d56bd0a595ecf231a7fd23ccda",
+      "exported_sha256": "aba9166b42169b06975769c257a00743ea8dd7d56bd0a595ecf231a7fd23ccda",
+      "bytes": 2201,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/cup_live_dashboard.py",
+      "source_sha256": "927ed9914a690b08bd28ba99aaba601f563c9c1edd1531c160a683c67e4be595",
+      "exported_sha256": "927ed9914a690b08bd28ba99aaba601f563c9c1edd1531c160a683c67e4be595",
+      "bytes": 13326,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/cup_mesh_selection.py",
+      "source_sha256": "6bf287000717eed82684fba67a10185accd7512e6799815a6f7caf1034a334cd",
+      "exported_sha256": "6bf287000717eed82684fba67a10185accd7512e6799815a6f7caf1034a334cd",
+      "bytes": 1637,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/cup_pose_quality.py",
+      "source_sha256": "03a0062a3e55cd7f4d72637a255d8fad1ae32f11cc989ca2dde4895a20a2288e",
+      "exported_sha256": "03a0062a3e55cd7f4d72637a255d8fad1ae32f11cc989ca2dde4895a20a2288e",
+      "bytes": 2506,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/cup_reacquisition.py",
+      "source_sha256": "3a793b71fec22a9d21f3aeb3fe7daa5417d3a7f184afff646a77678752301cf1",
+      "exported_sha256": "3a793b71fec22a9d21f3aeb3fe7daa5417d3a7f184afff646a77678752301cf1",
+      "bytes": 5569,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/cup_sam2_mask.py",
+      "source_sha256": "09e384601170a51ce8043fc23a4d533395d869c65e16bd47a7413bf4e0686d48",
+      "exported_sha256": "09e384601170a51ce8043fc23a4d533395d869c65e16bd47a7413bf4e0686d48",
+      "bytes": 3427,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/cup_sam2_worker.py",
+      "source_sha256": "9f818654deab74904be77f26db91c29cc702d32a76430da8f839d8ed0d3e3680",
+      "exported_sha256": "9f818654deab74904be77f26db91c29cc702d32a76430da8f839d8ed0d3e3680",
+      "bytes": 4853,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/cup_sam_mask.py",
+      "source_sha256": "f534d72a454188209277b8d6f9a900e4e614a76eb1db66e73a725dfab4711ee7",
+      "exported_sha256": "f534d72a454188209277b8d6f9a900e4e614a76eb1db66e73a725dfab4711ee7",
+      "bytes": 3707,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/cup_sam_worker.py",
+      "source_sha256": "06f1be0196ffa57b419382cff2dc407e436baad3a821d2e9e6dfe50454e50381",
+      "exported_sha256": "06f1be0196ffa57b419382cff2dc407e436baad3a821d2e9e6dfe50454e50381",
+      "bytes": 3692,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/deploy_bundlesdf_compile_20261013.py",
+      "source_sha256": "685cb0cdbcbd681d54d02b4f02d0fe20882afb53d5892ab33a713b7083dad148",
+      "exported_sha256": "685cb0cdbcbd681d54d02b4f02d0fe20882afb53d5892ab33a713b7083dad148",
+      "bytes": 1500,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/deploy_bundlesdf_isolated_20261013.py",
+      "source_sha256": "0f8e6ec39028f7ff4d84f758c1e7fd223a1860d3152b672979ea7b66efde35ea",
+      "exported_sha256": "0f8e6ec39028f7ff4d84f758c1e7fd223a1860d3152b672979ea7b66efde35ea",
+      "bytes": 6581,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/deploy_cup_stage_updates.py",
+      "source_sha256": "c2294ca78dd3f42ff47c7f2cee05e9fe36a5d63c0211cd2b74210732fe02b3a6",
+      "exported_sha256": "c2294ca78dd3f42ff47c7f2cee05e9fe36a5d63c0211cd2b74210732fe02b3a6",
+      "bytes": 14683,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/diagnose_reference_tracking.py",
+      "source_sha256": "6ebdf3b998ae877f13f176807ce53871e2a85f28d007e1f67a319d1a869cbded",
+      "exported_sha256": "6ebdf3b998ae877f13f176807ce53871e2a85f28d007e1f67a319d1a869cbded",
+      "bytes": 2313,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/download_assets.py",
+      "source_sha256": "8204adff888d4ef5ca87f6085acb75f0111a4569a14d89c042300078c9b442eb",
+      "exported_sha256": "8204adff888d4ef5ca87f6085acb75f0111a4569a14d89c042300078c9b442eb",
+      "bytes": 2133,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/download_bundlesdf_loftr_20261013.py",
+      "source_sha256": "d5f6bea277df2a99a1baf5a03f0f5825ba0057e7d05d556599a3900a94f9dff9",
+      "exported_sha256": "d5f6bea277df2a99a1baf5a03f0f5825ba0057e7d05d556599a3900a94f9dff9",
+      "bytes": 2430,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/download_bundlesdf_loftr_gdrive_20261013.py",
+      "source_sha256": "26e9999c38d00b2fefe02bfc37b31c1be62fd8b2b83a79c67aa3a0afccf0193b",
+      "exported_sha256": "26e9999c38d00b2fefe02bfc37b31c1be62fd8b2b83a79c67aa3a0afccf0193b",
+      "bytes": 2143,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/download_sam2_torch_wheel.py",
+      "source_sha256": "11f2e7aa4667f750b902ec21dfe069507d2e61375f20f648186bc213b0969f18",
+      "exported_sha256": "11f2e7aa4667f750b902ec21dfe069507d2e61375f20f648186bc213b0969f18",
+      "bytes": 4102,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/download_via_windows.py",
+      "source_sha256": "a3dc3514de0d63ccd8fc0f3964d780353dd691b17bd55a22c4813f859d6bccb4",
+      "exported_sha256": "a3dc3514de0d63ccd8fc0f3964d780353dd691b17bd55a22c4813f859d6bccb4",
+      "bytes": 1043,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/enter_foundationpose.sh",
+      "source_sha256": "5fc634212f64c20ac1fb45c4ea84585419174f496ea805052477ba5f7645dd9d",
+      "exported_sha256": "5fc634212f64c20ac1fb45c4ea84585419174f496ea805052477ba5f7645dd9d",
+      "bytes": 239,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/export_public_snapshot.py",
+      "source_sha256": "a838aa995a3d176f1215692d45d539b0bce0df16054d8c663dff2f138175f901",
+      "exported_sha256": "fa5a4903be8e903a5d2f7198683bf99b451c123494161d34e2531ee02e5a9775",
+      "bytes": 8336,
+      "private_host_or_profile_replacements": 4
+    },
+    {
+      "path": "setup/filter_cup_reference_stability.py",
+      "source_sha256": "dbcfe7e1131a598384e3dc373c9c5ea906bff9c9509e5468822020a3a96cfb44",
+      "exported_sha256": "dbcfe7e1131a598384e3dc373c9c5ea906bff9c9509e5468822020a3a96cfb44",
+      "bytes": 10031,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/finalize_asset_links.sh",
+      "source_sha256": "7d600f192113bc30a5ead973d28c2c8c50acd7f02023b8b62f3446914cacde6d",
+      "exported_sha256": "7d600f192113bc30a5ead973d28c2c8c50acd7f02023b8b62f3446914cacde6d",
+      "bytes": 671,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/finalize_bundlesdf_environment_20261013.py",
+      "source_sha256": "b6d26cf49e81e14adf2493e9564b1800c076fcda7cf775ba9732c3a14b3b4720",
+      "exported_sha256": "b6d26cf49e81e14adf2493e9564b1800c076fcda7cf775ba9732c3a14b3b4720",
+      "bytes": 4990,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/finalize_cup_aruco_id6.py",
+      "source_sha256": "d0be310cf5a45ea38922b6a69f4622464f1706fd156ce38fc17f9b9f68d5983a",
+      "exported_sha256": "d0be310cf5a45ea38922b6a69f4622464f1706fd156ce38fc17f9b9f68d5983a",
+      "bytes": 3446,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/finalize_cup_delivery.py",
+      "source_sha256": "039ec11730268288ee6d4bd1c7830ff725cc87f6a2509239f8e46bfeb3be359d",
+      "exported_sha256": "039ec11730268288ee6d4bd1c7830ff725cc87f6a2509239f8e46bfeb3be359d",
+      "bytes": 2678,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/finalize_cup_reference_readiness.py",
+      "source_sha256": "fc0c9df19c39bb6edc25b367abb6d36706d5773e97dfd3bcdef03ef0c389038c",
+      "exported_sha256": "fc0c9df19c39bb6edc25b367abb6d36706d5773e97dfd3bcdef03ef0c389038c",
+      "bytes": 13815,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/finalize_docker_metadata.py",
+      "source_sha256": "983a3ae9e802020fcd07a007bbd0208a27c13251ff86e851cafeb4a09b9a99be",
+      "exported_sha256": "983a3ae9e802020fcd07a007bbd0208a27c13251ff86e851cafeb4a09b9a99be",
+      "bytes": 703,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/finalize_git_proof.ps1",
+      "source_sha256": "9ee648d2538223ee9d97d03dd28e417ab9d6916a07f52a9ead59493bddfb7958",
+      "exported_sha256": "9ee648d2538223ee9d97d03dd28e417ab9d6916a07f52a9ead59493bddfb7958",
+      "bytes": 1323,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/finalize_obj_setup.py",
+      "source_sha256": "af8db144f9a8e99d77cdc43343c9f3ba1f5f4ba7c138e43761bf082c1882c4bf",
+      "exported_sha256": "af8db144f9a8e99d77cdc43343c9f3ba1f5f4ba7c138e43761bf082c1882c4bf",
+      "bytes": 3037,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/finalize_reacquisition_evidence.py",
+      "source_sha256": "c5762b4cfa934e242330affbf96e024de50e3c000811012ec41d9d5fb146a63e",
+      "exported_sha256": "c5762b4cfa934e242330affbf96e024de50e3c000811012ec41d9d5fb146a63e",
+      "bytes": 3167,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/finalize_transfer.py",
+      "source_sha256": "2061296b9e74d12fb1bc56ad94085b4b8649cde10540304ffd0663421b2ba184",
+      "exported_sha256": "2061296b9e74d12fb1bc56ad94085b4b8649cde10540304ffd0663421b2ba184",
+      "bytes": 2092,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/finalize_windows_cup_check_20261013.sh",
+      "source_sha256": "dcdadb7fdd22a705a7f3729cd03e64483a2520672dd85e0bcac7752e385ab499",
+      "exported_sha256": "dcdadb7fdd22a705a7f3729cd03e64483a2520672dd85e0bcac7752e385ab499",
+      "bytes": 978,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/fix_bundlesdf_device_link_sm86_20261013.py",
+      "source_sha256": "1964ee781831d67d992522fd7cef5c2ac970f077baefca8b16b4dc0826d98a97",
+      "exported_sha256": "1964ee781831d67d992522fd7cef5c2ac970f077baefca8b16b4dc0826d98a97",
+      "bytes": 1094,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/get_windows_capture_directory.ps1",
+      "source_sha256": "79fa4897dda42a299f7b6ecd1ae6fee37820d995621baeb2c5570a71c69497ed",
+      "exported_sha256": "79fa4897dda42a299f7b6ecd1ae6fee37820d995621baeb2c5570a71c69497ed",
+      "bytes": 1158,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/import_cup_offline_batch.py",
+      "source_sha256": "013e1cd807b56d2f2d40f8093664a46e0264e91b920eb15b511fa8cb276efe53",
+      "exported_sha256": "013e1cd807b56d2f2d40f8093664a46e0264e91b920eb15b511fa8cb276efe53",
+      "bytes": 26327,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/import_external_capture_package.py",
+      "source_sha256": "ad231ad1a684b887318139b2ad3f292f58be7ddad4be117211d221c48f6d5f5f",
+      "exported_sha256": "ad231ad1a684b887318139b2ad3f292f58be7ddad4be117211d221c48f6d5f5f",
+      "bytes": 6078,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/import_windows_run_records.py",
+      "source_sha256": "0427b694e7b27f248d3c8b3c2af46e912be5588afff9d430b8fe0dd4a373e5c6",
+      "exported_sha256": "0427b694e7b27f248d3c8b3c2af46e912be5588afff9d430b8fe0dd4a373e5c6",
+      "bytes": 1158,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/inspect_cup_aruco_scene.py",
+      "source_sha256": "5581c90058f24695c3fe78eb92c1de7339532ab3999fd38aea69fcc0b4076796",
+      "exported_sha256": "5581c90058f24695c3fe78eb92c1de7339532ab3999fd38aea69fcc0b4076796",
+      "bytes": 7433,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/inspect_cup_stage_difference.py",
+      "source_sha256": "4b468f7bed46e6a3f8dc875a8069264632ec8e529a16564551d14ac7d8120536",
+      "exported_sha256": "4b468f7bed46e6a3f8dc875a8069264632ec8e529a16564551d14ac7d8120536",
+      "bytes": 585,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/inspect_cup_v4_completion.py",
+      "source_sha256": "0fd18c1614df01f078be866bba543c0094b05c600733dbdc44a55424a23b4a61",
+      "exported_sha256": "0fd18c1614df01f078be866bba543c0094b05c600733dbdc44a55424a23b4a61",
+      "bytes": 1392,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/inspect_image.py",
+      "source_sha256": "a329725afecb3a2ea13a85b7afbf91a82f7439fd210494641ac6b929b24f05b3",
+      "exported_sha256": "a329725afecb3a2ea13a85b7afbf91a82f7439fd210494641ac6b929b24f05b3",
+      "bytes": 893,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/inspect_reacquisition.py",
+      "source_sha256": "845f0180ee625c9fd55ab04fc3a5888fedcce4bb5c87d3a28305816cc0ad0f0d",
+      "exported_sha256": "845f0180ee625c9fd55ab04fc3a5888fedcce4bb5c87d3a28305816cc0ad0f0d",
+      "bytes": 2725,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/inspect_remote.sh",
+      "source_sha256": "dba9e7223262ec1f9f44aa7b94d5a12edc27ce1cd16ae41c282e837548c92a53",
+      "exported_sha256": "dba9e7223262ec1f9f44aa7b94d5a12edc27ce1cd16ae41c282e837548c92a53",
+      "bytes": 775,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/inspect_sam2_progress.py",
+      "source_sha256": "af1cd0593751dae11847cdcbd45209ce0bda0e0caef82f15c3eb1483ed8bf339",
+      "exported_sha256": "af1cd0593751dae11847cdcbd45209ce0bda0e0caef82f15c3eb1483ed8bf339",
+      "bytes": 442,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/inspect_sam_environment.py",
+      "source_sha256": "91fbaa5aa35b6ec9e82367f905e31990722afa4c8a4d5bfc9017c050103aa2fb",
+      "exported_sha256": "91fbaa5aa35b6ec9e82367f905e31990722afa4c8a4d5bfc9017c050103aa2fb",
+      "bytes": 1559,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/install_realsense_viewer_user.py",
+      "source_sha256": "ea6c830793f716f1aae19c5c9b7c70b61f6ac3f57820f3e55240075edc82628f",
+      "exported_sha256": "ea6c830793f716f1aae19c5c9b7c70b61f6ac3f57820f3e55240075edc82628f",
+      "bytes": 9796,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/install_realsense_viewer_windows.ps1",
+      "source_sha256": "f58fe30e26d004ccf0d21753753511f76d06e425ed5699c224948a1b796b03c1",
+      "exported_sha256": "f58fe30e26d004ccf0d21753753511f76d06e425ed5699c224948a1b796b03c1",
+      "bytes": 4775,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/launch_manual_mask_editor.ps1",
+      "source_sha256": "4003958d4bb34e0da4a4b7cade976b8362094a36167bb340dfd878c8c17d6f7c",
+      "exported_sha256": "87fed1fcb01af91eea987630686f2b58e7756ac4e8146159ded2112f14cfe186",
+      "bytes": 1980,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/launch_obj_recapture_on_E.ps1",
+      "source_sha256": "134a0bb3f0af503e9c37a2e9f821eddb9f2cd0b806d68bca13d66391a5dc8306",
+      "exported_sha256": "134a0bb3f0af503e9c37a2e9f821eddb9f2cd0b806d68bca13d66391a5dc8306",
+      "bytes": 1729,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/launch_red_cup_photos.ps1",
+      "source_sha256": "fd1ad4144e8b6c5828bd4b048dcea66d6c4e21af62139a0a010d4036564a8bd8",
+      "exported_sha256": "fd1ad4144e8b6c5828bd4b048dcea66d6c4e21af62139a0a010d4036564a8bd8",
+      "bytes": 2970,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/list_official_assets.py",
+      "source_sha256": "cfabfa82f68a4e1ce3e7a343a262c77f242f4499581c9a6ee32386b62c8f6dea",
+      "exported_sha256": "cfabfa82f68a4e1ce3e7a343a262c77f242f4499581c9a6ee32386b62c8f6dea",
+      "bytes": 522,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/make_cup_masks_grabcut.py",
+      "source_sha256": "3e5d2296c2a472979fc790fb31c47f6d4783bd234609edf5c270f2840a1262de",
+      "exported_sha256": "3e5d2296c2a472979fc790fb31c47f6d4783bd234609edf5c270f2840a1262de",
+      "bytes": 38706,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/make_masked_rgb_reference_variant.py",
+      "source_sha256": "f20f605dbaf8aeecf5b7baffd35885c2f5f6838ba275c30a0cea0bf26ffd77db",
+      "exported_sha256": "f20f605dbaf8aeecf5b7baffd35885c2f5f6838ba275c30a0cea0bf26ffd77db",
+      "bytes": 2519,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/manage_project_git.py",
+      "source_sha256": "147b2d56fb90eed905293ae106009689d315b47b1cd29ab339e24090a482cb1b",
+      "exported_sha256": "147b2d56fb90eed905293ae106009689d315b47b1cd29ab339e24090a482cb1b",
+      "bytes": 7594,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/manual_mask_editor.py",
+      "source_sha256": "c76a0411832248c5952383614373d834ed6bccaf045fc19183b53dfbcfb716cc",
+      "exported_sha256": "c76a0411832248c5952383614373d834ed6bccaf045fc19183b53dfbcfb716cc",
+      "bytes": 33536,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/merge_cup_mask_geometry.py",
+      "source_sha256": "c9df66e3b16e7f7ee0925e2325b3de43eaf35525b1f847cf19580d7ab286980b",
+      "exported_sha256": "c9df66e3b16e7f7ee0925e2325b3de43eaf35525b1f847cf19580d7ab286980b",
+      "bytes": 3190,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/package_cup_offline.py",
+      "source_sha256": "2df58211cf9e2cd5f1375163fc3a091d08fc958868452c849e9526782866d054",
+      "exported_sha256": "2df58211cf9e2cd5f1375163fc3a091d08fc958868452c849e9526782866d054",
+      "bytes": 24195,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/package_external_captures.py",
+      "source_sha256": "bffeae006ba3e8e009e85a598750ef8e5bebd3cc7ed6ced7a6bb4616c84cbcd1",
+      "exported_sha256": "bffeae006ba3e8e009e85a598750ef8e5bebd3cc7ed6ced7a6bb4616c84cbcd1",
+      "bytes": 7028,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/patch_bundlesdf_cpu_sift_build_20261013.py",
+      "source_sha256": "550da795eb2922727bcf21dc1660f000eaa7b9c824c40b6eb0ec5ef46fffa841",
+      "exported_sha256": "550da795eb2922727bcf21dc1660f000eaa7b9c824c40b6eb0ec5ef46fffa841",
+      "bytes": 2118,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/patch_bundlesdf_ray_device_20261013.py",
+      "source_sha256": "bc6563d7ac5bcc6868e020000a3c765c7f19494a4e50f29326a4cbd3143d4ebc",
+      "exported_sha256": "bc6563d7ac5bcc6868e020000a3c765c7f19494a4e50f29326a4cbd3143d4ebc",
+      "bytes": 2321,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/patch_bundlesdf_unused_nonfree_20261013.py",
+      "source_sha256": "c86ca97617df03127dd1dc81b87e2b1128ad62d91ae6ea0efa7305fb984fb479",
+      "exported_sha256": "c86ca97617df03127dd1dc81b87e2b1128ad62d91ae6ea0efa7305fb984fb479",
+      "bytes": 1040,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/prepare_cup_pilot_inputs.py",
+      "source_sha256": "1fb61c92aafd102e61c0a85a124ea1e2742850c8c1fcbbbe5fdc7315fb95ca80",
+      "exported_sha256": "1fb61c92aafd102e61c0a85a124ea1e2742850c8c1fcbbbe5fdc7315fb95ca80",
+      "bytes": 8655,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/prepare_cup_stage_payload.py",
+      "source_sha256": "29c30addebb5fd61135167b316caf606ff6044ae130a7f696bc05143dccf905c",
+      "exported_sha256": "29c30addebb5fd61135167b316caf606ff6044ae130a7f696bc05143dccf905c",
+      "bytes": 4062,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/prepare_cup_visual_artifact_manifests.py",
+      "source_sha256": "27b3b3101cc62dcc39b04555e1729cf9d461a6b3572b332525a95eabd61b45fd",
+      "exported_sha256": "27b3b3101cc62dcc39b04555e1729cf9d461a6b3572b332525a95eabd61b45fd",
+      "bytes": 2135,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/prepare_d435i_camera.sh",
+      "source_sha256": "6e80c828b0c44170abac369c8a26721fd0a2abeb0e9072b06e5548c858352c14",
+      "exported_sha256": "6e80c828b0c44170abac369c8a26721fd0a2abeb0e9072b06e5548c858352c14",
+      "bytes": 1332,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/prepare_d435i_windows.ps1",
+      "source_sha256": "52b26fdc0c67262d86a77a68349d3d5d2f832a95c0efa6d1c54942f5b6ca0618",
+      "exported_sha256": "52b26fdc0c67262d86a77a68349d3d5d2f832a95c0efa6d1c54942f5b6ca0618",
+      "bytes": 3311,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/prepare_external_reference_inputs.py",
+      "source_sha256": "f92ce0ea775767211d88b8d9e8629302aac9f54f14d4988c220bf56561d378bc",
+      "exported_sha256": "f92ce0ea775767211d88b8d9e8629302aac9f54f14d4988c220bf56561d378bc",
+      "bytes": 3377,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/prepare_host.sh",
+      "source_sha256": "801c28b90de1a1f7a99640a34840588d3dd4512b40e6f4a7a664cb069e9e0395",
+      "exported_sha256": "801c28b90de1a1f7a99640a34840588d3dd4512b40e6f4a7a664cb069e9e0395",
+      "bytes": 1542,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/prepare_project.sh",
+      "source_sha256": "ff8895c4fbafe701b855ced30a8334e569386f26c0a879e0fbcaa04a0c977f56",
+      "exported_sha256": "ff8895c4fbafe701b855ced30a8334e569386f26c0a879e0fbcaa04a0c977f56",
+      "bytes": 1049,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/prepare_red_cup_collection.ps1",
+      "source_sha256": "9f6a30495a43f4a0ebfbaee37d5d03f47f29b7c18f2765cab736b0a09681c1bd",
+      "exported_sha256": "b23335b868ea53a395ce0de3dd5d5b19a50eadc7684f6d8c442edb8bd495e65c",
+      "bytes": 3929,
+      "private_host_or_profile_replacements": 2
+    },
+    {
+      "path": "setup/prepare_reviewed_cup_reference.py",
+      "source_sha256": "400438057256307911d4699f71c22db66d2a29517b40fa0aa8ba48af30d9b0b8",
+      "exported_sha256": "400438057256307911d4699f71c22db66d2a29517b40fa0aa8ba48af30d9b0b8",
+      "bytes": 3728,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/prepare_sam_assisted_masks.py",
+      "source_sha256": "6466b95ef7e2673e30d7a34a82281532b2853096399f8a13ccd118a2876670fd",
+      "exported_sha256": "6466b95ef7e2673e30d7a34a82281532b2853096399f8a13ccd118a2876670fd",
+      "bytes": 4115,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/preview_cup_mesh_cpu.py",
+      "source_sha256": "bf7963ab809dcfc8ebad3a5508f1550c18628acf745ba44637651b83d220dcc6",
+      "exported_sha256": "bf7963ab809dcfc8ebad3a5508f1550c18628acf745ba44637651b83d220dcc6",
+      "bytes": 9456,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/preview_cup_mesh_local.py",
+      "source_sha256": "b8c10603d7caaf3ffd24ee3fd70f0bd4783cb2c910a2ad23ded066add0881446",
+      "exported_sha256": "b8c10603d7caaf3ffd24ee3fd70f0bd4783cb2c910a2ad23ded066add0881446",
+      "bytes": 10281,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/preview_rgbd_photo_sequence.py",
+      "source_sha256": "30ae7f49eaa01902a591c11bf9c9b4cd1ad8413f716489574c8d252d13955769",
+      "exported_sha256": "30ae7f49eaa01902a591c11bf9c9b4cd1ad8413f716489574c8d252d13955769",
+      "bytes": 3590,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/preview_sam_drafts.py",
+      "source_sha256": "68a1370d417cdef9a209fdb80a237c8a954f665d5eec7a843231efaf12166337",
+      "exported_sha256": "68a1370d417cdef9a209fdb80a237c8a954f665d5eec7a843231efaf12166337",
+      "bytes": 2279,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/probe_camera_environment.py",
+      "source_sha256": "b1f9fd610aa595a263e61323d6ba8d6a91d62d671f9df75caa807e089f3115bc",
+      "exported_sha256": "b1f9fd610aa595a263e61323d6ba8d6a91d62d671f9df75caa807e089f3115bc",
+      "bytes": 1583,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/probe_camera_host.sh",
+      "source_sha256": "e8855471068e0f8c298258c39c1b0f19c12850ccd668545e955912844d9a39ed",
+      "exported_sha256": "e8855471068e0f8c298258c39c1b0f19c12850ccd668545e955912844d9a39ed",
+      "bytes": 1197,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/probe_d435i_depth_options.py",
+      "source_sha256": "e36905603d844fb55670acd588388f494c574abafceaa1a0d64d872b21579929",
+      "exported_sha256": "e36905603d844fb55670acd588388f494c574abafceaa1a0d64d872b21579929",
+      "bytes": 3239,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/project_git_state.py",
+      "source_sha256": "1e5984d586f1997335be36118bea29ac429b53a47ce93edeeb2c7437cff39c9d",
+      "exported_sha256": "1e5984d586f1997335be36118bea29ac429b53a47ce93edeeb2c7437cff39c9d",
+      "bytes": 2611,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/provision_cup_sam.py",
+      "source_sha256": "da50f36f361ddeed0c62285c43953c656ba1fae41a0ab7f56ae3f05ab786c153",
+      "exported_sha256": "da50f36f361ddeed0c62285c43953c656ba1fae41a0ab7f56ae3f05ab786c153",
+      "bytes": 2341,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/provision_cup_sam2.py",
+      "source_sha256": "39df96f3378d4919c17848f776063c9f71752b0e192ac572daf66cb8d5b57148",
+      "exported_sha256": "39df96f3378d4919c17848f776063c9f71752b0e192ac572daf66cb8d5b57148",
+      "bytes": 4792,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/realsense_capture_options.py",
+      "source_sha256": "ecff1b190709c9cc27d37a46dbcedbc4da82828c4628524e9c6a62115b29026a",
+      "exported_sha256": "ecff1b190709c9cc27d37a46dbcedbc4da82828c4628524e9c6a62115b29026a",
+      "bytes": 5393,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/reconstruct_cup_geometric_tsdf.py",
+      "source_sha256": "10805e41147b4e8b7df4e666f8d0ee938e636c4669aec9d5be224f066e77a5c7",
+      "exported_sha256": "10805e41147b4e8b7df4e666f8d0ee938e636c4669aec9d5be224f066e77a5c7",
+      "bytes": 11040,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/recover_cup_import_issue_newlines.py",
+      "source_sha256": "f335033613d6d85570e70d2a187bb13d09d25fb6170598ab7f1eafb5b11c43e3",
+      "exported_sha256": "f335033613d6d85570e70d2a187bb13d09d25fb6170598ab7f1eafb5b11c43e3",
+      "bytes": 16257,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/relocate_project.sh",
+      "source_sha256": "18e77ec1d14d91476a0cbad96da8932db3a477b25c79e9dc5adee3e9c373d33d",
+      "exported_sha256": "18e77ec1d14d91476a0cbad96da8932db3a477b25c79e9dc5adee3e9c373d33d",
+      "bytes": 850,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/replay_cup_live_segment.py",
+      "source_sha256": "01ee295907eecce172e2998220c1a3fd2f042e7872d206e3b207c571bc8247ce",
+      "exported_sha256": "01ee295907eecce172e2998220c1a3fd2f042e7872d206e3b207c571bc8247ce",
+      "bytes": 9350,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/rerank_cup_candidates_mask.py",
+      "source_sha256": "5b3e4fa3061048bb8abbd0c88d175f592dfef8e5670ad1f3e005dd102a566a44",
+      "exported_sha256": "5b3e4fa3061048bb8abbd0c88d175f592dfef8e5670ad1f3e005dd102a566a44",
+      "bytes": 25273,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/retry_bundlesdf_loftr_curl_20261013.py",
+      "source_sha256": "ffb63727a5b6e15daef34eb1501d3d298ad576e8cc8376de4421e2b432c32532",
+      "exported_sha256": "ffb63727a5b6e15daef34eb1501d3d298ad576e8cc8376de4421e2b432c32532",
+      "bytes": 2180,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/retry_sam2_sparse.py",
+      "source_sha256": "dc29cb7118dac1aa636354c957e56d2f4b9ab97d1ed7d9322d429a28f14681d0",
+      "exported_sha256": "dc29cb7118dac1aa636354c957e56d2f4b9ab97d1ed7d9322d429a28f14681d0",
+      "bytes": 1049,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/review_candidate_mask_sequence.py",
+      "source_sha256": "3869141ebb894190d1b689da178d0a7b6fa14abc7f28df94f68b260804ed0116",
+      "exported_sha256": "3869141ebb894190d1b689da178d0a7b6fa14abc7f28df94f68b260804ed0116",
+      "bytes": 3181,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/review_capture_timing.py",
+      "source_sha256": "83f274e918dad3436f6f33d1edb96c27915b5fc08d832db9c343cbde8ab43bd2",
+      "exported_sha256": "83f274e918dad3436f6f33d1edb96c27915b5fc08d832db9c343cbde8ab43bd2",
+      "bytes": 6858,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/review_cup_heldout_projection.py",
+      "source_sha256": "ed897b23cf9ce4c0db34bdaf5b45d2cdddcf7329782e9b19c16f10d3ffc0808d",
+      "exported_sha256": "ed897b23cf9ce4c0db34bdaf5b45d2cdddcf7329782e9b19c16f10d3ffc0808d",
+      "bytes": 6532,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/review_cup_mask_depth.py",
+      "source_sha256": "ff67e66b29eb8300b822ee9532494c140cf11a90f0e9fe78dd066ea82fc24844",
+      "exported_sha256": "ff67e66b29eb8300b822ee9532494c140cf11a90f0e9fe78dd066ea82fc24844",
+      "bytes": 11631,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/review_cup_reconstruction.py",
+      "source_sha256": "646e316b18d153b5294cc73a1494ba9a6dbf61adca53f2a692e228bd22ddc4ef",
+      "exported_sha256": "646e316b18d153b5294cc73a1494ba9a6dbf61adca53f2a692e228bd22ddc4ef",
+      "bytes": 33085,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/review_cup_return_trial.py",
+      "source_sha256": "8f91934105f42ea6efbcae9f2fe0a9ea6e16f2046fd2b35efa235d373c58c6ca",
+      "exported_sha256": "8f91934105f42ea6efbcae9f2fe0a9ea6e16f2046fd2b35efa235d373c58c6ca",
+      "bytes": 7056,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/review_live_handle_failure.py",
+      "source_sha256": "b3500fe04e4da5b36da6b5a0b7878823f496f7ac934959149a6f1d9e8b6f6f09",
+      "exported_sha256": "b3500fe04e4da5b36da6b5a0b7878823f496f7ac934959149a6f1d9e8b6f6f09",
+      "bytes": 5164,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/review_manual_capture_timing.py",
+      "source_sha256": "f989e512550af65e043e8a007903d067b29ea421dea42b4f59fcd0ed1e74c7b1",
+      "exported_sha256": "f989e512550af65e043e8a007903d067b29ea421dea42b4f59fcd0ed1e74c7b1",
+      "bytes": 9292,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/review_new72_regions.py",
+      "source_sha256": "7d121bed679c2f49a24b8ea4969f41872870dc4023214391ac04ab0f75c5141e",
+      "exported_sha256": "7d121bed679c2f49a24b8ea4969f41872870dc4023214391ac04ab0f75c5141e",
+      "bytes": 2299,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/review_reacquisition_frames.py",
+      "source_sha256": "a1bea9c6b4ad33dc9785f789388f7ca97a562ddd44fdf2cc6e340139f46acc62",
+      "exported_sha256": "a1bea9c6b4ad33dc9785f789388f7ca97a562ddd44fdf2cc6e340139f46acc62",
+      "bytes": 1096,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/review_rgbd_alignment.py",
+      "source_sha256": "eb72a20efaa1b82ab98e519ac2908bf109de3c6c5418a2389261a8728beaa54b",
+      "exported_sha256": "eb72a20efaa1b82ab98e519ac2908bf109de3c6c5418a2389261a8728beaa54b",
+      "bytes": 7203,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/review_rgbd_capture_rois.py",
+      "source_sha256": "608e25ba018ec94b5dd64f6459732f8fa0027240558ebb3e448072fbe6c68dc3",
+      "exported_sha256": "608e25ba018ec94b5dd64f6459732f8fa0027240558ebb3e448072fbe6c68dc3",
+      "bytes": 8381,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/review_saved_camera_motion.py",
+      "source_sha256": "58912f5e1e4fbbb3a902a80a63650b6ba86dc6cbeeacd4ce3d8a0a7d874a5db4",
+      "exported_sha256": "58912f5e1e4fbbb3a902a80a63650b6ba86dc6cbeeacd4ce3d8a0a7d874a5db4",
+      "bytes": 11457,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/review_saved_cup_aruco.py",
+      "source_sha256": "dd498565a9861f571a181218a3519f04c2d33eb9033b5047e42b69e84f39e1f6",
+      "exported_sha256": "dd498565a9861f571a181218a3519f04c2d33eb9033b5047e42b69e84f39e1f6",
+      "bytes": 19021,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/review_side72_depth_samples.py",
+      "source_sha256": "8176572b0130a2704fdd97d6c8efb92e5b85d1bbed1242ee5afe372f08973dc1",
+      "exported_sha256": "8176572b0130a2704fdd97d6c8efb92e5b85d1bbed1242ee5afe372f08973dc1",
+      "bytes": 4006,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/run_after_pull.sh",
+      "source_sha256": "8574dbad68936323888df9704f781b77eca10896aa46b5ff72d6952279d8e5dd",
+      "exported_sha256": "8574dbad68936323888df9704f781b77eca10896aa46b5ff72d6952279d8e5dd",
+      "bytes": 403,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/run_cup_bundlesdf_frozen_pose_pilot.py",
+      "source_sha256": "35a224859b392f0a2d7a6aa7d4494017a562e86f97878d7569a83665368f4e73",
+      "exported_sha256": "35a224859b392f0a2d7a6aa7d4494017a562e86f97878d7569a83665368f4e73",
+      "bytes": 4712,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/run_cup_bundlesdf_pilot.py",
+      "source_sha256": "ae6e5c357fbdf614d38f81294c7438564bba0c814511cc0a7c33971f1caaca8a",
+      "exported_sha256": "ae6e5c357fbdf614d38f81294c7438564bba0c814511cc0a7c33971f1caaca8a",
+      "bytes": 24036,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/run_cup_live.py",
+      "source_sha256": "5a4489f6176a5ce8d6d81cf61855042b9b66f55bff81964eb0581b59c4c05c97",
+      "exported_sha256": "5a4489f6176a5ce8d6d81cf61855042b9b66f55bff81964eb0581b59c4c05c97",
+      "bytes": 26636,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/run_cup_live.sh",
+      "source_sha256": "1b547b7b3983a31e16bfe8fa59ca1499132c027247a70f1d9778243077ffb846",
+      "exported_sha256": "1b547b7b3983a31e16bfe8fa59ca1499132c027247a70f1d9778243077ffb846",
+      "bytes": 361,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/run_cup_live_aruco_id6.sh",
+      "source_sha256": "f71601a1636d7e62262c94d2f4d4bf23eb0239d8cc309df26a742dda18d8f4fb",
+      "exported_sha256": "f71601a1636d7e62262c94d2f4d4bf23eb0239d8cc309df26a742dda18d8f4fb",
+      "bytes": 422,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/run_cup_live_fast.py",
+      "source_sha256": "2677bd1c151e0f695b9929e73b2df69e61287ee96728348c010e3d3a84d400a8",
+      "exported_sha256": "2677bd1c151e0f695b9929e73b2df69e61287ee96728348c010e3d3a84d400a8",
+      "bytes": 48287,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/run_cup_live_fast.sh",
+      "source_sha256": "ddbe2b1b781f4ab93de3da3568fd012e46df70a12d9b1c698ddb52917a988d4e",
+      "exported_sha256": "ddbe2b1b781f4ab93de3da3568fd012e46df70a12d9b1c698ddb52917a988d4e",
+      "bytes": 424,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/run_cup_live_redcup72.sh",
+      "source_sha256": "f1b6e484bca53b1dd5f3fad89446708e0f16e23d5ca9315dd16b47c383123789",
+      "exported_sha256": "f1b6e484bca53b1dd5f3fad89446708e0f16e23d5ca9315dd16b47c383123789",
+      "bytes": 447,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/run_cup_live_worker.py",
+      "source_sha256": "cbd1023b740717796ab322bbb52f0e66ab10781693a75e2e81aa2df66e192049",
+      "exported_sha256": "cbd1023b740717796ab322bbb52f0e66ab10781693a75e2e81aa2df66e192049",
+      "bytes": 19842,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/run_cup_mesh_inference.py",
+      "source_sha256": "662aff08d8d94eee5ad5151f357fcc031c08bd765084048eb37b323b17cc81c3",
+      "exported_sha256": "662aff08d8d94eee5ad5151f357fcc031c08bd765084048eb37b323b17cc81c3",
+      "bytes": 23983,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/run_cup_mesh_inference_candidates.py",
+      "source_sha256": "a91944116e4c1da37e4fe91752fc08ccf928028388cea64af5b517fda515b6c2",
+      "exported_sha256": "a91944116e4c1da37e4fe91752fc08ccf928028388cea64af5b517fda515b6c2",
+      "bytes": 29835,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/run_d435i_capture.ps1",
+      "source_sha256": "f4ab5d906b8c80c6a5dea92886f60ba42a1f819268f42f91d45cc1e7deda3e0d",
+      "exported_sha256": "f4ab5d906b8c80c6a5dea92886f60ba42a1f819268f42f91d45cc1e7deda3e0d",
+      "bytes": 870,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/run_d435i_capture.sh",
+      "source_sha256": "d1bc3d0eff23139b6f9f95bf2bd677f67c2e7a56d2100094980c50cfd69e3904",
+      "exported_sha256": "d1bc3d0eff23139b6f9f95bf2bd677f67c2e7a56d2100094980c50cfd69e3904",
+      "bytes": 245,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/run_d435i_check.ps1",
+      "source_sha256": "abebe0d2bb19f5aa1e96da5d710374c6bf1c6a78e6196d6ba127caf1a40a4068",
+      "exported_sha256": "abebe0d2bb19f5aa1e96da5d710374c6bf1c6a78e6196d6ba127caf1a40a4068",
+      "bytes": 867,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/run_d435i_check.sh",
+      "source_sha256": "a2004c39996f7f06d43b12537ca757726c1b9aecc4799fdcd4d4e3f791de373d",
+      "exported_sha256": "a2004c39996f7f06d43b12537ca757726c1b9aecc4799fdcd4d4e3f791de373d",
+      "bytes": 242,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/run_d435i_format_check.ps1",
+      "source_sha256": "673dd70e92a9a3f28156df3514457a94d691b2e64117dff575ebb7e18e59980a",
+      "exported_sha256": "673dd70e92a9a3f28156df3514457a94d691b2e64117dff575ebb7e18e59980a",
+      "bytes": 875,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/run_d435i_format_check.sh",
+      "source_sha256": "e909e6d8c58a828b96f4d01c0a6e6034e6d4ac41c8fe737b6172c36719846efe",
+      "exported_sha256": "e909e6d8c58a828b96f4d01c0a6e6034e6d4ac41c8fe737b6172c36719846efe",
+      "bytes": 256,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/run_logged.py",
+      "source_sha256": "c29ece71a23bbbf9f5fa3963061e74808d6a0003f07c4a825d5046d84ac7fb8a",
+      "exported_sha256": "c29ece71a23bbbf9f5fa3963061e74808d6a0003f07c4a825d5046d84ac7fb8a",
+      "bytes": 25623,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/run_logged.sh",
+      "source_sha256": "a5009df7761ed047eb322871f0e61c3984641ff7776ac71a64e8aabc270751fd",
+      "exported_sha256": "a5009df7761ed047eb322871f0e61c3984641ff7776ac71a64e8aabc270751fd",
+      "bytes": 166,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/run_manual_mask_editor.ps1",
+      "source_sha256": "3ab650cee9ba5f52488a4420c4d374ae1dcb0bd74948903803e256f326ed26f3",
+      "exported_sha256": "3ab650cee9ba5f52488a4420c4d374ae1dcb0bd74948903803e256f326ed26f3",
+      "bytes": 1767,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/run_obj_environment_check.sh",
+      "source_sha256": "96722cd6d06b16e77c85e1bf559d2aebf288d7d13cce6eb46122bdfd0c25057d",
+      "exported_sha256": "96722cd6d06b16e77c85e1bf559d2aebf288d7d13cce6eb46122bdfd0c25057d",
+      "bytes": 490,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/run_realsense_viewer_ubuntu.sh",
+      "source_sha256": "0e629ae0297ba10a341aebd38e176d35f5c241c63a046252d5783586cbbdefb5",
+      "exported_sha256": "0e629ae0297ba10a341aebd38e176d35f5c241c63a046252d5783586cbbdefb5",
+      "bytes": 529,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/run_rgbd_alignment_check.ps1",
+      "source_sha256": "e7c26551bce235f2c0b2e56cd0975af0ff76127f5026fdeae5738b2247dfb1bf",
+      "exported_sha256": "e7c26551bce235f2c0b2e56cd0975af0ff76127f5026fdeae5738b2247dfb1bf",
+      "bytes": 1128,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/sam2_runtime_environment.py",
+      "source_sha256": "9a92e68bf5f98df03c944f2e7ba981ea71a9d5b81c9cea14a61bd9754ad48a6d",
+      "exported_sha256": "9a92e68bf5f98df03c944f2e7ba981ea71a9d5b81c9cea14a61bd9754ad48a6d",
+      "bytes": 657,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/sam_offline_drafts.py",
+      "source_sha256": "6dfca2a7c99d54921396c39b113860d2a8b04788d89e271dbae9751a66e9a610",
+      "exported_sha256": "6dfca2a7c99d54921396c39b113860d2a8b04788d89e271dbae9751a66e9a610",
+      "bytes": 6401,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/snapshot_bundlesdf_environment_20261013.py",
+      "source_sha256": "0ef37a68db1d6c8a66a69d4710fce5ba4f89d981c49846e9492e7c858b3d3e69",
+      "exported_sha256": "0ef37a68db1d6c8a66a69d4710fce5ba4f89d981c49846e9492e7c858b3d3e69",
+      "bytes": 2919,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/stage_cup_appearance_review.py",
+      "source_sha256": "a1a5872368dcb2ae934a445be2d93d5795e8e580c80a571b27c1cd791f438018",
+      "exported_sha256": "a1a5872368dcb2ae934a445be2d93d5795e8e580c80a571b27c1cd791f438018",
+      "bytes": 5346,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/stage_cup_pose_session.py",
+      "source_sha256": "9cb281ef31ea3cee73794ca61b5b5ce41ee78d986cb098b05a059e8beee9731c",
+      "exported_sha256": "9cb281ef31ea3cee73794ca61b5b5ce41ee78d986cb098b05a059e8beee9731c",
+      "bytes": 3619,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/stage_geometric_comparison.py",
+      "source_sha256": "882c167d81ea83956907a7e48bd70f30ac46455b6e64969e8f12eb11556fe61f",
+      "exported_sha256": "882c167d81ea83956907a7e48bd70f30ac46455b6e64969e8f12eb11556fe61f",
+      "bytes": 4735,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/stage_offline_sam_drafts.py",
+      "source_sha256": "e28946f27e5e2aac16c452ec6c3859fd0648762f32e1b245862179df37520e58",
+      "exported_sha256": "3ad1f951b405a1959c363b5927f3911eb3438f3bdb73ae6df55a7412d99a5b87",
+      "bytes": 8658,
+      "private_host_or_profile_replacements": 1
+    },
+    {
+      "path": "setup/stage_redcup_live.py",
+      "source_sha256": "9c8a5de0b9987e3cc5fd1f99b188f74f4508d5b40e5734da23471dfb2d4da822",
+      "exported_sha256": "9c8a5de0b9987e3cc5fd1f99b188f74f4508d5b40e5734da23471dfb2d4da822",
+      "bytes": 26888,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/stage_reviewed_reconstruction.py",
+      "source_sha256": "39b85bbcad2cddabd74dce881cae30106fd6fd36cba4d4b8246df57f26a3e93a",
+      "exported_sha256": "1cca53973d537ac7dd802480d582f81aebc1d264ed442d9e097273d0928b2139",
+      "bytes": 7044,
+      "private_host_or_profile_replacements": 1
+    },
+    {
+      "path": "setup/stage_ubuntu_viewer.py",
+      "source_sha256": "b2ccb9cef73e5e5acc28a625feec9a847b76e020ee14e1c4ad14be4e6b8a6498",
+      "exported_sha256": "b2ccb9cef73e5e5acc28a625feec9a847b76e020ee14e1c4ad14be4e6b8a6498",
+      "bytes": 8668,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/start_cup_photos.ps1",
+      "source_sha256": "5518bba3353d8bdc063ac7633ab786665707f673441d2ec48f1ab2e7ed5f03b7",
+      "exported_sha256": "e18f4b8e6dd4fd34104a8bf760800ceb2fdb77e6c426b106010b6e0876377a6e",
+      "bytes": 3402,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/start_cup_trial.ps1",
+      "source_sha256": "132fc241c90ccec3c5ed2618577d41be794fb0c947018650d3e16cb4620b293a",
+      "exported_sha256": "132fc241c90ccec3c5ed2618577d41be794fb0c947018650d3e16cb4620b293a",
+      "bytes": 2502,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/start_obj_photos.ps1",
+      "source_sha256": "d16a067ad6661cd475717e147e65d6ee533a64781a497d10af4610b6a1af1ebd",
+      "exported_sha256": "d16a067ad6661cd475717e147e65d6ee533a64781a497d10af4610b6a1af1ebd",
+      "bytes": 3362,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/stop_exact_sam2_transfer.py",
+      "source_sha256": "4dc1a5bef28c7250817b6c690ce52c8053317c27cfbb6ee7d2d71607b7c2b30e",
+      "exported_sha256": "4dc1a5bef28c7250817b6c690ce52c8053317c27cfbb6ee7d2d71607b7c2b30e",
+      "bytes": 1195,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/summarize_cup_aruco_session.py",
+      "source_sha256": "fb8d7a2cc5493626e2a6be7b591f459f54622906d1fe8c54179b3d1da09bd929",
+      "exported_sha256": "fb8d7a2cc5493626e2a6be7b591f459f54622906d1fe8c54179b3d1da09bd929",
+      "bytes": 6849,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/summarize_cup_live_verification.py",
+      "source_sha256": "12efcb67703e25710ec908057daa1672893ffa0c4baedcd0b2d135e2d2573b92",
+      "exported_sha256": "12efcb67703e25710ec908057daa1672893ffa0c4baedcd0b2d135e2d2573b92",
+      "bytes": 3572,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/summarize_cup_pose_pilot.py",
+      "source_sha256": "c29a60238609d5534317c417dd43f1645054a47a19dc748565e304b8e2bbfebe",
+      "exported_sha256": "c29a60238609d5534317c417dd43f1645054a47a19dc748565e304b8e2bbfebe",
+      "bytes": 7176,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_aruco_reference.py",
+      "source_sha256": "3f94838d77eec42c20dd88900c17104a6f525a1fc1eb3264092747d0a0c4a581",
+      "exported_sha256": "3f94838d77eec42c20dd88900c17104a6f525a1fc1eb3264092747d0a0c4a581",
+      "bytes": 5338,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_bundlesdf_imports_only_20261013.py",
+      "source_sha256": "9393dda9b50ef939aea701083b2f5b075b30985806483ac64eee3f7505ff09c8",
+      "exported_sha256": "9393dda9b50ef939aea701083b2f5b075b30985806483ac64eee3f7505ff09c8",
+      "bytes": 1024,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_bundlesdf_loftr_cpu_20261013.py",
+      "source_sha256": "81a568bd6d479b974a1aa27d5abc07b03f455f20ebc6c121df0be79a30a044b6",
+      "exported_sha256": "81a568bd6d479b974a1aa27d5abc07b03f455f20ebc6c121df0be79a30a044b6",
+      "bytes": 1492,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_bundlesdf_qualified_imports_20261013.py",
+      "source_sha256": "e1ac51b39d770ed3daab794bce6006d33871089cfb0a31e74b07f66413ca35a5",
+      "exported_sha256": "e1ac51b39d770ed3daab794bce6006d33871089cfb0a31e74b07f66413ca35a5",
+      "bytes": 1207,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_bundlesdf_runtime_20261013.py",
+      "source_sha256": "587e9744d581773d2b60c4850842d0eaa5792c98b0131e78819d85c0d5dc58a8",
+      "exported_sha256": "587e9744d581773d2b60c4850842d0eaa5792c98b0131e78819d85c0d5dc58a8",
+      "bytes": 3034,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_cup_aruco_id6.py",
+      "source_sha256": "e6447b7656b0d7505ccf28711773c01746ad805c630e5ae316a739fba192c826",
+      "exported_sha256": "e6447b7656b0d7505ccf28711773c01746ad805c630e5ae316a739fba192c826",
+      "bytes": 3313,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_cup_dashboard_image_race.py",
+      "source_sha256": "a2ffb157f691d8b3425de5ecad2e73b49c867bef25a6fd80f5e84afc018f5dfc",
+      "exported_sha256": "a2ffb157f691d8b3425de5ecad2e73b49c867bef25a6fd80f5e84afc018f5dfc",
+      "bytes": 4300,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_cup_dashboard_restart.py",
+      "source_sha256": "4ba69ffc06477e87b182746f25591010ff18b64830a4f1ad3c7d33d0457e7284",
+      "exported_sha256": "4ba69ffc06477e87b182746f25591010ff18b64830a4f1ad3c7d33d0457e7284",
+      "bytes": 3170,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_cup_live_bridge.py",
+      "source_sha256": "8699220fc14394fc60efe7e9e952a4ede0d31414907bea75973cca5b96836f0c",
+      "exported_sha256": "8699220fc14394fc60efe7e9e952a4ede0d31414907bea75973cca5b96836f0c",
+      "bytes": 9196,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_cup_live_fast.py",
+      "source_sha256": "1ae7909da6dc9ddcff012d277f5567708b4a163a22b46361cdeab29303e4bfe9",
+      "exported_sha256": "1ae7909da6dc9ddcff012d277f5567708b4a163a22b46361cdeab29303e4bfe9",
+      "bytes": 9702,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_cup_mesh_selection.py",
+      "source_sha256": "5442f3c5d049fe18669f4db43aafa39eb5c39fd03ed65479bf2c93d82858e30a",
+      "exported_sha256": "5442f3c5d049fe18669f4db43aafa39eb5c39fd03ed65479bf2c93d82858e30a",
+      "bytes": 1572,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_cup_reacquisition.py",
+      "source_sha256": "12488ca51e6b9dc9075231a0f676dd258e97bb44e76df69acbe857cbe3517e16",
+      "exported_sha256": "12488ca51e6b9dc9075231a0f676dd258e97bb44e76df69acbe857cbe3517e16",
+      "bytes": 7836,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_cup_review_download.py",
+      "source_sha256": "93858bb616382c6d85bf3ac2ca1fb12bbe7f3ffc22e58ce8437855a5a992c1e7",
+      "exported_sha256": "93858bb616382c6d85bf3ac2ca1fb12bbe7f3ffc22e58ce8437855a5a992c1e7",
+      "bytes": 2145,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_cup_sam.py",
+      "source_sha256": "544477d7e3ca0064b0e28b1b32e6a6aff1188b7482e7ced1b04cc088a8516a07",
+      "exported_sha256": "544477d7e3ca0064b0e28b1b32e6a6aff1188b7482e7ced1b04cc088a8516a07",
+      "bytes": 8041,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_cup_yaw_worker.py",
+      "source_sha256": "dc3e56a3b5a46c67deef12881e7835d9ab68b21c9dc0212f5065e21535cd144e",
+      "exported_sha256": "dc3e56a3b5a46c67deef12881e7835d9ab68b21c9dc0212f5065e21535cd144e",
+      "bytes": 4370,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_d435i.py",
+      "source_sha256": "d68045f72eedd8871bab472c723f9b8c1faf2fbc3535bb6eb0998fb79f5ef88c",
+      "exported_sha256": "d68045f72eedd8871bab472c723f9b8c1faf2fbc3535bb6eb0998fb79f5ef88c",
+      "bytes": 17452,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_demo.py",
+      "source_sha256": "bb498a4f9739d131e5e95a94113639287d76973bfec5cb12e79deddef144fe7a",
+      "exported_sha256": "bb498a4f9739d131e5e95a94113639287d76973bfec5cb12e79deddef144fe7a",
+      "bytes": 10354,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_docker_demo.sh",
+      "source_sha256": "4f743cebe050831b925ced9885de72285a607f9c4d105339688f8aade7a9579c",
+      "exported_sha256": "4f743cebe050831b925ced9885de72285a607f9c4d105339688f8aade7a9579c",
+      "bytes": 778,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_environment.py",
+      "source_sha256": "13d19cdb75ca1b760c4699536abd69a81c11ab1d6a9cd4b5447805008dd1060c",
+      "exported_sha256": "13d19cdb75ca1b760c4699536abd69a81c11ab1d6a9cd4b5447805008dd1060c",
+      "bytes": 12287,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_logging.sh",
+      "source_sha256": "1e17495dcd3430089652cd9b6ced6e13ef820d50f13ecaa5f03b958e14736779",
+      "exported_sha256": "1e17495dcd3430089652cd9b6ced6e13ef820d50f13ecaa5f03b958e14736779",
+      "bytes": 926,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_logging_outputs.py",
+      "source_sha256": "14f624c8da5d40d720ead51aba89a025c9dd56d3b1fc4411377f0dbda2e8d5f2",
+      "exported_sha256": "14f624c8da5d40d720ead51aba89a025c9dd56d3b1fc4411377f0dbda2e8d5f2",
+      "bytes": 3127,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_manual_mask_editor.py",
+      "source_sha256": "8f20ecb9f7edf76151221c1fef5b706f37d51e0bc531c59ce18d35549e7c7a70",
+      "exported_sha256": "8f20ecb9f7edf76151221c1fef5b706f37d51e0bc531c59ce18d35549e7c7a70",
+      "bytes": 8351,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_mask_proposals.py",
+      "source_sha256": "566111e3c2633e5d0db623107405770c79eaeb550dd331304ccd192bf30b6ca9",
+      "exported_sha256": "566111e3c2633e5d0db623107405770c79eaeb550dd331304ccd192bf30b6ca9",
+      "bytes": 3923,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_mesh_color_render.py",
+      "source_sha256": "cca2fc4be24d5bf10da9a33e4742bc683de5098f59db9f8673e052473c5ef4cb",
+      "exported_sha256": "cca2fc4be24d5bf10da9a33e4742bc683de5098f59db9f8673e052473c5ef4cb",
+      "bytes": 3938,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_obj_environment.py",
+      "source_sha256": "0a6b3a8d1e304d02b9ebed6868f1b453a4494e2b8f627505104100ecdac3868d",
+      "exported_sha256": "0a6b3a8d1e304d02b9ebed6868f1b453a4494e2b8f627505104100ecdac3868d",
+      "bytes": 11405,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_obj_windows_options.py",
+      "source_sha256": "d6a4198dfc23f9bc0feb79f5713470c8489cb2c38efc82474913f57330ffbdf2",
+      "exported_sha256": "d6a4198dfc23f9bc0feb79f5713470c8489cb2c38efc82474913f57330ffbdf2",
+      "bytes": 5398,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_portable_capture.py",
+      "source_sha256": "1139040dcd5f594596f81d666e4b9459783cfc288a7a5f1e50b391e52ed12051",
+      "exported_sha256": "1139040dcd5f594596f81d666e4b9459783cfc288a7a5f1e50b391e52ed12051",
+      "bytes": 812,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_project_git.py",
+      "source_sha256": "b1bfc14069f09408d4807261344489ffeb87257a7e5286af2fcf7020ab73bb70",
+      "exported_sha256": "b1bfc14069f09408d4807261344489ffeb87257a7e5286af2fcf7020ab73bb70",
+      "bytes": 4027,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_sam_evidence_download.py",
+      "source_sha256": "47c0d02d4e8d4afe1fa9f5dcec0bd3988ce3d276a93160eecf014080cd8b4109",
+      "exported_sha256": "47c0d02d4e8d4afe1fa9f5dcec0bd3988ce3d276a93160eecf014080cd8b4109",
+      "bytes": 601,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/verify_windows_e_storage.py",
+      "source_sha256": "8ffa9f7330dabc122e8b609af32db94bed8e3c7fc591ad27913d02763a15034f",
+      "exported_sha256": "3217a21306561e1a0642276837bae540102a89f6ba2884034e4e6da95bf6da22",
+      "bytes": 1934,
+      "private_host_or_profile_replacements": 1
+    },
+    {
+      "path": "setup/windows_capture_storage.json",
+      "source_sha256": "1596b939fb4def1a68b7ed983b7793f74828595f198c1b7dffba35a9b86c487b",
+      "exported_sha256": "4ded0e1b2da8576abc8dac27ec4a5c1951e34377580bb9e953058f06481e6af6",
+      "bytes": 311,
+      "private_host_or_profile_replacements": 0
+    },
+    {
+      "path": "setup/windows_storage_policy.json",
+      "source_sha256": "f8a308e81000ea26692420988f0c2961f44b1cc08134323722d5a49a022482bc",
+      "exported_sha256": "dac2749baad7a4c7471c0fe65ba98c7be46e692602a26b02063174fd163f9e21",
+      "bytes": 984,
+      "private_host_or_profile_replacements": 1
+    },
+    {
+      "path": "third_party/licenses/librealsense-LICENSE.txt",
+      "source_sha256": "0656803c0f61036b73ec2c35bd473cb1a095deed5a7247a879f3f51e3298ad24",
+      "exported_sha256": "c7aa1fdf0e38c4827fef17859ddbfac800b8995f3ec875a06dd23c79135f956d",
+      "bytes": 11352,
+      "private_host_or_profile_replacements": 0
+    }
+  ],
+  "generated_files": {
+    ".gitignore": "71dda4bae76504ba9b5d5558b43b2aa4cf914922cead5abd35da90bc56780ac6"
+  },
+  "validation": {
+    "python_files_parsed": 199,
+    "json_files_parsed": 4
+  }
+}

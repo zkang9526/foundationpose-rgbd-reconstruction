@@ -1,0 +1,4 @@
+{
+  "capture_root": "E:\\foundationPos_data\\windows_captures",
+  "note": "2026-10-15: entire Windows project now physically E:\\foundationPos; old C workspace is a directory junction. All captures, reports, logs, exports and caches must stay on E. Historical C paths remain compatible through the junction."
+}

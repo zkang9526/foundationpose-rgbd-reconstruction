@@ -1,0 +1,5 @@
+## 相机说明同步复验（2026-10-14）
+
+首次SSH部署命令中的note包含分号，经过嵌套引号解析后被远程shell拆开，记录器参数解析失败，部署helper未执行。失败记录 `20261014_125102_847772_cup_camera_calibration_ubuntu_deploy_49154efc` 保留。
+
+修正为不含shell分隔符和空格的远程note，使用新批次 `cup_camera_calibration_updates_20261014_1251_retry1`。服务器 `20261014_125231_224042_cup_camera_calibration_updates_deploy_retry1_12b76576` 退出0，175文件SHA及部署复验通过，按唯一run_id追加3份Windows记录（含失败记录）。报告为 `foundationpose_data/incoming/cup_camera_calibration_updates_20261014_1251_retry1/deployment_report.json`。新说明、78对离线审计与备份后的启动指南已同步；旧数据、内参和服务器原历史记录未替换。
