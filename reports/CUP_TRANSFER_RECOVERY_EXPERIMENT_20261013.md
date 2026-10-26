@@ -1,9 +1,0 @@
-## 完整批次传输与换行恢复（2026-10-13）
-
-完整批次6380文件打包与上传成功，SHA256 `0c146d2ceaa318cca2f70dc3880557efb02684388c65333bcb7672290827b6f9`，Ubuntu incoming为 `foundationpose_data/incoming/cup_complete_batch_20261013_2055`。原始、派生、被拒Mask、失败/中断采集均保留。
-
-初次导入整ZIP及全部成员验证通过、6118项新建/有备份更新完成、117份Windows run索引和2个人工阶段总结追加完成；最终SHA因Windows历史issues.md换行改变而失败。保留import_report与失败run，不把“有输出/exit0子步骤”误报整个导入成功。
-
-根因为import_windows_run_records调用append_records，后者会重写每个失败run的问题单，在Linux把原CRLF变LF。专用恢复逐一证明仅此变化，全preflight后将20份LF副本另存到import_backups，再恢复ZIP中的原字节，6380输出和6380 staged来源重新SHA全部通过；不重新追加索引，原失败报告哈希也复验不变。成功证据为incoming/recovery_report.json，Ubuntu run `20261013_213931_599894_cup_import_newline_recovery_4215c027`。
-
-本机索引接口新增write_run_issue可选参数：默认True正常新run仍有问题单，导入历史档案False只追加根索引，针对性回归通过。服务器补丁部署结果另行记录。当前数据可以进入实际重建；本记录不声称杯子网格/参考位姿/推理已完成。

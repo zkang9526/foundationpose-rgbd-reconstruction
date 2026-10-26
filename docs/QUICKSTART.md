@@ -1,64 +1,54 @@
-# 快速使用与环境准备
+# 使用指南
 
-本仓库提供复现脚本与实验记录，尚不是跨机器的一键安装包。以下区分已部署机器的命令与新机器需要准备的资源。
+## 1. 环境准备
 
-## 环境与资产
-
-| 用途 | 本次已验证配置 |
+| 环节 | 已验证配置 |
 | --- | --- |
-| Windows 采集 | Python 3.11 x64、独立 `.windows-camera-venv`、pyrealsense2 2.55.1.6486、NumPy 1.26.4、OpenCV、Pillow |
-| Ubuntu 推理 | Ubuntu 20.04、RTX 3090 24 GB、Docker GPU 容器 `foundationpose` |
-| FoundationPose | 上游提交 `a1b694b83e633c2cb6115b9063d940a687759392`；容器 PyTorch 2.0.0+cu118 |
-| SAM2.1 | 独立环境；Hiera Tiny；上游提交 `2b90b9f5ceec907a1c18123530e92e794ad901a4` |
-| 几何处理 | 宿主独立环境 Open3D 0.19.0，与推理容器分开 |
+| Windows 采集 | Python 3.11、pyrealsense2 2.55.1.6486、NumPy、OpenCV、Pillow |
+| Ubuntu 推理 | Ubuntu 20.04、RTX 3090、Docker GPU 容器 `foundationpose` |
+| FoundationPose | 提交 `a1b694b83e633c2cb6115b9063d940a687759392`；PyTorch 2.0.0+cu118 |
+| SAM2.1 | Hiera Tiny，独立环境；提交 `2b90b9f5ceec907a1c18123530e92e794ad901a4` |
+| 重建 | 独立 Open3D 0.19.0 环境 |
 
-完整实测版本见 [Ubuntu 环境记录](../Ubuntu_environment.md)。宿主驱动支持的 CUDA 与容器 PyTorch 的 CUDA 构建版本是不同概念。
+按 [FoundationPose 官方说明](https://github.com/NVlabs/FoundationPose/tree/a1b694b83e633c2cb6115b9063d940a687759392) 准备源码、权重和容器。SAM/SAM2 分别通过 `setup/provision_cup_sam.py`、`setup/provision_cup_sam2.py` 准备；先核对脚本中的环境和目录。
 
-新机器需准备：
+这些脚本沿用实验机器布局：项目 `/data/ZJC/foundationPos`，相机 Python `.camera-venv/bin/python`，容器内 Python `/opt/conda/envs/my/bin/python`。SAM2 还引用原宿主 Conda 环境。换机器需适配路径，不能直接视为一键安装包。
 
-1. 按 [FoundationPose 固定版本官方说明](https://github.com/NVlabs/FoundationPose/tree/a1b694b83e633c2cb6115b9063d940a687759392) 准备源码、预训练权重及 GPU 容器；本仓库不重新分发这些资源。
-2. 为 Windows 相机、Ubuntu 相机、FoundationPose、SAM2 保留独立环境，不直接升级现有可用的 FoundationPose PyTorch。
-3. 检查脚本中的 `/data/ZJC/foundationPos`、`/home/ni/anaconda3/envs/foundationpose`、容器名及 Python 路径。SSH 编排脚本带原实验机器设置，不可直接用于新机器。
-4. 准备米制 Mesh、对应内参、深度单位及人工确认的初始分割。`setup/cup_mesh_selection.py` 固定两个实验杯子的路径及 SHA256；自己的模型需定义对应 profile，不应绕过哈希检查。
+Windows 默认项目 `E:\foundationPos`、数据 `E:\foundationPos_data`；配置在 `setup/windows_capture_storage.json` 和 `setup/windows_storage_policy.json`。`prepare_d435i_windows.ps1` 依赖已缓存并匹配 SHA256 的官方 wheel，不自动下载。
 
-`setup/prepare_d435i_windows.ps1` 是离线 wheel 缓存安装器，要求 `.assets_download/` 已有指定文件及 SHA256，不会自动下载。`setup/provision_cup_sam2.py` 带原机器路径，应先核对再通过记录器运行。
-
-## Windows 采集
-
-当前项目在 `E:\foundationPos`，默认数据根为 `E:\foundationPos_data`。配置见 `setup/windows_capture_storage.json`、`setup/windows_storage_policy.json`。
+## 2. RGB-D 采集
 
 ```powershell
 cd E:\foundationPos
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\setup\start_obj_photos.ps1 -Ring side -Views 72 -AngleStep 5
 ```
 
-固定相机，旋转杯子，停稳、手退出后按回车，等待 `Saved`。计划角度不是实测外参；采集和格式检查自动留档。先检查目标局部深度与视角覆盖，不能用整图有效比例代替杯把/杯口质量。
+固定相机，旋转杯子，停稳、手退出后按回车，等待 `Saved`。计划角度只是备注，不是外参真值。先检查杯把和杯口的原始深度质量。`-RecordBag` 可额外录制，`-FilteredDepth` 另存派生深度。
 
-`-RecordBag` 可录制原始流；`-FilteredDepth` 保存独立派生深度，原始 `depth/` 不变。默认保留当前相机设置；显式选择预设/自动曝光前阅读 [照片采集说明](../CUP_MANUAL_PHOTOS.md)。
-
-## Mask 与重建
+## 3. Mask 与 Mesh
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\setup\run_manual_mask_editor.ps1 -Scene 'E:\foundationPos_data\windows_captures\YOUR_CAPTURE' -Output 'E:\foundationPos_data\manual_masks\YOUR_MASKS'
 ```
 
-默认页面 `http://127.0.0.1:8767`。标完整杯身、杯把与可见内壁，杯把内孔属于背景。相同输出目录可继续编辑。草稿与人工复核见 [Mask 说明](../MANUAL_CUP_MASKS.md)。
+页面默认 `http://127.0.0.1:8767`。Mask 包含杯身、杯把和可见内壁；杯把内孔是背景。相同输出目录可继续编辑。`sam_offline_drafts.py` 生成草稿，`prepare_sam_assisted_masks.py` 将草稿接入人工复核。
 
-`setup/reconstruct_cup_geometric_tsdf.py` 依赖固定 72 帧、杯底几何、颜色与 ROI。新批次需检查假设、调整数据选择并验证配准，不能照抄旧编排脚本的数据路径。
-原始数据、Mask、派生深度、估计姿态、插值标记和候选 Mesh 分开保存。参数和失败对照见 [Mesh 报告](../reports/RED_CUP_REVIEWED72_MESH_RESULT_20261017.md)。
+重建实现为 `setup/reconstruct_cup_geometric_tsdf.py`，清理导出为 `setup/audit_geometric_cup_mesh.py`。两者依赖 72 帧；前者还带杯子颜色、杯底 ROI 等假设，新批次必须调整并验证。使用各自 `--help` 查看参数。计划角度不能替代实际配准，平滑/补洞不能恢复未观测表面。
 
-## 实时跟踪
+## 4. 实时跟踪
 
-环境与红杯 Mesh 已准备、D435i 连接 Ubuntu 后：
+Mesh 使用米制，目标 profile 和 SHA256 在 `setup/cup_mesh_selection.py`。自己的模型需配置对应 profile；本仓库不提供实验杯子的 Mesh 或模型权重。
+
+有固定参考码时：
 
 ```bash
 cd /data/ZJC/foundationPos
 bash setup/run_cup_live_redcup72.sh --duration-seconds 600 --max-frames 3000
 ```
 
-此入口启用红杯 Mesh、SAM2 首帧、自动找回、杯把 yaw 初始化检查及固定杯子/ID6 参考评测。
+此入口使用红杯 profile、SAM2、自动找回和杯把 yaw 检查，默认 ArUco `DICT_5X5_50` / ID6 / 黑色外边长 30 mm。杯子与码保持固定，只移动相机。二者相对移动时加 `--no-aruco-fixed-scene`。
 
-不使用 ArUco 时显式调用通用入口：
+不使用参考码时：
 
 ```bash
 bash setup/run_cup_live_fast.sh \
@@ -66,29 +56,12 @@ bash setup/run_cup_live_fast.sh \
   --duration-seconds 600 --max-frames 3000
 ```
 
-通用入口不传这些参数时默认仍是旧 `legacy` 模型与 SAM ViT-B；历史 `run_cup_live.sh` 使用 GrabCut。
+页面 `http://127.0.0.1:8765`：冻结 → 框选 → 生成/修正 Mask → 确认初始化。保持静止直到跟踪；失跟后重新入镜并停稳，候选注册后连续 3 个新帧通过才恢复显示。
 
-Ubuntu 浏览器访问 `http://127.0.0.1:8765`。首次冻结、框选杯身和杯把、修正 Mask 并确认，保持静止直到跟踪。失跟后隐藏旧姿态，SAM2 全图搜索，候选重新注册，连续 3 个新帧通过后恢复显示。
+通用入口默认仍是旧 `legacy` profile 与 SAM ViT-B，必须显式选上述参数。SAM2 用 RGB 生成候选，外层用颜色和深度尺度筛选；同色同尺寸目标可能混淆。
 
-SAM2 仅从 RGB 生成候选；深度由外层筛选目标尺度。目标再次入镜后短暂停稳，避免搜索期间 Mask 过期。颜色/尺寸相似的其他物体仍可能混淆。
+## 5. 输出与评测
 
-## 相对漂移评测
+运行输出位于 `foundationpose_data/`，不进入 Git。相机会话保存 RGB-D、内参、时间戳、位姿和恢复事件；正常结束自动汇总 ArUco 相对漂移。首帧对齐消除了初始偏差，单码参考还可能跳变，不能作为绝对精度真值。
 
-红杯入口默认 `DICT_5X5_50`、ID 6、黑色外边长 30 mm。换码时需修改参数。固定杯子与码，只移动相机；二者相对移动时追加 `--no-aruco-fixed-scene`，不能按固定场景解释误差。
-
-会话位于 `foundationpose_data/live_sessions/`，包含 RGB-D、K、时间戳、矩阵、Mask 尝试、恢复事件、ArUco CSV 与汇总。
-首帧对齐后的数值是相对漂移，单码参考本身可能跳变。见 [协议](../reports/CUP_ARUCO_ACCURACY_PROTOCOL_20261014.md)、[最新结果](../reports/CUP_RECOVERED_ACCURACY_20261018_172656.md)。
-
-## 留档
-
-现有采集与实时 wrapper 已接入记录器。其他处理通过：
-
-```powershell
-.\.windows-camera-venv\Scripts\python.exe -B setup/run_logged.py --root E:\foundationPos --label YOUR_LABEL -- COMMAND ARGUMENTS
-```
-
-```bash
-bash setup/run_logged.sh --label YOUR_LABEL -- COMMAND ARGUMENTS
-```
-
-补充材质、尺寸、光照与运动条件；不要将密码/令牌放进参数、备注和终端输出。失败保留，新尝试用新目录。
+采集和实时 wrapper 自动接入记录器。独立处理命令使用 `setup/run_logged.py` 或 `setup/run_logged.sh`；计算过程中产生的记录留本地。

@@ -36,3 +36,10 @@ reports/*/
 camera_calibration/sessions/
 camera_calibration/preflight/
 camera_calibration/results/
+
+# Keep local experiment and publication documentation out of the public tree.
+reports/
+camera_calibration/
+PUBLICATION_MANIFEST.json
+GIT_WORKFLOW.md
+README_LEGACY.md

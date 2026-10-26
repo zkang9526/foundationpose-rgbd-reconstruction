@@ -1,3 +1,0 @@
-# D435i USB and descendant device nodes, adapted from librealsense v2.55.1.
-# MODE= is compatible with Ubuntu 20.04 udev 245; ni belongs to plugdev.
-SUBSYSTEMS=="usb", ATTRS{idVendor}=="8086", ATTRS{idProduct}=="0b3a", MODE="0660", GROUP="plugdev"
