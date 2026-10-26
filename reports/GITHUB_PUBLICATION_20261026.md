@@ -24,4 +24,13 @@ GitHub 认证只调用现有 Git Credential Manager，在内存中供 API 使用
 
 ## 验证与发布状态
 
-具体导出计数、验证结果、公开提交与远端核验在发布完成后追加；对应原始运行记录保留本机，不随公开快照上传。
+- 仓库：[zkang9526/foundationpose-rgbd-reconstruction](https://github.com/zkang9526/foundationpose-rgbd-reconstruction)，GitHub API 核验为 public，默认分支 main。
+- 首次公开提交：`c916c07c049ccaa7706d21ae59aa7a878ea56228`；来源本地提交：`2265979b13b408da7261990d8f0811fa02bc85bf`。后续发布文档同步另成提交，不改写这份初始快照。
+- 正式导出 447 文件，源内容 2,438,320 字节，199 个 Python 文件 AST、4 个 JSON 解析通过；入口文档链接及逐文件导出 SHA256 核验通过。
+- 已知私人 SSH 主机/Windows 用户路径共替换 54 处；37 个未公开原始附件链接明确标注。常见私钥、GitHub/OpenAI/AWS 凭据和硬编码密码模式无命中；不把自动扫描当完整安全保证。
+- 仅推送独立公开 main；Git ls-remote 与 GitHub API 两种方式均核验首次提交一致。原分支与原历史未上传、未重置。
+- 原生 curl 最初没有沿用 Windows 系统代理，显式使用已有系统代理后创建、上传和 API 核验通过；原 raw 端点的 TLS 故障未另外复验。没有修改全局网络设置或 Git 配置，没有保存/打印 token。
+- 原始相机、重建、推理环境未改动；本次验证是文档、导出和发布检查，不冒称重新完成实物精度评测。
+
+关键运行档案：`20261026_111031_437709_github_public_snapshot_export_final_63bc3d88`、`20261026_111143_657144_github_public_snapshot_git_init_b0c2df1c`、`20261026_111238_941188_github_public_repository_create_system_proxy_7c7e6d8f`、`20261026_111328_555271_github_public_snapshot_push_1a2ac17f`、`20261026_111409_279691_github_public_snapshot_api_verification_637f2680`。
+完整运行日志、失败记录、预检目录和发布回执位于本机 `foundationpose_data/publication/github_20261026` 及 `foundationpose_data/runs`，不随公开快照上传。

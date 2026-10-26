@@ -4,6 +4,8 @@
 
 用户已授权创建公开仓库 `zkang9526/foundationpose-rgbd-reconstruction`。GitHub 发布使用独立、经过审计的源码快照，不推送本地原有全部 Git 历史；原分支 `fix/reacquisition-sam2-eval`、Ubuntu 分支及实验档案保持原样。
 
+已发布并核验：[GitHub 项目](https://github.com/zkang9526/foundationpose-rgbd-reconstruction)。首次公开提交 `c916c07`，验证记录见 [发布报告](reports/GITHUB_PUBLICATION_20261026.md)。
+
 公开副本在 Windows 项目下 `foundationpose_data/publication/github_20261026/repository`，单独管理 `main` 与 GitHub remote；它位于原项目忽略的数据目录，不是第二份采集环境。不得从原项目执行 `git push --all` 或用公开快照覆盖 Ubuntu 账本。
 
 后续同步：先在原项目修复、验证和提交，再通过 `setup/export_public_snapshot.py --source E:\foundationPos --output <新空目录>` 导出。检查 `PUBLICATION_MANIFEST.json`、脱敏和差异后，只在公开副本提交选定变更并推送 `main`。导出器拒绝已有输出目录，不自动发布或删除内容。

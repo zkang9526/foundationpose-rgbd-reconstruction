@@ -1,7 +1,7 @@
 {
   "schema": "foundationpos_public_snapshot_v1",
-  "created_utc": "2026-10-26T03:10:34.962040+00:00",
-  "source_commit": "2265979b13b408da7261990d8f0811fa02bc85bf",
+  "created_utc": "2026-10-26T03:16:18.504201+00:00",
+  "source_commit": "138ee5b67c3e42fa920b57e043e4560e9b3e1ea2",
   "source_branch": "fix/reacquisition-sam2-eval",
   "source_tracked_changes": [],
   "private_history_included": false,
@@ -249,9 +249,9 @@
     },
     {
       "path": "GIT_WORKFLOW.md",
-      "source_sha256": "87f7d8d4571b64574a325996d8d606efd8d0c4640f8f395eba2d05029bbda5e1",
-      "exported_sha256": "87f7d8d4571b64574a325996d8d606efd8d0c4640f8f395eba2d05029bbda5e1",
-      "bytes": 4981,
+      "source_sha256": "4f63b7a788c180ae6eb116bc1e8a444d7e569bade1a71eab416fe9dc2fe02855",
+      "exported_sha256": "4f63b7a788c180ae6eb116bc1e8a444d7e569bade1a71eab416fe9dc2fe02855",
+      "bytes": 5191,
       "private_host_or_profile_replacements": 0
     },
     {
@@ -1152,9 +1152,9 @@
     },
     {
       "path": "reports/GITHUB_PUBLICATION_20261026.md",
-      "source_sha256": "80fae9533c4fcd0f13ddb0cd4817afee9b8a86085bb41eb212f52205b018648b",
-      "exported_sha256": "80fae9533c4fcd0f13ddb0cd4817afee9b8a86085bb41eb212f52205b018648b",
-      "bytes": 2467,
+      "source_sha256": "bafce23e6254fc2cbc0daa782ac5b91a8c11541344df8134e8569db2d4b00f8a",
+      "exported_sha256": "bafce23e6254fc2cbc0daa782ac5b91a8c11541344df8134e8569db2d4b00f8a",
+      "bytes": 4201,
       "private_host_or_profile_replacements": 0
     },
     {
