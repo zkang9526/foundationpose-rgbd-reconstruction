@@ -68,7 +68,11 @@ def main():
                         help="stop safely while at least this many GiB remain on the capture drive")
     parser.add_argument("--save-filtered-depth", action="store_true",
                         help="save additional derived spatial/temporal/hole-filled depth; keep depth/ raw")
+    parser.add_argument('--preview-port', type=int, default=0, help='Optional local RGB/depth browser preview port')
+    parser.add_argument('--browser-control', action='store_true', help='Use browser controls without waiting for terminal stdin')
     args = parser.parse_args()
+    if not 0 <= args.preview_port <= 65535 or (args.browser_control and not args.preview_port):
+        parser.error('Browser control requires --preview-port in 1..65535')
     output = args.output.expanduser().resolve()
     reserved = {"rgb", "depth", "depth_filtered", "raw_streams.bag", "color", "mask", "masks", "cam_k.txt", "k.txt", "depth_scale.txt"}
     try:
@@ -120,6 +124,8 @@ def main():
     capture_started = None
     valid_saved_pixels = 0
     total_saved_pixels = 0
+    preview = None
+    requests = queue.Queue()
 
     def save_reports():
         write_json(output / "timestamps.json", report["frames"])
@@ -197,6 +203,12 @@ def main():
             np.savetxt(str(output / filename), K, fmt="%.12g")
         (output / "depth_scale.txt").write_text("0.001\n", encoding="utf-8")
         align = rs.align(rs.stream.color)
+        if args.preview_port:
+            from rgbd_photo_preview import PhotoPreview
+            preview = PhotoPreview(output, args.views, args.planned_angle_step, requests, args.preview_port)
+            report['browser_preview'] = dict(url='http://127.0.0.1:%d/' % args.preview_port,
+                                            browser_control=args.browser_control)
+            print('Live preview: ' + report['browser_preview']['url'], flush=True)
 
         phase = "warmup"
         print("Warming up {} RGB-D pairs. Keep the fixed camera and cup steady.".format(args.warmup), flush=True)
@@ -204,6 +216,8 @@ def main():
             aligned = align.process(pipeline.wait_for_frames(args.timeout_ms))
             require(aligned.get_color_frame() and aligned.get_depth_frame(), "Missing RGB or depth during warmup")
             capture_options.process(aligned.get_depth_frame())
+            if preview is not None:
+                preview.publish(aligned.get_color_frame(), aligned.get_depth_frame(), native_scale)
             report["warmup_frames"] = index + 1
         fields = ["index", "rgb", "depth", "planned_angle_degrees", "planned_angle_is_measured",
                   "host_elapsed_seconds", "request_host_elapsed_seconds", "settle_seconds",
@@ -216,8 +230,10 @@ def main():
         csv_handle.flush()
         capture_started = time.monotonic()
         report["capture_started_at_utc"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
-        requests = queue.Queue()
-        threading.Thread(target=read_requests, args=(requests,), daemon=True).start()
+        if not args.browser_control:
+            threading.Thread(target=read_requests, args=(requests,), daemon=True).start()
+        if preview is not None:
+            preview.set_state(ready=True, message='停稳后可保存第一张')
         phase = "waiting_for_enter"
         pending = None
         last_saved_numbers = None
@@ -239,6 +255,8 @@ def main():
             depth_frame = aligned.get_depth_frame()
             require(color_frame and depth_frame, "Missing RGB or depth after alignment")
             filtered_frame = capture_options.process(depth_frame)
+            if preview is not None:
+                preview.publish(color_frame, depth_frame, native_scale)
             report["acquired_frames"] += 1
             numbers = (int(color_frame.get_frame_number()), int(depth_frame.get_frame_number()))
             while True:
@@ -257,6 +275,8 @@ def main():
                 elif pending is None:
                     pending = {"request_time": request_time, "baseline_numbers": numbers}
                     phase = "settling"
+                    if preview is not None:
+                        preview.set_state(busy=True, message='保持静止，正在保存新帧')
                     print("Request received; draining fresh frames for {:.1f}s. Keep the cup STILL.".format(args.settle_seconds), flush=True)
                 else:
                     print("Extra Enter ignored while this photo is pending; wait for Saved before rotating again.", flush=True)
@@ -330,6 +350,10 @@ def main():
             pending = None
             report["aggregate_saved_valid_pixel_ratio"] = valid_saved_pixels / total_saved_pixels
             save_reports()
+            if preview is not None:
+                preview.set_state(saved_frames=report['saved_frames'], busy=False,
+                                  ready=report['saved_frames'] < args.views,
+                                  message='已保存，可转动杯子准备下一张')
             print("Saved {}/{}: planned angle {:.1f} degrees; timestamp gap {:.2f}ms; raw depth valid (whole image) {:.1f}%.".format(
                 report["saved_frames"], args.views, entry["planned_angle_degrees"], gap, entry["saved_valid_pixel_ratio"] * 100), flush=True)
             print("  RGB: {}\n  depth: {}".format(output / rgb_path, output / depth_path), flush=True)
@@ -347,6 +371,14 @@ def main():
         report["stop_reason"] = "interrupted" if isinstance(exc, KeyboardInterrupt) else "error"
         traceback.print_exc()
     finally:
+        # Preserve the failure and disable controls before native SDK shutdown,
+        # which can block after a disconnected USB/IP device.
+        if not report['passed']:
+            report['status'] = 'incomplete'
+        if preview is not None:
+            preview.set_state(running=False, ready=False, busy=False,
+                              message='正在释放相机' if report['passed'] else '采集已停止，请检查连接和运行记录')
+        save_reports()
         if capture_options is not None:
             try:
                 capture_options.restore()
@@ -379,6 +411,9 @@ def main():
         except Exception as exc:
             print("Could not save capture report: {}: {}".format(type(exc).__name__, exc), file=sys.stderr)
             return 1
+        finally:
+            if preview is not None:
+                preview.close(report)
     print(json.dumps({"passed": report["passed"], "status": report["status"], "saved_frames": report["saved_frames"], "output": str(output)}), flush=True)
     return 0 if report["passed"] else 1
 

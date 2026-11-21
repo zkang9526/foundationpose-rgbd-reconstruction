@@ -27,9 +27,17 @@ def main():
     p.add_argument('--repo', type=Path, required=True)
     p.add_argument('--mesh', type=Path, required=True)
     p.add_argument('--mesh-sha256', required=True)
+    p.add_argument('--source-manifest', type=Path, help='Checksummed minimal source snapshot instead of a full Git checkout')
+    p.add_argument('--low-memory', action='store_true', help='Bound independent features and CPU diameter temporary arrays')
     p.add_argument('--fast', action='store_true', help='Lossless NPY input and original-mesh GPU contour/depth guard')
+    p.add_argument('--warp-batch-limit', type=int, default=0, help='Optional inference warp temporary batch limit; 0 keeps upstream behavior')
     p.add_argument('--cup-yaw-init', action='store_true', help='Experimental redcup72 model-Z yaw search using the initialization mask')
+    p.add_argument('--handle-local-init', action='store_true', help='Use visible handle-hole mask evidence to validate initialization candidates')
+    p.add_argument('--initialization-consensus', choices=('auto', 'off'), default='auto',
+                   help='Validate a tight registration candidate consensus for the reviewed smoothed cup mesh')
     args = p.parse_args()
+    if not 0 <= args.warp_batch_limit <= 128:
+        p.error('Warp batch limit must be between 0 and 128')
     session, repo, meshfile = args.session.resolve(), args.repo.resolve(), args.mesh.resolve()
     report = dict(passed=False, status='loading', frames_completed=0, frames_failed=0,
                   pose_is_ground_truth=False, pose_accuracy_validated=False,
@@ -38,10 +46,17 @@ def main():
         if report['mesh_sha256'] != args.mesh_sha256:
             raise ValueError('Mesh differs from the selected metric candidate')
         from run_cup_mesh_inference import EXPECTED_PIN, inspect_pose, loaded_weight_info
-        commit = subprocess.check_output(['git', '-C', str(repo), 'rev-parse', 'HEAD'], text=True).strip()
-        if commit != EXPECTED_PIN:
-            raise ValueError('FoundationPose checkout differs from validated pin')
-        report['repo_commit'] = commit
+        if args.source_manifest:
+            source = json.loads(args.source_manifest.read_text())
+            for name in ('estimater.py', 'Utils.py'):
+                if sha(repo / name) != source['FoundationPose/' + name]:
+                    raise ValueError('FoundationPose source snapshot SHA mismatch: ' + name)
+            report['source_manifest_sha256'] = sha(args.source_manifest)
+        else:
+            commit = subprocess.check_output(['git', '-C', str(repo), 'rev-parse', 'HEAD'], text=True).strip()
+            if commit != EXPECTED_PIN:
+                raise ValueError('FoundationPose checkout differs from validated pin')
+            report['repo_commit'] = commit
         report['upstream_sha256'] = {name: sha(repo / name) for name in ('estimater.py', 'Utils.py')}
         os.environ.setdefault('PYOPENGL_PLATFORM', 'egl')
         sys.path.insert(0, str(repo))
@@ -51,6 +66,13 @@ def main():
         import torch
         import trimesh
         import nvdiffrast.torch as dr
+        if args.warp_batch_limit:
+            from cup_warp_batch import install_warp_batch_limit
+            report['warp_batching'] = install_warp_batch_limit(args.warp_batch_limit)
+        if args.low_memory:
+            from cup_low_memory import install_bounded_diameter, install_feature_batches, install_render_batches
+            report['low_memory'] = install_bounded_diameter()
+            report['low_memory'].update(install_render_batches())
         from estimater import FoundationPose, PoseRefinePredictor, ScorePredictor
         from Utils import draw_posed_3d_box, draw_xyz_axis, set_logging_format, set_seed
         if args.fast:
@@ -71,6 +93,8 @@ def main():
         context = dr.RasterizeCudaContext()
         projection = MeshProjection(mesh, context) if args.fast else None
         scorer, refiner = ScorePredictor(), PoseRefinePredictor()
+        if args.low_memory:
+            report['low_memory'].update(install_feature_batches(scorer, refiner))
         report['weights'] = {name: loaded_weight_info(model, repo)
                              for name, model in (('scorer', scorer), ('refiner', refiner))}
         report.update(gpu=torch.cuda.get_device_name(0), torch=torch.__version__,
@@ -78,6 +102,17 @@ def main():
                       mesh_visual_kind=mesh.visual.kind,
                       pose_definition='T_camera_from_original_mesh_meters',
                       obb_display_frame_only=True)
+        from cup_pose_reference import load_reference, body_center_pose, mark_body_reference
+        display_reference = load_reference(meshfile, report['mesh_sha256'])
+        consensus_enabled = (args.fast and args.initialization_consensus == 'auto'
+                             and report['mesh_sha256'] == '16ffcc896a0a827399143437a0378123dc07c5c7e8d3e85e5378e74c7fa70022')
+        if consensus_enabled:
+            if display_reference is None:
+                raise ValueError('Initialization consensus requires the mesh-bound body-center reference')
+            from cup_initialization_consensus import registration_consensus
+        report['initialization_consensus'] = dict(mode=args.initialization_consensus, enabled=consensus_enabled)
+        report['display_origin'] = 'cup_body_center' if display_reference else 'display_obb_center'
+        report['display_reference'] = display_reference
         estimator = FoundationPose(model_pts=mesh.vertices, model_normals=mesh.vertex_normals,
                                    mesh=mesh, scorer=scorer, refiner=refiner,
                                    glctx=context, debug=0,
@@ -148,24 +183,35 @@ def main():
                         official_pose = np.asarray(pose).copy()
                         np.savetxt(folder / 'official_top1_pose.txt', official_pose, fmt='%.12g')
                         transform = estimator.get_tf_to_centered_mesh()
+                        local_reference = None
+                        if args.handle_local_init:
+                            from cup_handle_local_selection import handle_region, local_quality, select_registration_candidate
+                            local_reference = handle_region(mask)
                         candidates = []
-                        for rank in range(min(8, len(estimator.poses))):
+                        candidate_limit = 32 if local_reference is not None else 8
+                        for rank in range(min(candidate_limit, len(estimator.poses))):
                             candidate = (estimator.poses[rank] @ transform).detach().cpu().numpy()
                             rendered = projection.render_depth(candidate, K, raw.shape)
                             overlap = mask_overlap(rendered, mask)
                             quality = depth_consistency(rendered, raw)
                             metric = overlap['iou'] - min(.1, (quality['median_abs_depth_residual_m'] or .1) * 2)
                             candidates.append(dict(rank=rank, pose=candidate.tolist(), overlap=overlap,
+                                handle_quality=local_quality(rendered > 0, mask, local_reference) if args.handle_local_init else None,
                                 depth_quality=quality, official_score=float(estimator.scores[rank]), selection_metric=metric))
                         eligible = [c for c in candidates if c['overlap']['consistent'] and c['depth_quality']['heuristic_consistent']]
                         selected = max(eligible, key=lambda c: c['selection_metric']) if eligible else candidates[0]
                         if candidates[0] in eligible and selected['selection_metric'] - candidates[0]['selection_metric'] < .015:
                             selected = candidates[0]
+                        local_selection = dict(enabled=False, changed=False)
+                        if args.handle_local_init:
+                            selected, local_selection = select_registration_candidate(candidates, True)
                         pose = np.array(selected['pose'])
                         estimator.pose_last = estimator.poses[selected['rank']].clone()
                         response['registration_selection'] = dict(official_top1_preserved=True,
-                            method='custom top8 silhouette/depth validation; official score order breaks near ties',
+                            method='custom silhouette/depth validation with optional handle evidence',
+                            candidate_count=len(candidates),
                             selected_rank=selected['rank'], selected_overlap=selected['overlap'], pose_accuracy_validated=False)
+                        response['registration_selection']['handle_local_selection'] = local_selection
                         atomic_json(folder / 'registration_candidates.json', dict(candidates=candidates, **response['registration_selection']))
                         if args.cup_yaw_init:
                             if args.mesh_sha256 != '88e127e4cd4388bedcd77e7a0fb2cd5bde31c0557f861a7b60f8250bdac32f53':
@@ -182,6 +228,19 @@ def main():
                                 iou=yaw_selection['selected']['iou'],pose_accuracy_validated=False)
                             response['registration_selection']['pre_yaw_overlap']=response['registration_selection']['selected_overlap']
                             response['registration_selection']['selected_overlap']=yaw_selection['selected']['overlap']
+                        if consensus_enabled:
+                            np.savetxt(folder / 'pre_consensus_pose.txt', pose, fmt='%.12g')
+                            pose, consensus = registration_consensus(candidates, selected, raw, mask, K, projection,
+                                                                     display_reference['body_center_mesh_m'])
+                            atomic_json(folder / 'registration_consensus.json', consensus)
+                            response['registration_selection']['consensus'] = consensus
+                            if consensus['accepted']:
+                                transform_numpy = transform.detach().cpu().numpy() if hasattr(transform, 'detach') else np.asarray(transform)
+                                estimator.pose_last = torch.as_tensor(pose @ np.linalg.inv(transform_numpy),
+                                    dtype=estimator.pose_last.dtype, device=estimator.pose_last.device)
+                                np.savetxt(folder / 'consensus_pose.txt', pose, fmt='%.12g')
+                                response['registration_selection']['pre_consensus_overlap'] = response['registration_selection']['selected_overlap']
+                                response['registration_selection']['selected_overlap'] = mask_overlap(projection.render_depth(pose, K, raw.shape), mask)
                 elif operation == 'track':
                     if estimator.pose_last is None:
                         raise RuntimeError('Tracking requires a successful initialization')
@@ -202,8 +261,13 @@ def main():
                 obb_pose = pose @ np.linalg.inv(origin)
                 np.savetxt(folder / 'pose_camera_from_display_obb.txt', obb_pose, fmt='%.12g')
                 vis = draw_posed_3d_box(K, img=color.copy(), ob_in_cam=obb_pose, bbox=bbox)
-                vis = draw_xyz_axis(vis, ob_in_cam=obb_pose, K=K, scale=float(np.max(extents) * 0.5),
+                axis_pose = body_center_pose(pose, display_reference) if display_reference else obb_pose
+                vis = draw_xyz_axis(vis, ob_in_cam=axis_pose, K=K, scale=float(np.max(extents) * 0.35),
                                     thickness=2, transparency=0, is_input_rgb=True)
+                if display_reference:
+                    np.savetxt(folder / 'pose_camera_from_body_center.txt', axis_pose, fmt='%.12g')
+                    response['pose_camera_from_body_center'] = axis_pose.tolist()
+                    vis = mark_body_reference(vis, pose, K, display_reference)
                 # Project the full original mesh, so wrong handle orientation is visible.
                 render_started = time.monotonic()
                 if args.fast:
@@ -251,6 +315,9 @@ def main():
                 response.update(passed=True, operation=operation, pose=pose.tolist(),
                                 pose_sha256=sha(posepath), overlay_sha256=sha(folder / overlay_name), overlay_file=overlay_name,
                                 state='tracking_estimate_unverified')
+                if args.source_manifest:
+                    response['cuda_peak_allocated_mib'] = torch.cuda.max_memory_allocated() / 1024 ** 2
+                    response['cuda_peak_reserved_mib'] = torch.cuda.max_memory_reserved() / 1024 ** 2
                 report['frames_completed'] += 1
             except Exception as error:
                 estimator.pose_last = None

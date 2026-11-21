@@ -31,13 +31,20 @@ from cup_mesh_selection import add_mesh_arguments, resolve_mesh
 def arguments():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--root', type=Path, default=Path('/data/ZJC/foundationPos'))
+    p.add_argument('--worker-backend', choices=('docker', 'native'), default='docker')
+    p.add_argument('--native-runtime', type=Path, default=Path.home() / 'foundationPose',
+                   help='Local native inference assets and environment directory')
     p.add_argument('--output', type=Path)
     p.add_argument('--port', type=int, default=8765)
     p.add_argument('--duration-seconds', type=float, default=600)
     p.add_argument('--max-frames', type=int, default=2000)
+    p.add_argument('--warp-batch-limit', type=int, default=0, help='Optional GPU warp temporary batch limit, 0 uses original behavior')
     add_mesh_arguments(p)
     p.add_argument('--cup-yaw-init', action='store_true', help='Experimental init-only mask/protrusion yaw check; redcup72 axes only')
     p.add_argument('--no-cup-yaw-init', dest='cup_yaw_init', action='store_false', help='Disable experimental cup yaw check for comparison')
+    p.add_argument('--initialization-consensus', choices=('auto', 'off'), default='auto',
+                   help='Same-frame registration candidate consensus for the reviewed smoothed cup mesh')
+    p.add_argument('--handle-local-init', action='store_true', help='Use visible handle-hole mask evidence during initialization')
     p.add_argument('--mask-backend', choices=('sam', 'sam2', 'grabcut'), default='sam', help='First-frame prompted segmentation backend')
     p.add_argument('--no-auto-reacquire', dest='auto_reacquire', action='store_false', help='Disable full-frame SAM2 search after loss')
     p.add_argument('--auto-reacquire', dest='auto_reacquire', action='store_true', help='Enable full-frame target reacquisition (default)')
@@ -59,6 +66,8 @@ def arguments():
     p.add_argument('--replay-return-shift-x', type=int, default=0, help='Offline loss test only: translated return image/depth, explicitly synthetic')
     p.add_argument('--replay-return-frame-dir', type=Path, help='Offline loss test only: actual saved RGB-D from another scene/view')
     args = p.parse_args()
+    if not 0 <= args.warp_batch_limit <= 128:
+        p.error('Warp batch limit must be between 0 and 128')
     if args.cup_yaw_init and args.mesh_profile != 'redcup72':
         p.error('--cup-yaw-init requires --mesh-profile redcup72')
     if not 1 <= args.port <= 65535 or args.duration_seconds <= 0 or args.max_frames < 1 or args.replay_count < 1 or args.recovery_interval_seconds <= 0:
@@ -106,6 +115,7 @@ def main():
                   skipped_capture_frames_are_not_saved=True, capture_fps_requested=30,
                   official_tracking_iterations=2, official_registration_iterations=5,
                   segmentation_backend=args.mask_backend,
+                  initialization_consensus_mode=args.initialization_consensus,
                   automatic_reacquisition=args.auto_reacquire, recovery_attempts=0, recovery_confirmations_required=3,
                   aruco=dict(enabled=args.aruco_marker_length_m is not None, dictionary=args.aruco_dictionary, marker_id=args.aruco_id,
                              measured_black_side_m=args.aruco_marker_length_m, fixed_scene=args.aruco_fixed_scene,
@@ -113,6 +123,7 @@ def main():
                   code_sha256={}, note=os.environ.get('FP_RUN_NOTE', ''))
     report.update(mesh_profile=args.mesh_profile, mesh_path=mesh_selection['path'], mesh_selection=mesh_selection)
     report['cup_yaw_initialization']=args.cup_yaw_init
+    report['warp_batch_limit']=args.warp_batch_limit
     report['synthetic_target_absence_test'] = args.replay_loss_test
     report['synthetic_return_shift_x_px'] = args.replay_return_shift_x
     state.update(loss_test_started=None, loss_test_done=False)
@@ -234,6 +245,7 @@ def main():
     def acquire():
         nonlocal sequence
         next_tick = time.monotonic()
+        invalid_pair_streak = 0
         try:
             while not stop.is_set():
                 if args.replay_scene:
@@ -266,7 +278,18 @@ def main():
                         continue
                     gap = abs(color.get_timestamp() - depthframe.get_timestamp())
                     if color.get_frame_timestamp_domain() != depthframe.get_frame_timestamp_domain() or gap > 1000 / 30 + .001:
-                        raise ValueError('RGB/depth SDK timestamp pairing invalid')
+                        invalid_pair_streak += 1
+                        report['pairing_rejected_frames'] = report.get('pairing_rejected_frames', 0) + 1
+                        with (output / 'capture_pairing_events.jsonl').open('a', encoding='utf-8') as stream:
+                            stream.write(json.dumps(dict(event='rejected_timestamp_pair', gap_ms=gap,
+                                rgb_domain=str(color.get_frame_timestamp_domain()),
+                                depth_domain=str(depthframe.get_frame_timestamp_domain()),
+                                rgb_timestamp_ms=color.get_timestamp(), depth_timestamp_ms=depthframe.get_timestamp(),
+                                consecutive_rejected=invalid_pair_streak)) + '\n')
+                        if invalid_pair_streak >= 90:
+                            raise ValueError('90 consecutive RGB/depth timestamp pairs rejected; inspect capture_pairing_events.jsonl')
+                        continue
+                    invalid_pair_streak = 0
                     if get_intrinsics(depthframe.profile) != report['color_intrinsics']:
                         raise ValueError('Aligned depth intrinsics differ from RGB')
                     raw, rejected = millimeter_depth(np.asanyarray(depthframe.get_data()), native_scale, np)
@@ -429,12 +452,14 @@ def main():
     try:
         if sha(Path(mesh_selection['path'])) != mesh_selection['sha256']:
             raise ValueError('Metric mesh SHA mismatch')
-        if args.auto_reacquire or args.mask_backend == 'sam2':
+        if args.worker_backend == 'native':
+            os.environ['FP_LOCAL_NATIVE_RUNTIME'] = str(args.native_runtime.resolve(strict=True))
+        if (args.auto_reacquire or args.mask_backend == 'sam2') and args.worker_backend == 'docker':
             for path in (dataroot / 'environments/sam2/bin/python', dataroot / 'checkpoints/sam2/installation.json'):
                 if not path.is_file():
                     raise RuntimeError('SAM2 environment is unavailable: ' + str(path) + '; provision with setup/provision_cup_sam2.py')
         for name in ('run_cup_live_fast.py', 'run_cup_live_worker.py', 'run_cup_live.py', 'run_cup_live_fast.sh',
-                     'cup_live_dashboard.py', 'cup_mesh_selection.py', 'cup_handle_yaw.py', 'cup_sam_mask.py', 'cup_sam_worker.py', 'cup_sam2_mask.py', 'cup_sam2_worker.py', 'sam2_runtime_environment.py', 'cup_reacquisition.py', 'capture_d435i.py', 'cup_pose_quality.py', 'cup_aruco_reference.py', 'summarize_cup_aruco_session.py', 'run_cup_mesh_inference.py', 'verify_demo.py'):
+                     'cup_live_dashboard.py', 'cup_pose_reference.py', 'cup_initialization_consensus.py', 'cup_handle_local_selection.py', 'cup_mesh_selection.py', 'cup_neural_pose_model.py', 'cup_warp_batch.py', 'cup_low_memory.py', 'cup_handle_yaw.py', 'cup_sam_mask.py', 'cup_sam_worker.py', 'cup_sam2_mask.py', 'cup_sam2_worker.py', 'sam2_runtime_environment.py', 'cup_reacquisition.py', 'capture_d435i.py', 'cup_pose_quality.py', 'cup_aruco_reference.py', 'summarize_cup_aruco_session.py', 'run_cup_mesh_inference.py', 'verify_demo.py'):
             shutil.copy2(root / 'setup' / name, output / 'worker_code' / name)
             report['code_sha256'][name] = sha(output / 'worker_code' / name)
         report['mesh_sha256'] = mesh_selection['sha256']
@@ -467,6 +492,14 @@ def main():
                 report['return_view'] = dict(folder=str(folder), rgb_sha256=sha(folder / 'rgb.npy'), depth_sha256=sha(folder / 'depth.npy'))
         else:
             import pyrealsense2 as rs
+            try:
+                sdk_version = importlib.metadata.version('pyrealsense2')
+            except importlib.metadata.PackageNotFoundError:
+                sdk_version = getattr(rs, '__version__', 'source build without distribution metadata')
+                module = Path(rs.__file__).resolve()
+                report['sdk_source_bindings'] = [{'path': str(path.resolve()), 'sha256': sha(path.resolve())}
+                                                 for path in sorted(module.parent.glob('pyrealsense2*.so'))
+                                                 if path.is_file()]
             devices = list(rs.context().query_devices())
             chosen = next((d for d in devices if 'D435I' in d.get_info(rs.camera_info.name).upper()), None)
             if chosen is None:
@@ -487,7 +520,7 @@ def main():
             for _ in range(30):
                 pipeline.wait_for_frames(5000)
             report.update(camera_connected=True, color_intrinsics=intrinsics, K=K.tolist(), native_depth_scale_m=native_scale,
-                          align_to='color', saved_depth_scale_m=.001, sdk_version=importlib.metadata.version('pyrealsense2'))
+                          align_to='color', saved_depth_scale_m=.001, sdk_version=sdk_version)
         np.savetxt(output / 'K.txt', K, fmt='%.12g')
         atomic_json(output / 'session.json', report)
         capture_thread = threading.Thread(target=acquire, daemon=True)
@@ -498,15 +531,28 @@ def main():
                    '--note', report['source'] + '; official pretrained; two track iterations; no GT', '--', 'docker', 'exec', '-w',
                    '/workspace/FoundationPose', 'foundationpose', '/opt/conda/envs/my/bin/python', '-B', '-u', mapped + '/worker_code/run_cup_live_worker.py',
                    '--session', mapped, '--repo', '/workspace/FoundationPose', '--mesh', '/data/' + mesh_selection['relative'], '--mesh-sha256', mesh_selection['sha256'], '--fast']
+        if args.worker_backend == 'native':
+            runtime = Path(os.environ['FP_LOCAL_NATIVE_RUNTIME'])
+            command = [sys.executable, str(root / 'setup/run_logged.py'), '--root', str(root),
+                       '--label', 'cup_live_native_gpu_worker', '--note', 'Local WSL RGB-D capture and sm_75 pose inference',
+                       '--', str(runtime / 'env/bin/python'), '-B', '-u', str(output / 'worker_code/run_cup_live_worker.py'),
+                       '--session', str(output), '--repo', str(runtime / 'FoundationPose'),
+                       '--source-manifest', str(runtime / 'source_sha256.json'), '--mesh', mesh_selection['path'],
+                       '--mesh-sha256', mesh_selection['sha256'], '--fast', '--low-memory']
         if args.cup_yaw_init:
             command.append('--cup-yaw-init')
+        if args.handle_local_init:
+            command.append('--handle-local-init')
+        command.extend(['--initialization-consensus', args.initialization_consensus])
+        if args.warp_batch_limit:
+            command.extend(['--warp-batch-limit', str(args.warp_batch_limit)])
         report['worker_command'] = command
         logstream = (output / 'worker_stdout.log').open('wb')
         worker = subprocess.Popen(command, stdout=logstream, stderr=subprocess.STDOUT)
         for sig in (signal.SIGINT, signal.SIGTERM):
             signal.signal(sig, lambda *_: stop.set())
         print(json.dumps(dict(output=str(output), preview='http://127.0.0.1:' + str(args.port), source=report['source'])), flush=True)
-        deadline = time.monotonic() + 120
+        deadline = time.monotonic() + (600 if args.worker_backend != 'docker' else 120)
         while not (output / 'ready.json').exists() and not stop.is_set():
             if worker.poll() is not None or time.monotonic() > deadline:
                 raise RuntimeError('GPU worker not ready; see worker_stdout.log')
@@ -544,7 +590,8 @@ def main():
             if pending is not None:
                 responsepath = output / 'responses' / (pending['id'] + '.json')
                 if not responsepath.exists():
-                    if time.monotonic() - pending['submitted'] > 120:
+                    response_timeout = 300 if args.worker_backend != 'docker' and pending['operation'] == 'register' else 120
+                    if time.monotonic() - pending['submitted'] > response_timeout:
                         raise RuntimeError('GPU response timeout')
                     stop.wait(.001); continue
                 record_response(pending, json.loads(responsepath.read_text(encoding='utf-8')))
@@ -647,7 +694,7 @@ def main():
                       fps_scope='weighted continuous tracking segments; excludes search/pause/reinitialization')
         atomic_json(output / 'session.json', report)
         if (output / 'frame_events.jsonl').exists():
-            summary_command = ['/usr/bin/python3', str(root / 'setup/run_logged.py'), '--root', str(root),
+            summary_command = [sys.executable, str(root / 'setup/run_logged.py'), '--root', str(root),
                                '--label', 'cup_aruco_session_error_summary', '--note', 'All attempts and reference coverage; first-frame bias is excluded, not absolute GT',
                                '--', sys.executable, '-B', str(output / 'worker_code/summarize_cup_aruco_session.py'),
                                '--session', str(output), '--output', str(output / 'evaluation_summary')]

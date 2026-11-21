@@ -127,13 +127,32 @@ def mask_bytes(mask):
     return stream.getvalue()
 
 
+def retained_proposals(output):
+    items = []
+    for path in (output / 'proposals/index.json', output / 'sam_proposals.json'):
+        if path.exists():
+            items.extend(json.loads(path.read_text(encoding='utf-8'))['frames'])
+    return items
+
+
+def proposal_path(output, item):
+    path = output / item.get('artifact', 'proposals/masks/' + item['frame'])
+    if not inside(path.resolve(), output.resolve()):
+        raise ValueError('Proposal artifact escapes annotation workspace')
+    return path
+
+
 class Editor:
-    def __init__(self, scene, output):
+    def __init__(self, scene, output, sam_runtime=None):
         self.scene, self.output = e_path(scene), e_path(output)
         if inside(self.output, self.scene) or inside(self.scene, self.output):
             raise ValueError('Annotation output must be separate from the source scene')
         self.lock = threading.RLock()
         self.token = secrets.token_urlsafe(32)
+        self.sam = None
+        if sam_runtime is not None:
+            from manual_mask_sam import PromptedSam
+            self.sam = PromptedSam(sam_runtime)
         if self.output.exists() and not (self.output / 'manual_editor.json').is_file() and any(self.output.iterdir()):
             raise ValueError('Existing output is not an editor dataset; choose a new directory')
         self.output.mkdir(parents=True, exist_ok=True)
@@ -194,16 +213,15 @@ class Editor:
             if any(not isinstance(v, str) or not re.fullmatch(r'[0-9]{8}T[0-9]{12}Z_[0-9a-f]{16}', v) for v in self.state.values()):
                 raise ValueError('Invalid saved revision index')
             self.proposals_by_id, self.proposals_by_frame = {}, {}
-            proposal_index = self.output / 'proposals' / 'index.json'
-            if proposal_index.exists():
+            proposal_items = retained_proposals(self.output)
+            if proposal_items:
                 known = {f['frame']:f for f in self.frames}
-                for item in json.loads(proposal_index.read_text(encoding='utf-8'))['frames']:
+                for item in proposal_items:
                     original = known.get(item['frame'])
                     if (not original or item['source_rgb_sha256'] != original['source_rgb_sha256']
                             or item['source_depth_sha256'] != original['source_depth_sha256']
                             or not re.fullmatch(r'[0-9a-f]{64}', item['proposal_id'])
-                            or item['proposal_id'] != hashlib.sha256((item['frame']+':'+item['mask_sha256']).encode()).hexdigest()
-                            or item['frame'] in self.proposals_by_frame):
+                            or item['proposal_id'] != hashlib.sha256((item['frame']+':'+item['mask_sha256']).encode()).hexdigest()):
                         raise ValueError('Proposal/source index differs from this dataset')
                     self.proposals_by_id[item['proposal_id']] = item
                     self.proposals_by_frame[item['frame']] = item
@@ -240,7 +258,7 @@ class Editor:
         item = self.proposals_by_id.get(proposal_id)
         if not item or item['frame'] != frame['frame']:
             raise ValueError('Proposal belongs to another frame or is not retained')
-        path = self.output / 'proposals' / 'masks' / frame['frame']
+        path = proposal_path(self.output, item)
         if sha(path) != item['mask_sha256']:
             raise ValueError('Retained proposal SHA changed')
         with Image.open(path) as source:
@@ -263,9 +281,34 @@ class Editor:
             if latest:
                 revision = json.loads((self.output / 'revisions' / latest / 'annotation.json').read_text(encoding='utf-8'))
                 content = (self.output / 'revisions' / latest / 'mask.png').read_bytes()
+                referenced = {operation['proposal_id'] for operation in revision['operations'] if operation['type'] == 'proposal'}
+                historical = [dict(id=key, mask_png=base64.b64encode(mask_bytes(self.proposal(frame,key))).decode('ascii'))
+                              for key in sorted(referenced)]
                 return dict(frame=frame, revision=latest, operations=revision['operations'], confirmed=True, proposal=proposal,
-                            mask_png=base64.b64encode(content).decode('ascii'), mask_sha256=hashlib.sha256(content).hexdigest())
+                            proposals=historical, mask_png=base64.b64encode(content).decode('ascii'), mask_sha256=hashlib.sha256(content).hexdigest())
             return dict(frame=frame, revision=None, operations=[], confirmed=False, proposal=proposal, mask_png=None, mask_sha256=None)
+
+    def segment(self, value):
+        if self.sam is None:
+            raise ValueError('SAM分割服务未启用')
+        if not isinstance(value, dict) or set(value) != {'index', 'rect', 'points', 'labels'}:
+            raise ValueError('Expected frame, rectangle and foreground/background points')
+        with self.lock:
+            frame = dict(self.frame(value['index']))
+            self.sources(frame, verify=True)
+        item = self.sam.generate(self, frame, value)
+        key = hashlib.sha256((item['frame']+':'+item['mask_sha256']).encode()).hexdigest()
+        item['proposal_id'] = key
+        with self.lock:
+            history_path = self.output / 'sam_proposals.json'
+            history = json.loads(history_path.read_text()) if history_path.exists() else dict(frames=[])
+            history['frames'].append(item)
+            atomic_json(history_path, history)
+            self.proposals_by_id[key] = item
+            self.proposals_by_frame[frame['frame']] = item
+            content = mask_bytes(self.proposal(frame, key))
+        return dict(proposal_id=key, backend=item['backend'], seconds=item.get('inference_seconds'),
+                    mask_png=base64.b64encode(content).decode('ascii'), mask_sha256=hashlib.sha256(content).hexdigest())
 
     def preview(self, value):
         if not isinstance(value, dict) or set(value) != {'index', 'operations'}:
@@ -341,38 +384,102 @@ HTML = r'''<!doctype html><html lang="zh"><meta charset="utf-8"><title>杯子人
 <style>body{font:16px system-ui;margin:18px;background:#f3f5f7;color:#17212c}button,select,input{margin:4px;padding:7px}button{cursor:pointer}#viewport{overflow:auto;max-height:72vh;border:1px solid #8592a1;background:#222}#canvas{display:block;touch-action:none}#message{white-space:pre-wrap;color:#88420b}.row{display:flex;align-items:center;flex-wrap:wrap}p{max-width:1100px}</style>
 <h2>杯子人工 Mask 标注 · 本机离线</h2><p>包含杯身、把手及可见内壁；把手缝隙、桌面和手属于背景。可见杯子即使深度为 0 也应标前景。源 RGB/深度只读，每次保存保留新版本。</p>
 <div class="row"><button onclick="navigate(-1)">上一张</button><span id="position"></span><button onclick="navigate(1)">下一张</button><label>跳到 <input id="jump" type="number" min="1" style="width:70px"></label><button onclick="jumpTo()">跳转</button><span id="progress"></span></div>
-<div class="row"><select id="mode"><option value="fgpoly">前景多边形</option><option value="bgpoly">背景多边形 / 挖孔</option><option value="brush">前景画笔</option><option value="erase">背景橡皮擦</option></select><button onclick="finishPolygon()">完成多边形 (Enter)</button><button onclick="cancelPolygon()">取消未完成多边形 (Esc)</button><button onclick="undo()">撤销 (Ctrl+Z)</button><label>画笔半径 <input id="radius" type="number" min="1" max="150" value="5" style="width:65px"> 原图像素</label><label>显示缩放 <select id="zoom" onchange="resize()"><option value="0.5">50%</option><option value="1" selected>100%</option><option value="1.5">150%</option><option value="2">200%</option><option value="3">300%</option><option value="4">400%</option></select></label><label>叠图透明度 <input id="opacity" type="range" min="0" max="80" value="35" oninput="draw()"></label></div>
+<div class="row"><select id="mode"><option value="sambox">SAM矩形框</option><option value="samfg">SAM前景点</option><option value="sambg">SAM背景点</option><option value="fgpoly">前景多边形</option><option value="bgpoly">背景多边形 / 挖孔</option><option value="brush">前景画笔</option><option value="erase">背景橡皮擦</option></select><button onclick="finishPolygon()">完成多边形 (Enter)</button><button onclick="cancelPolygon()">取消未完成多边形 (Esc)</button><button onclick="undo()">撤销 (Ctrl+Z)</button><label>画笔半径 <input id="radius" type="number" min="1" max="150" value="5" style="width:65px"> 原图像素</label><label>显示缩放 <select id="zoom" onchange="resize()"><option value="0.5">50%</option><option value="1" selected>100%</option><option value="1.5">150%</option><option value="2">200%</option><option value="3">300%</option><option value="4">400%</option></select></label><label>叠图透明度 <input id="opacity" type="range" min="0" max="80" value="35" oninput="draw()"></label></div>
+<div id="samTools" hidden><button id="samButton" onclick="segmentSam()">按框生成 / 更新 SAM Mask</button><button onclick="clearSamPrompts()">清除SAM框和提示点</button><span>先拖框包含完整杯子和杯把。漏选处加前景点，误选处加背景点，再生成。</span></div>
 <div><button onclick="preview()">预览最终二值 Mask</button><label><input id="confirm" type="checkbox">我已查看最终预览并确认本张 Mask</label><button id="save" onclick="save()">保存并确认本张</button><button onclick="reloadFrame()">重新载入本张</button></div>
 <div><button id="draft" onclick="loadDraft()" disabled>重新载入机器草稿</button><span id="draftInfo"></span></div>
 <p id="message">加载中…</p><div id="viewport"><canvas id="canvas"></canvas></div>
 <script>
 const TOKEN=__TOKEN__, c=document.getElementById('canvas'),ctx=c.getContext('2d'),mc=document.createElement('canvas'),mx=mc.getContext('2d');
 let index=0,total=0,revision=null,operations=[],pending=[],stroke=null,base=new Image(),width=640,height=480,dirty=false,busy=false,frameName='',exactMask=null,previewSha=null,proposal=null;
+let samEnabled=false,samRect=null,samDrag=null,samPoints=[],samLabels=[],samPromptsDirty=false;
+let proposalImages=new Map();
 function message(s){document.getElementById('message').textContent=s}
 async function request(path,data){let options=data?{method:'POST',headers:{'Content-Type':'application/json','X-Editor-Token':TOKEN},body:JSON.stringify(data)}:{};let r=await fetch(path,options),j=await r.json();if(!r.ok)throw Error(j.error||r.status);return j}
 function changed(){dirty=true;exactMask=null;previewSha=null;document.getElementById('confirm').checked=false;message('有未保存修改；完成轮廓后点击“预览最终二值 Mask”，检查后勾选确认再保存。')}
 function resize(){let z=Number(document.getElementById('zoom').value);c.style.width=(width*z)+'px';c.style.height=(height*z)+'px'}
-function paint(context,op){if(op.type==='proposal'){if(!proposal||proposal.id!==op.proposal_id)throw Error('草稿与当前图片不对应');context.drawImage(proposal.image,0,0);return}context.fillStyle=context.strokeStyle=op.value?'white':'black';context.lineJoin=context.lineCap='round';context.beginPath();context.moveTo(...op.points[0]);for(let p of op.points.slice(1))context.lineTo(...p);if(op.type==='polygon'){context.closePath();context.fill()}else{context.lineWidth=2*op.radius+1;context.stroke();for(let p of op.points){context.beginPath();context.arc(...p,op.radius,0,Math.PI*2);context.fill()}}}
+function paint(context,op){if(op.type==='proposal'){let image=proposalImages.get(op.proposal_id);if(!image)throw Error('草稿与当前图片不对应');context.drawImage(image,0,0);return}context.fillStyle=context.strokeStyle=op.value?'white':'black';context.lineJoin=context.lineCap='round';context.beginPath();context.moveTo(...op.points[0]);for(let p of op.points.slice(1))context.lineTo(...p);if(op.type==='polygon'){context.closePath();context.fill()}else{context.lineWidth=2*op.radius+1;context.stroke();for(let p of op.points){context.beginPath();context.arc(...p,op.radius,0,Math.PI*2);context.fill()}}}
 function loadDraft(){if(busy||!proposal)return;if((dirty||revision)&&!confirm('用机器草稿替换当前编辑轮廓？已保存的历史版本仍保留。'))return;operations=[{type:'proposal',proposal_id:proposal.id}];pending=[];stroke=null;changed();draw()}
-function draw(){if(!base.complete||!base.naturalWidth)return;mx.fillStyle='black';mx.fillRect(0,0,width,height);if(exactMask)mx.drawImage(exactMask,0,0);else{for(let op of operations)paint(mx,op);if(stroke)paint(mx,stroke)}ctx.clearRect(0,0,width,height);ctx.drawImage(base,0,0);let pixels=mx.getImageData(0,0,width,height),alpha=Math.round(Number(document.getElementById('opacity').value)*2.55);for(let i=0;i<pixels.data.length;i+=4){let yes=pixels.data[i]>127;pixels.data[i]=255;pixels.data[i+1]=215;pixels.data[i+2]=0;pixels.data[i+3]=yes?alpha:0}let overlay=document.createElement('canvas');overlay.width=width;overlay.height=height;overlay.getContext('2d').putImageData(pixels,0,0);ctx.drawImage(overlay,0,0);if(pending.length){ctx.strokeStyle='#00ff8a';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(...pending[0]);for(let p of pending.slice(1))ctx.lineTo(...p);ctx.stroke();for(let p of pending){ctx.fillStyle='#00ff8a';ctx.fillRect(p[0]-2,p[1]-2,4,4)}}}
+function draw(){if(!base.complete||!base.naturalWidth)return;mx.fillStyle='black';mx.fillRect(0,0,width,height);if(exactMask)mx.drawImage(exactMask,0,0);else{for(let op of operations)paint(mx,op);if(stroke)paint(mx,stroke)}ctx.clearRect(0,0,width,height);ctx.drawImage(base,0,0);let pixels=mx.getImageData(0,0,width,height),alpha=Math.round(Number(document.getElementById('opacity').value)*2.55);for(let i=0;i<pixels.data.length;i+=4){let yes=pixels.data[i]>127;pixels.data[i]=255;pixels.data[i+1]=215;pixels.data[i+2]=0;pixels.data[i+3]=yes?alpha:0}let overlay=document.createElement('canvas');overlay.width=width;overlay.height=height;overlay.getContext('2d').putImageData(pixels,0,0);ctx.drawImage(overlay,0,0);if(pending.length){ctx.strokeStyle='#00ff8a';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(...pending[0]);for(let p of pending.slice(1))ctx.lineTo(...p);ctx.stroke();for(let p of pending){ctx.fillStyle='#00ff8a';ctx.fillRect(p[0]-2,p[1]-2,4,4)}}drawSamPrompts()}
+function drawSamPrompts(){
+  if(samRect){ctx.strokeStyle='#21c5ff';ctx.lineWidth=2;ctx.strokeRect(...samRect)}
+  samPoints.forEach((point,i)=>{ctx.beginPath();ctx.arc(point[0],point[1],4,0,2*Math.PI);ctx.fillStyle=samLabels[i]?'#00ef83':'#ff4561';ctx.fill();ctx.strokeStyle='white';ctx.lineWidth=1;ctx.stroke()});
+}
+function promptsChanged(){samPromptsDirty=true;previewSha=null;document.getElementById('confirm').checked=false;message('SAM提示已改变，点击“按框生成 / 更新 SAM Mask”。');draw()}
+function clearSamPrompts(){if(busy)return;samRect=null;samDrag=null;samPoints=[];samLabels=[];samPromptsDirty=false;draw()}
+async function proposalImage(item){
+  const image=await new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=reject;im.src='data:image/png;base64,'+item.mask_png});
+  proposalImages.set(item.id,image);
+  return image;
+}
+async function segmentSam(){
+  if(busy)return;
+  if(!samRect||samRect[2]<12||samRect[3]<12){message('请先拖出包含杯身和杯把的矩形框。');return}
+  if(pending.length||stroke){message('请先完成或取消当前手工轮廓。');return}
+  busy=true;document.getElementById('samButton').disabled=true;message('SAM正在分割，首次加载稍慢，请等待…');
+  try{
+    const result=await request('/segment',{index,rect:samRect,points:samPoints,labels:samLabels});
+    const image=await proposalImage({id:result.proposal_id,mask_png:result.mask_png});
+    proposal={id:result.proposal_id,image};operations=[{type:'proposal',proposal_id:proposal.id}];
+    pending=[];stroke=null;samPromptsDirty=false;changed();await exactPreview(result);
+    document.getElementById('draft').disabled=false;
+    message('SAM已完成。可继续加前景/背景点再生成，或检查黄色Mask后勾选确认并保存。');
+  }catch(error){message(error.message)}finally{busy=false;document.getElementById('samButton').disabled=false}
+}
 async function exactPreview(j){exactMask=await new Promise((ok,fail)=>{let im=new Image();im.onload=()=>ok(im);im.onerror=fail;im.src='data:image/png;base64,'+j.mask_png});previewSha=j.mask_sha256;draw()}
-async function preview(){if(busy)return;if(pending.length||stroke){message('请先完成或取消当前轮廓。');return}busy=true;try{let j=await request('/preview',{index,operations});await exactPreview(j);message('已显示与保存文件完全相同的最终二值轮廓。请检查后勾选确认并保存。')}catch(e){message(e.message)}finally{busy=false}}
+async function preview(){if(busy)return;if(samPromptsDirty){message('请先按新提示生成SAM Mask，或清除SAM提示。');return}if(pending.length||stroke){message('请先完成或取消当前轮廓。');return}busy=true;try{let j=await request('/preview',{index,operations});await exactPreview(j);message('已显示与保存文件完全相同的最终二值轮廓。请检查后勾选确认并保存。')}catch(e){message(e.message)}finally{busy=false}}
 function point(e){let b=c.getBoundingClientRect();return [Math.round(Math.max(0,Math.min(width-1,(e.clientX-b.left)*width/b.width))),Math.round(Math.max(0,Math.min(height-1,(e.clientY-b.top)*height/b.height)))]}
-c.onpointerdown=e=>{if(busy)return;let mode=document.getElementById('mode').value;if(mode.endsWith('poly')){pending.push(point(e));changed();draw();return}if(pending.length){message('请先完成或取消当前多边形。');return}let radius=Math.max(1,Math.min(150,Math.round(Number(document.getElementById('radius').value)||5)));stroke={type:'brush',value:mode==='brush'?255:0,radius,points:[point(e)]};c.setPointerCapture(e.pointerId);changed();draw()};
-c.onpointermove=e=>{if(!stroke||busy)return;let p=point(e),last=stroke.points.at(-1);if(p[0]!==last[0]||p[1]!==last[1]){stroke.points.push(p);draw()}};
-c.onpointerup=()=>{if(stroke){operations.push(stroke);stroke=null;draw()}};c.onpointercancel=c.onpointerup;
+c.onpointerdown=e=>{
+  if(busy)return;
+  const mode=document.getElementById('mode').value,p=point(e);
+  if(mode.startsWith('sam')){
+    if(!samEnabled){message('当前页面未启用SAM。');return}
+    if(mode==='sambox'){samDrag=p;samRect=[p[0],p[1],0,0];c.setPointerCapture(e.pointerId)}
+    else{samPoints.push(p);samLabels.push(mode==='samfg'?1:0)}
+    promptsChanged();return;
+  }
+  if(mode.endsWith('poly')){pending.push(p);changed();draw();return}
+  if(pending.length){message('请先完成或取消当前多边形。');return}
+  const radius=Math.max(1,Math.min(150,Math.round(Number(document.getElementById('radius').value)||5)));
+  stroke={type:'brush',value:mode==='brush'?255:0,radius,points:[p]};c.setPointerCapture(e.pointerId);changed();draw();
+};
+c.onpointermove=e=>{
+  if(busy)return;
+  const p=point(e);
+  if(samDrag){samRect=[Math.min(samDrag[0],p[0]),Math.min(samDrag[1],p[1]),Math.abs(p[0]-samDrag[0]),Math.abs(p[1]-samDrag[1])];draw();return}
+  if(stroke){const last=stroke.points.at(-1);if(p[0]!==last[0]||p[1]!==last[1]){stroke.points.push(p);draw()}}
+};
+c.onpointerup=()=>{samDrag=null;if(stroke){operations.push(stroke);stroke=null;draw()}};c.onpointercancel=c.onpointerup;
 function finishPolygon(){if(busy)return;if(pending.length<3){message('多边形至少需要 3 个点。');return}operations.push({type:'polygon',value:document.getElementById('mode').value==='fgpoly'?255:0,points:pending});pending=[];changed();draw()}
 function cancelPolygon(){if(busy)return;pending=[];draw()}
-function undo(){if(busy)return;if(pending.length)pending.pop();else operations.pop();changed();draw()}
+function undo(){if(busy)return;if(document.getElementById('mode').value.startsWith('sam')){if(samPoints.length){samPoints.pop();samLabels.pop()}else samRect=null;promptsChanged();return}if(pending.length)pending.pop();else operations.pop();changed();draw()}
 document.getElementById('mode').onchange=()=>{if(pending.length){pending=[];message('切换工具已取消未完成多边形；已完成标注仍保留。');draw()}};
-window.onkeydown=e=>{if(e.target.matches('input,select'))return;if(e.key==='Enter'){e.preventDefault();finishPolygon()}else if(e.key==='Escape')cancelPolygon();else if(e.ctrlKey&&e.key.toLowerCase()==='z'){e.preventDefault();undo()}};
-window.onbeforeunload=e=>{if(dirty){e.preventDefault();e.returnValue='有未保存的标注'}};
-async function loadFrame(target){busy=true;try{let j=await request('/frame?index='+target);index=target;revision=j.revision;operations=j.operations;pending=[];stroke=null;exactMask=null;previewSha=null;proposal=null;[width,height]=j.frame.size;frameName=j.frame.frame;c.width=mc.width=width;c.height=mc.height=height;resize();await new Promise((ok,fail)=>{base.onload=ok;base.onerror=()=>fail(Error('RGB载入失败'));base.src='/image?index='+index+'&t='+Date.now()});if(j.proposal){let image=await new Promise((ok,fail)=>{let im=new Image();im.onload=()=>ok(im);im.onerror=fail;im.src='data:image/png;base64,'+j.proposal.mask_png});proposal={id:j.proposal.id,image};if(!j.confirmed)operations=[{type:'proposal',proposal_id:proposal.id}]}document.getElementById('draft').disabled=!proposal;document.getElementById('draftInfo').textContent=proposal?'本张有 '+j.proposal.backend+' 草稿；需人工检查杯把孔、红色下沿及边缘，未确认不计入完成。':'';if(j.mask_png)await exactPreview(j);dirty=false;document.getElementById('confirm').checked=false;document.getElementById('position').textContent=(index+1)+' / '+total+' · '+frameName;document.getElementById('jump').value=index+1;message(j.confirmed?'此张已有人工确认版本；修改后需要重新预览和确认。':proposal?'已载入机器草稿：用前景画笔补漏、橡皮擦/背景多边形去背景，预览后再人工确认。':'此张尚未确认；可从零绘制前景轮廓，再挖背景孔。');draw()}finally{busy=false}}
-async function navigate(delta){if(busy)return;if(dirty&&!confirm('有未保存标注，放弃本次修改并切换？'))return;try{await loadFrame(Math.max(0,Math.min(total-1,index+delta)))}catch(e){message(e.message)}}
+window.onkeydown=e=>{if(e.target.matches('input,select'))return;if(e.key==='Enter'){e.preventDefault();if(document.getElementById('mode').value.startsWith('sam'))segmentSam();else finishPolygon()}else if(e.key==='Escape')cancelPolygon();else if(e.ctrlKey&&e.key.toLowerCase()==='z'){e.preventDefault();undo()}};
+window.onbeforeunload=e=>{if(dirty||samPromptsDirty){e.preventDefault();e.returnValue='有未保存的标注或SAM提示'}};
+async function loadFrame(target){
+  busy=true;
+  try{
+    const j=await request('/frame?index='+target);
+    index=target;revision=j.revision;operations=j.operations;pending=[];stroke=null;exactMask=null;previewSha=null;proposal=null;
+    proposalImages=new Map();samRect=null;samDrag=null;samPoints=[];samLabels=[];samPromptsDirty=false;
+    [width,height]=j.frame.size;frameName=j.frame.frame;c.width=mc.width=width;c.height=mc.height=height;resize();
+    await new Promise((ok,fail)=>{base.onload=ok;base.onerror=()=>fail(Error('RGB载入失败'));base.src='/image?index='+index+'&t='+Date.now()});
+    for(const item of j.proposals||[])await proposalImage(item);
+    if(j.proposal){const image=await proposalImage(j.proposal);proposal={id:j.proposal.id,image};if(!j.confirmed)operations=[{type:'proposal',proposal_id:proposal.id}]}
+    document.getElementById('draft').disabled=!proposal;
+    document.getElementById('draftInfo').textContent=proposal?'本张有 '+j.proposal.backend+' 草稿，可直接重新框选SAM分割。':'';
+    if(j.mask_png)await exactPreview(j);
+    dirty=false;document.getElementById('confirm').checked=false;
+    document.getElementById('position').textContent=(index+1)+' / '+total+' · '+frameName;
+    document.getElementById('jump').value=index+1;
+    message(j.confirmed?'此张已有保存版本，重新分割后可检查并保存新版本。':'拖矩形框包含杯身和杯把，点击“按框生成 / 更新 SAM Mask”。');draw();
+  }finally{busy=false}
+}
+async function navigate(delta){if(busy)return;if((dirty||samPromptsDirty)&&!confirm('有未保存标注或SAM提示，放弃本次修改并切换？'))return;try{await loadFrame(Math.max(0,Math.min(total-1,index+delta)))}catch(e){message(e.message)}}
 async function jumpTo(){let n=Number(document.getElementById('jump').value);if(!Number.isInteger(n)||n<1||n>total){message('请输入有效张号。');return}await navigate(n-1-index)}
 async function reloadFrame(){await navigate(0)}
 async function save(){if(busy)return;if(pending.length||stroke){message('请先完成或取消正在绘制的轮廓。');return}if(!previewSha){message('请先点击“预览最终二值 Mask”。');return}if(!document.getElementById('confirm').checked){message('请检查最终预览并勾选本张确认。');return}busy=true;document.getElementById('save').disabled=true;try{let j=await request('/save',{index,base_revision:revision,operations,confirmed:true,preview_sha256:previewSha});revision=j.revision;dirty=false;document.getElementById('progress').textContent='已确认 '+j.confirmed_frames+' / '+j.total_frames;message('已保存独立版本 '+revision+'；可继续下一张。')}catch(e){message(e.message)}finally{busy=false;document.getElementById('save').disabled=false}}
-(async()=>{try{let s=await request('/status');total=s.total_frames;document.getElementById('progress').textContent='已确认 '+s.confirmed_frames+' / '+total;await loadFrame(s.first_unconfirmed)}catch(e){message(e.message)}})();
+(async()=>{try{let s=await request('/status');total=s.total_frames;samEnabled=!!s.sam_enabled;document.getElementById('samTools').hidden=!samEnabled;if(!samEnabled)document.getElementById('mode').value='fgpoly';document.getElementById('progress').textContent='已确认 '+s.confirmed_frames+' / '+total;await loadFrame(s.first_unconfirmed)}catch(e){message(e.message)}})();
 </script></html>'''
 
 
@@ -411,7 +518,8 @@ def make_server(editor, port=8767):
                 elif parsed.path == '/status' and not parsed.query:
                     with editor.lock:
                         first = next((i for i, f in enumerate(editor.frames) if f['frame'] not in editor.state), 0)
-                        self.send(200, dict(total_frames=len(editor.frames), confirmed_frames=len(editor.state), first_unconfirmed=first))
+                        self.send(200, dict(total_frames=len(editor.frames), confirmed_frames=len(editor.state),
+                                            first_unconfirmed=first, sam_enabled=editor.sam is not None))
                 elif parsed.path in ('/frame', '/image'):
                     query = parse_qs(parsed.query, strict_parsing=True)
                     if set(query) - {'index', 't'} or len(query.get('index', [])) != 1 or not query['index'][0].isdigit():
@@ -431,7 +539,7 @@ def make_server(editor, port=8767):
         def do_POST(self):
             try:
                 self.safe_host()
-                if self.path not in ('/save', '/preview'):
+                if self.path not in ('/save', '/preview', '/segment'):
                     self.send(404, dict(error='Unknown endpoint'))
                     return
                 if self.headers.get('X-Editor-Token') != editor.token:
@@ -445,7 +553,8 @@ def make_server(editor, port=8767):
                 if len(data) != length:
                     raise ValueError('Incomplete body')
                 value = json.loads(data)
-                self.send(200, editor.save(value) if self.path == '/save' else editor.preview(value))
+                handlers = {'/save': editor.save, '/preview': editor.preview, '/segment': editor.segment}
+                self.send(200, handlers[self.path](value))
             except FileExistsError as error:
                 self.send(409, dict(error=str(error)))
             except Exception as error:
@@ -463,10 +572,11 @@ def main():
     parser.add_argument('--scene', required=True, type=Path)
     parser.add_argument('--output', required=True, type=Path)
     parser.add_argument('--port', type=int, default=8767)
+    parser.add_argument('--sam-runtime', type=Path, help='Local SAM2 runtime for box/point prompting')
     args = parser.parse_args()
     if not 1024 <= args.port <= 65535:
         parser.error('Port must be 1024..65535')
-    editor = Editor(args.scene, args.output)
+    editor = Editor(args.scene, args.output, sam_runtime=args.sam_runtime)
     server = None
     try:
         server = make_server(editor, args.port)

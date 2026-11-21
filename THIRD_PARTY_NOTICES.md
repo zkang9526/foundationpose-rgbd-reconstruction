@@ -2,6 +2,8 @@
 
 本仓库是复现脚本和实验记录，不代表下列项目的官方实现或性能结论。预训练权重、数据与完整上游检出不随仓库分发。
 
+公开内容包括项目自身的采集、推理适配和预抓取数值函数。各项验证的条件见README及使用指南。
+
 | 依赖 | 使用位置 / 固定版本 |
 | --- | --- |
 | [FoundationPose](https://github.com/NVlabs/FoundationPose/tree/a1b694b83e633c2cb6115b9063d940a687759392) | 官方初始化、跟踪和渲染接口；提交 `a1b694b83e633c2cb6115b9063d940a687759392` |
@@ -17,3 +19,5 @@
 模型和数据请从对应上游官方渠道获取，使用前核对代码、权重与数据的许可。
 
 RealSense SDK 的 Apache-2.0 许可副本见 `third_party/licenses/librealsense-LICENSE.txt`。
+
+新增神经对象场脚本调用FoundationPose/BundleSDF中的SDF及颜色网络，使用其对应版本的条款。点云及评测工具还使用SciPy、trimesh、scikit-image。可选机器人规划模块通过使用者已有的Pinocchio、hpp-fcl与CasADi/IPOPT求解接口运行。相关项目的源码、机器人驱动及网格资产由各自官方渠道提供。

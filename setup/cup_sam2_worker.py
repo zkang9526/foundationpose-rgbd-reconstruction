@@ -1,5 +1,6 @@
 """Isolated SAM2.1 image prompting or full-image proposals, never 6D ground truth."""
 import argparse
+from contextlib import nullcontext
 import hashlib
 import json
 from pathlib import Path
@@ -16,10 +17,14 @@ def digest(path):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--attempt', type=Path, required=True)
+    parser.add_argument('--root', type=Path, default=Path('/data/ZJC/foundationPos/foundationpose_data'))
+    parser.add_argument('--device', choices=('cuda', 'cpu'), default='cuda')
+    parser.add_argument('--snapshot', action='store_true', help='Use the retained minimal SAM2 source snapshot')
     args = parser.parse_args()
     folder = args.attempt.resolve(strict=True)
-    root = Path('/data/ZJC/foundationPos/foundationpose_data')
-    folder.relative_to(root)
+    root = args.root.resolve(strict=True)
+    if not args.snapshot:
+        folder.relative_to(root)
     if folder.parent.name != 'mask_attempts':
         raise ValueError('Expected a retained mask attempt')
     started = time.monotonic()
@@ -28,24 +33,30 @@ def main():
         import cv2
         import numpy as np
         import torch
-        sys.path.insert(0, str(root / 'tools/sam2'))
+        sys.path.insert(0, str(root if args.snapshot else root / 'tools/sam2'))
         from sam2.build_sam import build_sam2
         from sam2.sam2_image_predictor import SAM2ImagePredictor
-        install = json.loads((root / 'checkpoints/sam2/installation.json').read_text())
-        commit = subprocess.check_output(['git', '-C', str(root / 'tools/sam2'), 'rev-parse', 'HEAD'], text=True).strip()
-        if commit != install['commit']:
-            raise ValueError('SAM2 source commit differs from installation manifest')
-        checkpoint = root / 'checkpoints/sam2/sam2.1_hiera_tiny.pt'
+        checkpoint_root = root / ('checkpoints' if args.snapshot else 'checkpoints/sam2')
+        install = json.loads((checkpoint_root / 'installation.json').read_text())
+        if not args.snapshot:
+            commit = subprocess.check_output(['git', '-C', str(root / 'tools/sam2'), 'rev-parse', 'HEAD'], text=True).strip()
+            if commit != install['commit']:
+                raise ValueError('SAM2 source commit differs from installation manifest')
+        checkpoint = checkpoint_root / 'sam2.1_hiera_tiny.pt'
         if digest(checkpoint) != install['checkpoint_sha256']:
             raise ValueError('SAM2 checkpoint SHA mismatch')
         request = json.loads((folder / 'request.json').read_text())
         rgb = np.load(folder / 'rgb.npy', allow_pickle=False)
         if rgb.shape != (480, 640, 3) or rgb.dtype != np.uint8:
             raise ValueError('SAM2 requires native 640x480 uint8 RGB')
-        model = build_sam2(install['config'], str(checkpoint), device='cuda')
-        torch.cuda.synchronize()
+        torch.set_num_threads(4)
+        model = build_sam2(install['config'], str(checkpoint), device=args.device)
+        if args.device == 'cuda':
+            torch.cuda.synchronize()
         inference_start = time.monotonic()
-        with torch.inference_mode(), torch.autocast('cuda', dtype=torch.bfloat16):
+        precision = torch.bfloat16 if args.device == 'cuda' and torch.cuda.is_bf16_supported() else torch.float16
+        autocast = torch.autocast('cuda', dtype=precision) if args.device == 'cuda' else nullcontext()
+        with torch.inference_mode(), autocast:
             if request.get('mode') == 'search':
                 from sam2.automatic_mask_generator import SAM2AutomaticMaskGenerator
                 generator = SAM2AutomaticMaskGenerator(model, points_per_side=16, points_per_batch=64,
@@ -69,12 +80,14 @@ def main():
                     raise RuntimeError('Mask write failed')
                 result.update(sam_predicted_iou=float(scores[0]), prompt_agreement=[bool(masks[0, p[1], p[0]]) == bool(label) for p, label in zip(request['points'], request['labels'])])
                 artifact = 'mask.png'
-        torch.cuda.synchronize()
+        if args.device == 'cuda':
+            torch.cuda.synchronize()
         result.update(passed=True, installation=install, artifact=artifact, artifact_sha256=digest(folder / artifact),
                       rgb_sha256=digest(folder / 'rgb.npy'), request_sha256=digest(folder / 'request.json'),
                       inference_seconds=time.monotonic() - inference_start, torch=torch.__version__,
-                      cuda_peak_allocated_mb=torch.cuda.max_memory_allocated() / 1024 ** 2,
-                      precision='bfloat16 autocast', optional_connected_component_extension_used=False)
+                      cuda_peak_allocated_mb=torch.cuda.max_memory_allocated() / 1024 ** 2 if args.device == 'cuda' else 0,
+                      precision=str(precision) + ' autocast' if args.device == 'cuda' else 'float32 CPU',
+                      device=args.device, source_snapshot=args.snapshot, optional_connected_component_extension_used=False)
     except Exception as error:
         result['error'] = str(error)
         traceback.print_exc()

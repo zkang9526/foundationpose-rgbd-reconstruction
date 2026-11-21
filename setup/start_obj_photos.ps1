@@ -7,6 +7,8 @@ param(
     [switch]$RecordBag,
     [switch]$FilteredDepth,
     [string]$CaptureRoot = '',
+    [ValidateRange(0, 65535)][int]$PreviewPort = 0,
+    [switch]$BrowserControl,
     [switch]$DryRun,
     [switch]$Help
 )
@@ -38,6 +40,11 @@ Write-Output "Depth preset: $DepthPreset (device-default preserves current setti
 if ($RecordBag) { $ObjArgs += '--record-bag' }
 if ($FilteredDepth) { $ObjArgs += '--save-filtered-depth' }
 if ($DepthAutoExposure) { $ObjArgs += '--depth-auto-exposure' }
+if ($PreviewPort) { $ObjArgs += @('--preview-port', "$PreviewPort") }
+if ($BrowserControl) {
+    if (-not $PreviewPort) { throw 'BrowserControl requires PreviewPort' }
+    $ObjArgs += '--browser-control'
+}
 Write-Output "Output: $ObjOutput"
 if ($DryRun) {
     Write-Output ('Capture arguments: ' + ($ObjArgs -join ' '))

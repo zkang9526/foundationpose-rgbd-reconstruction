@@ -28,16 +28,28 @@ def run_sam2(root, output, rgb, rect=None, points=None, labels=None, capture=Non
     code = output / 'worker_code/cup_sam2_worker.py'
     start = time.monotonic()
     child, libraries = sam2_runtime_environment(root)
+    command = [str(exe), '-B', '-u', str(code), '--attempt', str(folder)]
+    if os.environ.get('FP_LOCAL_NATIVE_RUNTIME'):
+        runtime = Path(os.environ['FP_LOCAL_NATIVE_RUNTIME'])
+        command = ['timeout', '--signal=TERM', '--kill-after=5', '95',
+                   str(runtime / 'env/bin/python'), '-B', '-u', str(code), '--attempt', str(folder),
+                   '--root', str(runtime / 'sam2'), '--device', 'cpu', '--snapshot']
     with (folder / 'worker.log').open('w') as stream:
-        process = subprocess.Popen([str(exe), '-B', '-u', str(code), '--attempt', str(folder)], stdout=stream, stderr=subprocess.STDOUT, start_new_session=True, env=child)
+        process = subprocess.Popen(command, stdout=stream, stderr=subprocess.STDOUT, start_new_session=True, env=child)
         try:
             result = process.wait(timeout=100)
         except subprocess.TimeoutExpired:
-            os.killpg(process.pid, signal.SIGTERM)
+            if os.name == 'nt':
+                process.terminate()
+            else:
+                os.killpg(process.pid, signal.SIGTERM)
             try:
                 process.wait(timeout=5)
             except subprocess.TimeoutExpired:
-                os.killpg(process.pid, signal.SIGKILL)
+                if os.name == 'nt':
+                    process.kill()
+                else:
+                    os.killpg(process.pid, signal.SIGKILL)
                 process.wait()
             (folder / 'host_failure.json').write_text(json.dumps(dict(error='SAM2 timeout', timeout_seconds=100)))
             raise RuntimeError('SAM2 timed out; attempt retained')

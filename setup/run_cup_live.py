@@ -179,7 +179,7 @@ def main():
         if sha(mesh) != mesh_selection['sha256']:
             raise ValueError('Selected metric candidate mesh SHA differs')
         for name in ('run_cup_live.py', 'cup_live_dashboard.py', 'capture_d435i.py',
-                     'run_cup_live_worker.py', 'run_cup_mesh_inference.py', 'verify_demo.py', 'run_cup_live.sh', 'cup_mesh_selection.py'):
+                     'run_cup_live_worker.py', 'run_cup_mesh_inference.py', 'verify_demo.py', 'run_cup_live.sh', 'cup_mesh_selection.py', 'cup_neural_pose_model.py'):
             source = root / 'setup' / name
             shutil.copy2(source, output / 'worker_code' / name)
             report['code_sha256'][name] = sha(source)

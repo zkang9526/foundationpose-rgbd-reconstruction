@@ -16,7 +16,7 @@ if ([string]::IsNullOrWhiteSpace($Output)) {
 }
 $MaskOutput = [IO.Path]::GetFullPath($Output)
 if (-not $MaskOutput.StartsWith('E:\', [StringComparison]::OrdinalIgnoreCase)) { throw 'Mask output must be on E drive' }
-$MaskNote = 'Offline human mask annotation; source RGB/depth read-only; original-resolution masks 0/255; immutable revisions, no SAM or pose ground truth. ' + [string]$env:FP_RUN_NOTE
+$MaskNote = 'Offline human mask annotation; optional imported SAM drafts; source RGB/depth read-only; original-resolution masks 0/255; immutable revisions and explicit human confirmations; masks are not pose ground truth. ' + [string]$env:FP_RUN_NOTE
 Write-Output "Manual mask page: http://127.0.0.1:$Port"
 Write-Output "Annotations: $MaskOutput"
 Write-Output 'To resume, rerun with the same -Scene and -Output. Ctrl+C stops the editor after saving.'

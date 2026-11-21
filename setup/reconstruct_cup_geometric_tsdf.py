@@ -21,10 +21,41 @@ p.add_argument('--top-y-max', type=int, default=75, help='RGB-reviewed upper pla
 p.add_argument('--body-core-roi', type=int, nargs=4, default=[419,87,481,118], metavar=('X0','Y0','X1','Y1'))
 p.add_argument('--body-halfspan-mm',type=float,default=80,help='Diagnostic body-depth window; original default retained')
 p.add_argument('--handle-hidden-frames',type=int,nargs=2,default=[48,63],help='Inclusive RGB-reviewed hidden-handle range, not planned angles')
+p.add_argument('--depth-consistency-mm',type=float,default=0,help='Optional raw-depth rejection against 3x3 median; never fills or replaces depth')
+p.add_argument('--mask-erode-pixels',type=int,default=0,help='Derived integration boundary margin only; original reviewed masks retained')
+p.add_argument('--rgb-cap-center',action='store_true',help='Fixed-camera circular-cap prior: shared RGB ellipse shape with per-frame centers and measured plane distance')
+p.add_argument('--axis-camera',type=float,nargs=3,help='Optional reviewed cup-axis direction in camera coordinates')
+p.add_argument('--body-cylinder-radius-mm',type=float,help='Optional approximate cylinder radius prior to refine per-frame coarse rotation centers')
 args = p.parse_args()
+if args.depth_consistency_mm<0 or args.mask_erode_pixels<0:raise ValueError('Negative filter parameters')
+if args.body_cylinder_radius_mm is not None and (not np.isfinite(args.body_cylinder_radius_mm) or args.body_cylinder_radius_mm<=0):
+    raise ValueError('Cylinder radius prior must be finite and positive')
 args.output.mkdir(parents=True, exist_ok=False)
 K = np.loadtxt(args.scene / 'K.txt')
 rows, points_all, colors_all, depths, planes, cyan_all = [], [], [], [], [], []
+cap_centers_px=[]
+if args.rgb_cap_center:
+    upper_arcs,ellipses=[],[]
+    for i in range(72):
+        binary=cv2.imread(str(args.masks/'masks'/('%06d.png'%i)),0)
+        contours,_=cv2.findContours(binary,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
+        contour=max(contours,key=cv2.contourArea).reshape(-1,2)
+        arc=contour[contour[:,1]<contour[:,1].min()+16].astype(float)
+        if len(arc)<15:raise ValueError('Insufficient upper cap silhouette')
+        upper_arcs.append(arc);ellipses.append(cv2.fitEllipse(arc.astype(np.float32)))
+    cap_axes=np.median([e[1] for e in ellipses],axis=0)/2
+    cap_theta=np.deg2rad(np.median([e[2] for e in ellipses]))
+    cap_R=np.array([[np.cos(cap_theta),-np.sin(cap_theta)],[np.sin(cap_theta),np.cos(cap_theta)]])
+    cap_Q=cap_R@np.diag(cap_axes**-2)@cap_R.T
+    for arc,ellipse in zip(upper_arcs,ellipses):
+        center=np.array(ellipse[0])
+        for _ in range(8):
+            delta=arc-center
+            residual=np.einsum('ni,ij,nj->n',delta,cap_Q,delta)-1
+            center-=np.linalg.lstsq(-2*delta@cap_Q,residual,rcond=None)[0]
+        if np.linalg.norm(center-np.median([e[0] for e in ellipses],axis=0))>8:
+            raise ValueError('Shared cap ellipse center inconsistent; inspect cap prior')
+        cap_centers_px.append(center)
 o3d.utility.random.seed(0)
 for index in range(72):
     name = '%06d.png' % index
@@ -41,6 +72,14 @@ for index in range(72):
     if not len(body_values):raise ValueError('No body-core depth')
     rejected_far = int(np.count_nonzero(valid & (np.abs(depth.astype(float) - center_depth) > args.body_halfspan_mm)))
     valid &= np.abs(depth.astype(float) - center_depth) <= args.body_halfspan_mm
+    pre_filter_count=int(valid.sum())
+    if args.mask_erode_pixels:
+        size=2*args.mask_erode_pixels+1
+        valid &= cv2.erode(mask.astype(np.uint8),np.ones((size,size),np.uint8))>0
+    if args.depth_consistency_mm:
+        median=cv2.medianBlur(depth,3)
+        neighbors=cv2.boxFilter((depth>0).astype(np.float32),-1,(3,3),normalize=False)
+        valid &= (neighbors>=5)&(np.abs(depth.astype(float)-median.astype(float))<=args.depth_consistency_mm)
     hsv = cv2.cvtColor(rgb, cv2.COLOR_RGB2HSV)
     cyan = (hsv[:, :, 0] >= 70) & (hsv[:, :, 0] <= 105) & (hsv[:, :, 1] >= 90) & (hsv[:, :, 2] >= 45)
     z = depth[valid].astype(float) / 1000
@@ -64,7 +103,21 @@ for index in range(72):
                      mask_sha256=hashlib.sha256((args.masks / 'masks' / name).read_bytes()).hexdigest(),
                      plane_points=len(inliers), plane_normal_camera=normal.tolist(),
                      sampled_body_depth_median_mm=center_depth, far_depth_pixels_rejected=rejected_far))
+    rows[-1]['boundary_or_depth_inconsistent_pixels_rejected']=pre_filter_count-int(valid.sum())
+    if args.rgb_cap_center:
+        cap_delta=np.column_stack((xx[valid],yy[valid]))-cap_centers_px[index]
+        cap_interior=np.einsum('ni,ij,nj->n',cap_delta,cap_Q,cap_delta)<.60
+        rows[-1]['rgb_cap_center_px']=cap_centers_px[index].tolist()
+        # Full measured cap interior, independent of a single noisy RANSAC patch.
+        planes[-1]=(normal,xyz[cap_interior])
 axis = np.median([n for n, _ in planes], axis=0)
+plane_axis = axis / np.linalg.norm(axis)
+if args.axis_camera is not None:
+    axis = np.asarray(args.axis_camera,dtype=float)
+    if not np.isfinite(axis).all() or np.linalg.norm(axis)<1e-8:
+        raise ValueError('Cup axis must be finite and nonzero')
+    if axis[1]<0:
+        axis=-axis
 axis /= np.linalg.norm(axis)
 e1 = np.array([1., 0, 0]) - axis * axis[0]
 e1 /= np.linalg.norm(e1)
@@ -80,6 +133,28 @@ for i, (xyz, (_, top)) in enumerate(zip(points_all, planes)):
     center_xy = solution[:2]
     radius = float(np.sqrt(max(0, solution[2] + np.sum(center_xy**2))))
     center = basis[:, :2] @ center_xy + axis * np.median(top @ axis)
+    if args.rgb_cap_center:
+        ray=np.linalg.inv(K)@np.r_[cap_centers_px[i],1.]
+        center=ray*(np.median(top@axis)/(ray@axis))
+        radius=float(max(cap_axes)*center[2]/K[0,0])
+    if args.body_cylinder_radius_mm is not None:
+        from scipy.optimize import least_squares
+        cylinder_radius=args.body_cylinder_radius_mm/1000
+        initial_local=(xyz-center)@basis
+        initial_radial=np.linalg.norm(initial_local[:,:2],axis=1)
+        side=(initial_local[:,2]>.015)&(initial_local[:,2]<.075)&(initial_radial<cylinder_radius+.012)
+        if side.sum()<100:
+            raise ValueError('Insufficient side-wall points for cylinder-center refinement')
+        side_xy=initial_local[side,:2]
+        fit=least_squares(lambda offset:np.linalg.norm(side_xy-offset,axis=1)-cylinder_radius,
+            np.zeros(2),bounds=(-.02,.02),loss='soft_l1',f_scale=.001,max_nfev=100)
+        if not fit.success:
+            raise ValueError('Cylinder-center refinement did not converge')
+        correction=basis[:,:2]@fit.x
+        center=center+correction
+        rows[i].update(cylinder_center_correction_camera_m=correction.tolist(),
+            cylinder_center_fit_points=int(side.sum()),
+            cylinder_center_fit_median_absolute_residual_mm=float(np.median(np.abs(fit.fun))*1000))
     centers.append(center)
     local = (xyz - center) @ basis
     radial = np.linalg.norm(local[:, :2], axis=1)
@@ -164,11 +239,15 @@ with (args.output / 'cup_geometric_tsdf.obj').open('x') as stream:
     for face in faces:
         stream.write('f %d %d %d\n' % tuple(face + 1))
 report = dict(passed=True, scope='Experimental geometric-pose ICP TSDF candidate; requires visual and physical geometry review',
+    depth_consistency_mm=args.depth_consistency_mm,mask_erode_pixels=args.mask_erode_pixels,
+    rgb_cap_center_shared_shape=args.rgb_cap_center,depth_filter_fills_or_replaces_depth=False,
     body_core_roi_xyxy=args.body_core_roi,body_halfspan_mm=args.body_halfspan_mm,
     top_y_max=args.top_y_max,handle_hidden_frames_rgb_review=args.handle_hidden_frames,
     raw_sources_modified=False, planned_angles_used=False, poses_are_ground_truth=False,
     directly_observed_handle_frames=int(len(observed_indices)), interpolated_handle_frames=72-int(len(observed_indices)),
-    angular_span_degrees=float(np.degrees(span)), axis_camera=axis.tolist(), frames=rows,
+    angular_span_degrees=float(np.degrees(span)), axis_camera=axis.tolist(),
+    depth_plane_axis_camera=plane_axis.tolist(),axis_override_used=args.axis_camera is not None,frames=rows,
+    body_cylinder_radius_prior_mm=args.body_cylinder_radius_mm,
     vertices=len(vertices), faces=len(faces), extents_m=(vertices.max(axis=0)-vertices.min(axis=0)).tolist(),
     obj_sha256=hashlib.sha256((args.output / 'cup_geometric_tsdf.obj').read_bytes()).hexdigest(),
     mesh_quality_validated=False, unseen_interior_not_observed=True)

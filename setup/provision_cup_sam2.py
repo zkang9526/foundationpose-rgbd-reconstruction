@@ -26,7 +26,7 @@ if commit != expected_commit:
 subprocess.run(['git', '-C', str(source), 'checkout', '--detach', commit], check=True)
 assets_only = '--assets-only' in sys.argv
 if not assets_only and not (env / 'bin/python').exists():
-    subprocess.run(['/home/ni/anaconda3/envs/foundationpose/bin/python', '-m', 'venv', '--system-site-packages', str(env)], check=True)
+    subprocess.run(['/home/YOUR_USER/anaconda3/envs/foundationpose/bin/python', '-m', 'venv', '--system-site-packages', str(env)], check=True)
 child = os.environ.copy()
 child.update(PIP_CACHE_DIR=str(data / 'cache/pip_sam2'), SAM2_BUILD_CUDA='0')
 cached_wheel = data / 'cache/sam2_wheels/torch-2.5.1+cu121-cp311-cp311-linux_x86_64.whl'
@@ -60,7 +60,7 @@ if hashlib.sha256(checkpoint.read_bytes()).hexdigest() != '7402e0d864fa82708a20f
 info = dict(source_url='https://github.com/facebookresearch/sam2', commit=commit, checkpoint_url=url,
             checkpoint_sha256=hashlib.sha256(checkpoint.read_bytes()).hexdigest(), checkpoint_bytes=checkpoint.stat().st_size,
             model_type='sam2.1_hiera_tiny', config='configs/sam2.1/sam2.1_hiera_t.yaml',
-            environment=str(env), inherited_base='/home/ni/anaconda3/envs/foundationpose',
+            environment=str(env), inherited_base='/home/YOUR_USER/anaconda3/envs/foundationpose',
             original_environments_modified=False, optional_cuda_extension=False)
 if assets_only:
     (checkpoint.parent / 'asset_download.json').write_text(json.dumps(info, indent=2) + '\n')

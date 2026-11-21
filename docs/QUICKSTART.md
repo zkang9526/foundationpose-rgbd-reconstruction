@@ -33,6 +33,8 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\setup\run_manual_mask_
 
 页面默认 `http://127.0.0.1:8767`。Mask 包含杯身、杯把和可见内壁；杯把内孔是背景。相同输出目录可继续编辑。`sam_offline_drafts.py` 生成草稿，`prepare_sam_assisted_masks.py` 将草稿接入人工复核。
 
+矩形框/提示点SAM2标注、点云滤波、神经对象表示及WSL原生worker的操作见[扩展流程](PIPELINE.md)。SAM2标注使用 `manual_mask_editor.py --sam-runtime` 指定本机运行目录。
+
 重建实现为 `setup/reconstruct_cup_geometric_tsdf.py`，清理导出为 `setup/audit_geometric_cup_mesh.py`。两者依赖 72 帧；前者还带杯子颜色、杯底 ROI 等假设，新批次必须调整并验证。使用各自 `--help` 查看参数。计划角度不能替代实际配准，平滑/补洞不能恢复未观测表面。
 
 ## 4. 实时跟踪
